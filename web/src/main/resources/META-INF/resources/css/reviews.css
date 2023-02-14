@@ -1,0 +1,35 @@
+.reviews {
+    /*width: 700px;*/
+    /*margin: auto;*/
+}
+
+.reviewItem {
+    font-size: 15px;
+    font-family: "Roboto", "Arial", sans-serif;
+    text-align: left;
+    color: #1CC5FA;
+    text-indent: 0;
+    margin: 5px;
+    padding: 10px;
+    background-color: #1304a1;
+    border-radius: 10px;
+    width: 50%;
+}
+
+.loading {
+    width: 64px;
+    height: 64px;
+    border: 8px solid;
+    border-color: black transparent black transparent;
+    border-radius: 50%;
+    animation: loadingAnimation 1.2s linear infinite;
+}
+
+@keyframes loadingAnimation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

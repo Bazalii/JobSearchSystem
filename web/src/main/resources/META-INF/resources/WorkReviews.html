@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Отзывы</title>
+
+    <link href="css/mainTags.css" rel="stylesheet">
+    <link href="css/pictures.css" rel="stylesheet">
+    <link href="css/text.css" rel="stylesheet">
+    <link href="css/mediaRestrictions.css" rel="stylesheet">
+    <link href="css/buttons.css" rel="stylesheet">
+    <link href="css/reviews.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    <script src="js/configuration.js"></script>
+    <script src="js/pageLoading.js"></script>
+    <script src="js/interactiveMenu.js"></script>
+    <script src="js/navigationLocation.js"></script>
+    <script src="js/workReviews.js"></script>
+</head>
+<body>
+<header>
+    <nav>
+        <a href="index.html">Обо мне</a>
+        <a href="WorkReviews.html">Отзывы</a>
+        <a href="ProjectsAndAchievements.html">Проекты</a>
+        <a href="WorkExperience.html">Опыт работы</a>
+    </nav>
+</header>
+<main>
+    <button id="getReviewsButton" type="button">Load work reviews</button>
+    <div id="loading"></div>
+    <div id="reviews" class="reviews"></div>
+    <template id="reviewItem">
+        <div class="reviewItem">
+            <strong></strong>
+            <br><br>
+            <div></div>
+        </div>
+    </template>
+</main>
+<footer>
+    <nav>
+        <a href="https://github.com/Bazalii" target="_blank">Github</a>
+        <a href="https://t.me/IvanBazalii" target="_blank">Telegram</a>
+        <div class="loadInformation" id="loadInformation">Время загрузки страницы: </div>
+    </nav>
+</footer>
+</body>
+</html>
