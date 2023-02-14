@@ -1,0 +1,13 @@
+.photoLayer {
+    margin: 0 0 0 10px;
+    padding: 5px;
+    filter: drop-shadow(10px 10px 4px #1CC5FA);
+}
+
+.asciiLayer {
+    padding: 5px;
+}
+
+.clear {
+    clear: left;
+}

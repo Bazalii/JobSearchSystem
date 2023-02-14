@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Опыт работы</title>
+
+    <link href="css/mainTags.css" rel="stylesheet">
+    <link href="css/pictures.css" rel="stylesheet">
+    <link href="css/text.css" rel="stylesheet">
+    <link href="css/mediaRestrictions.css" rel="stylesheet">
+    <link href="css/tables.css" rel="stylesheet">
+    <link href="css/buttons.css" rel="stylesheet">
+    <link href="css/forms.css" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    <script src="js/configuration.js"></script>
+    <script src="js/pageLoading.js"></script>
+    <script src="js/interactiveMenu.js"></script>
+    <script src="js/navigationLocation.js"></script>
+    <script src="js/dynamicTable.js"></script>
+</head>
+<body>
+<header>
+    <nav>
+        <a href="index.html">Обо мне</a>
+        <a href="WorkReviews.html">Отзывы</a>
+        <a href="ProjectsAndAchievements.html">Проекты</a>
+        <a href="WorkExperience.html">Опыт работы</a>
+    </nav>
+</header>
+<main>
+    <button id="clearLocalStorage">ClearLocalStorage</button>
+    <form id="tableSizing" action="">
+        <input type="number" required="required" min="1" step="1" placeholder="Количество столбцов" id="columns">
+        <input type="number" required="required" min="1" step="1" placeholder="Количество строк" id="rows">
+        <input id="tableSizingButton" type="submit" value="Send">
+    </form>
+    <form id="tableInput" action="">
+        <input type="number" required="required" min="1" step="1" placeholder="Столбец" id="column">
+        <input type="number" required="required" min="1" step="1" placeholder="Строка" id="row">
+        <input type="text" required="required" placeholder="Значение" id="tableCellContent">
+        <input id="tableInputButton" type="submit" value="Send">
+    </form>
+    <div id="customTable"></div>
+</main>
+<footer>
+    <nav>
+        <a href="https://github.com/Bazalii" target="_blank">Github</a>
+        <a href="https://t.me/IvanBazalii" target="_blank">Telegram</a>
+        <div class="loadInformation" id="loadInformation">Время загрузки страницы:</div>
+    </nav>
+</footer>
+</body>
+</html>
