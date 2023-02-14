@@ -1,0 +1,4 @@
+package commentaries
+
+interface ICommentaryService {
+}
