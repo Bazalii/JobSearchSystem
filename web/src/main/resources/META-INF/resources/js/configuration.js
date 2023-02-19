@@ -1,3 +1,6 @@
+document.addEventListener('DOMContentLoaded', event => addHeader())
+document.addEventListener('DOMContentLoaded', event => addFooter())
+
 document.addEventListener('DOMContentLoaded',
     event => setMouseOnHandlers('body header nav a', '#1CC5FA', '#000000'));
 document.addEventListener('DOMContentLoaded',
