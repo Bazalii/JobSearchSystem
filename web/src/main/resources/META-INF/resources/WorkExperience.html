@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <title>Опыт работы</title>
 
@@ -29,15 +29,15 @@
 </header>
 <main>
     <button id="clearLocalStorage">ClearLocalStorage</button>
-    <form id="tableSizing" action="">
-        <input type="number" required="required" min="1" step="1" placeholder="Количество столбцов" id="columns">
-        <input type="number" required="required" min="1" step="1" placeholder="Количество строк" id="rows">
+    <form action="" id="tableSizing">
+        <input id="columns" min="1" placeholder="Количество столбцов" required="required" step="1" type="number">
+        <input id="rows" min="1" placeholder="Количество строк" required="required" step="1" type="number">
         <input id="tableSizingButton" type="submit" value="Send">
     </form>
-    <form id="tableInput" action="">
-        <input type="number" required="required" min="1" step="1" placeholder="Столбец" id="column">
-        <input type="number" required="required" min="1" step="1" placeholder="Строка" id="row">
-        <input type="text" required="required" placeholder="Значение" id="tableCellContent">
+    <form action="" id="tableInput">
+        <input id="column" min="1" placeholder="Столбец" required="required" step="1" type="number">
+        <input id="row" min="1" placeholder="Строка" required="required" step="1" type="number">
+        <input id="tableCellContent" placeholder="Значение" required="required" type="text">
         <input id="tableInputButton" type="submit" value="Send">
     </form>
     <div id="customTable"></div>
