@@ -6,6 +6,7 @@ import commentaries.models.CommentaryDbModel
 import users.repositories.PanacheUserRepository
 import java.util.*
 import javax.enterprise.context.ApplicationScoped
+import javax.transaction.Transactional
 
 @ApplicationScoped
 class CommentaryRepository(
@@ -13,6 +14,7 @@ class CommentaryRepository(
     private var _panacheCommentaryRepository: PanacheCommentaryRepository,
 ) : ICommentaryRepository {
 
+    @Transactional
     override fun add(commentary: Commentary) {
         _panacheCommentaryRepository.add(
             CommentaryDbModel(
@@ -36,6 +38,7 @@ class CommentaryRepository(
         return dbModels.map { it.toCommentary() }
     }
 
+    @Transactional
     override fun update(commentary: Commentary) {
         _panacheCommentaryRepository.update(
             CommentaryDbModel(
@@ -47,6 +50,7 @@ class CommentaryRepository(
         )
     }
 
+    @Transactional
     override fun removeById(id: UUID) {
         _panacheCommentaryRepository.removeById(id)
     }

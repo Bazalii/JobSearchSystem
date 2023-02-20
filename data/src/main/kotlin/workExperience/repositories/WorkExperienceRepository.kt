@@ -6,6 +6,7 @@ import workExperience.models.WorkExperienceItem
 import workExperience.models.WorkExperienceItemDbModel
 import java.util.*
 import javax.enterprise.context.ApplicationScoped
+import javax.transaction.Transactional
 
 @ApplicationScoped
 class WorkExperienceRepository(
@@ -13,6 +14,7 @@ class WorkExperienceRepository(
     private var _panacheWorkExperienceRepository: PanacheWorkExperienceRepository,
 ) : IWorkExperienceRepository {
 
+    @Transactional
     override fun add(workExperienceItem: WorkExperienceItem) {
         _panacheWorkExperienceRepository.add(
             WorkExperienceItemDbModel(
@@ -37,6 +39,7 @@ class WorkExperienceRepository(
         return dbModels.map { it.toWorkExperienceItem() }
     }
 
+    @Transactional
     override fun update(workExperienceItem: WorkExperienceItem) {
         _panacheWorkExperienceRepository.update(
             WorkExperienceItemDbModel(
@@ -49,6 +52,7 @@ class WorkExperienceRepository(
         )
     }
 
+    @Transactional
     override fun removeById(id: UUID) {
         _panacheWorkExperienceRepository.removeById(id)
     }

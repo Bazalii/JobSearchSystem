@@ -6,6 +6,7 @@ import resumes.models.ResumeDbModel
 import users.repositories.PanacheUserRepository
 import java.util.*
 import javax.enterprise.context.ApplicationScoped
+import javax.transaction.Transactional
 
 @ApplicationScoped
 class ResumeRepository(
@@ -13,6 +14,7 @@ class ResumeRepository(
     private var _panacheResumeRepository: PanacheResumeRepository
 ) : IResumeRepository {
 
+    @Transactional
     override fun add(resume: Resume) {
         _panacheResumeRepository.add(
             ResumeDbModel(
@@ -42,6 +44,7 @@ class ResumeRepository(
         return dbModels.map { it.toResume() }
     }
 
+    @Transactional
     override fun update(resume: Resume) {
         _panacheResumeRepository.update(
             ResumeDbModel(
@@ -59,6 +62,7 @@ class ResumeRepository(
         )
     }
 
+    @Transactional
     override fun removeById(id: UUID) {
         _panacheResumeRepository.removeById(id)
     }

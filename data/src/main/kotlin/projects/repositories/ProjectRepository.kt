@@ -6,13 +6,15 @@ import projects.models.ProjectDbModel
 import users.repositories.PanacheUserRepository
 import java.util.*
 import javax.enterprise.context.ApplicationScoped
+import javax.transaction.Transactional
 
 @ApplicationScoped
 class ProjectRepository(
     private var _panacheUserRepository: PanacheUserRepository,
-    private var _panacheProjectRepository: PanacheProjectRepository
+    private var _panacheProjectRepository: PanacheProjectRepository,
 ) : IProjectRepository {
 
+    @Transactional
     override fun add(project: Project) {
         _panacheProjectRepository.add(
             ProjectDbModel(
@@ -37,6 +39,7 @@ class ProjectRepository(
         return dbModels.map { it.toProject() }
     }
 
+    @Transactional
     override fun update(project: Project) {
         _panacheProjectRepository.update(
             ProjectDbModel(
@@ -49,6 +52,7 @@ class ProjectRepository(
         )
     }
 
+    @Transactional
     override fun removeById(id: UUID) {
         _panacheProjectRepository.removeById(id)
     }
