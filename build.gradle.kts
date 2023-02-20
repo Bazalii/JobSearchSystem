@@ -29,15 +29,15 @@ java {
     targetCompatibility = JavaVersion.VERSION_17
 }
 
+tasks.withType<KotlinCompile> {
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_17.toString()
+    kotlinOptions.javaParameters = true
+}
+
 allOpen {
     annotation("javax.ws.rs.Path")
     annotation("javax.enterprise.context.ApplicationScoped")
     annotation("io.quarkus.test.junit.QuarkusTest")
-}
-
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = JavaVersion.VERSION_17.toString()
-    kotlinOptions.javaParameters = true
 }
 
 fun isNonStable(version: String): Boolean {

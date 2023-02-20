@@ -1,6 +1,18 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     kotlin("jvm") version "1.8.10"
     id("io.quarkus")
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_17.toString()
+    kotlinOptions.javaParameters = true
 }
 
 val quarkusPlatformGroupId: String by project
@@ -16,6 +28,7 @@ dependencies {
     implementation("io.quarkus:quarkus-smallrye-jwt")
     implementation("io.quarkus:quarkus-smallrye-jwt-build")
     implementation("io.quarkus:quarkus-container-image-jib")
+    implementation("io.quarkus:quarkus-smallrye-openapi")
 
     implementation(project(":core"))
     implementation(project(":data"))
