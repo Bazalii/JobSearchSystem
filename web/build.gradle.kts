@@ -29,6 +29,7 @@ dependencies {
     implementation("io.quarkus:quarkus-smallrye-jwt-build")
     implementation("io.quarkus:quarkus-container-image-jib")
     implementation("io.quarkus:quarkus-smallrye-openapi")
+    implementation("io.quarkus:quarkus-resteasy-reactive-qute")
 
     implementation(project(":core"))
     implementation(project(":data"))
