@@ -13,7 +13,7 @@ import javax.ws.rs.POST
 import javax.ws.rs.Path
 
 @RequestScoped
-@Path("resume")
+@Path("resumes")
 class ResumeController(
     private var _resumeService: IResumeService,
 ) {
@@ -36,7 +36,7 @@ class ResumeController(
     }
 
     @GET
-    @Path("getById")
+    @Path("/{id}")
     fun getById(id: UUID): ResumeResponse {
         val resume = _resumeService.getById(id)
 
@@ -44,14 +44,15 @@ class ResumeController(
     }
 
     @GET
-    @Path("getAllByUserId")
-    fun getAllByUserId(id: UUID): List<ResumeResponse> {
-        val resumes = _resumeService.getAllByUserId(id)
+    @Path("/{userId}")
+    fun getAllByUserId(userId: UUID): List<ResumeResponse> {
+        val resumes = _resumeService.getAllByUserId(userId)
 
         return resumes.map { it.toResumeResponse() }
     }
 
     @DELETE
+    @Path("/{id}")
     fun removeById(id: UUID) {
         _resumeService.removeById(id)
     }

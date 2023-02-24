@@ -10,7 +10,7 @@ import javax.enterprise.context.RequestScoped
 import javax.ws.rs.*
 
 @RequestScoped
-@Path("workExperience")
+@Path("workExperiences")
 class WorkExperienceController(
     private var _workExperienceService: IWorkExperienceService,
 ) {
@@ -28,7 +28,7 @@ class WorkExperienceController(
     }
 
     @GET
-    @Path("getById")
+    @Path("/{id}")
     fun getById(id: UUID): WorkExperienceItemResponse {
         val workExperienceItem = _workExperienceService.getById(id)
 
@@ -36,14 +36,15 @@ class WorkExperienceController(
     }
 
     @GET
-    @Path("getAllByUserId")
-    fun getAllByUserId(id: UUID): List<WorkExperienceItemResponse> {
-        val workExperienceItems = _workExperienceService.getAllByUserId(id)
+    @Path("/{userId}")
+    fun getAllByUserId(userId: UUID): List<WorkExperienceItemResponse> {
+        val workExperienceItems = _workExperienceService.getAllByUserId(userId)
 
         return workExperienceItems.map { it.toWorkExperienceItemResponse() }
     }
 
     @DELETE
+    @Path("/{id}")
     fun removeById(id: UUID) {
         _workExperienceService.removeById(id)
     }

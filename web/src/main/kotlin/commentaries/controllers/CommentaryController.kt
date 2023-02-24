@@ -13,7 +13,7 @@ import javax.ws.rs.POST
 import javax.ws.rs.Path
 
 @RequestScoped
-@Path("commentary")
+@Path("commentaries")
 class CommentaryController(
     private var _commentaryService: ICommentaryService,
 ) {
@@ -30,7 +30,7 @@ class CommentaryController(
     }
 
     @GET
-    @Path("getById")
+    @Path("/{id}")
     fun getById(id: UUID): CommentaryResponse {
         val commentary = _commentaryService.getById(id)
 
@@ -38,14 +38,15 @@ class CommentaryController(
     }
 
     @GET
-    @Path("getAllByUserId")
-    fun getAllByUserId(id: UUID): List<CommentaryResponse> {
-        val commentaries = _commentaryService.getAllByUserId(id)
+    @Path("/{userId}")
+    fun getAllByUserId(userId: UUID): List<CommentaryResponse> {
+        val commentaries = _commentaryService.getAllByUserId(userId)
 
         return commentaries.map { it.toResponseCommentary() }
     }
 
     @DELETE
+    @Path("/{id}")
     fun removeById(id: UUID) {
         _commentaryService.removeById(id)
     }

@@ -13,7 +13,7 @@ import javax.ws.rs.POST
 import javax.ws.rs.Path
 
 @RequestScoped
-@Path("project")
+@Path("projects")
 class ProjectController(
     private var _projectService: IProjectService,
 ) {
@@ -31,7 +31,7 @@ class ProjectController(
     }
 
     @GET
-    @Path("getById")
+    @Path("/{id}")
     fun getById(id: UUID): ProjectResponse {
         val project = _projectService.getById(id)
 
@@ -39,14 +39,15 @@ class ProjectController(
     }
 
     @GET
-    @Path("getAllByUserId")
-    fun getAllByUserId(id: UUID): List<ProjectResponse> {
-        val projects = _projectService.getAllByUserId(id)
+    @Path("/{userId}")
+    fun getAllByUserId(userId: UUID): List<ProjectResponse> {
+        val projects = _projectService.getAllByUserId(userId)
 
         return projects.map { it.toProjectResponse() }
     }
 
     @DELETE
+    @Path("/{id}")
     fun removeById(id: UUID) {
         _projectService.removeById(id)
     }

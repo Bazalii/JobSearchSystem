@@ -7,7 +7,7 @@ import javax.enterprise.context.RequestScoped
 import javax.ws.rs.*
 
 @RequestScoped
-@Path("/user")
+@Path("/users")
 class UserController(
     private var _userService: IUserService,
 ) {
@@ -23,6 +23,7 @@ class UserController(
     }
 
     @GET
+    @Path("/{id}")
     fun getById(id: UUID): UserResponse {
         val user = _userService.getById(id)
 
@@ -39,6 +40,7 @@ class UserController(
     }
 
     @DELETE
+    @Path("/{id}")
     fun removeById(id: UUID) {
         _userService.removeById(id)
     }
