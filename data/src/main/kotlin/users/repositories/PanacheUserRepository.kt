@@ -17,6 +17,10 @@ class PanacheUserRepository : PanacheRepositoryBase<UserDbModel, UUID> {
         return findById(id) ?: throw EntityNotFoundException("Entity not found!")
     }
 
+    fun getByLogin(login: String): UserDbModel {
+        return list("login", login).firstOrNull() ?: throw EntityNotFoundException("User not found!")
+    }
+
     fun removeById(id: UUID) {
         val user = getById(id)
 
