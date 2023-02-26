@@ -23,6 +23,12 @@ class UserRepository(
         return userDbModel.toUser()
     }
 
+    override fun getByLogin(login: String): User {
+        val userDbModel = _panacheUserRepository.getByLogin(login)
+
+        return userDbModel.toUser()
+    }
+
     @Transactional
     override fun updatePassword(userId: UUID, password: String) {
         _panacheUserRepository.updatePassword(userId, password)
