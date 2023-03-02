@@ -12,8 +12,8 @@ class CommentaryService(
     private var _commentaryRepository: ICommentaryRepository,
 ) : ICommentaryService {
 
-    override fun add(commentaryCreationModel: CommentaryCreationModel) {
-        _commentaryRepository.add(
+    override fun add(commentaryCreationModel: CommentaryCreationModel): Commentary {
+        return _commentaryRepository.add(
             Commentary(
                 id = UUID.randomUUID(),
                 title = commentaryCreationModel.title,
@@ -31,11 +31,11 @@ class CommentaryService(
         return _commentaryRepository.getAllByUserId(id)
     }
 
-    override fun update(commentary: Commentary) {
-        _commentaryRepository.update(commentary)
+    override fun update(commentary: Commentary): Commentary {
+        return _commentaryRepository.update(commentary)
     }
 
-    override fun removeById(id: UUID) {
-        _commentaryRepository.removeById(id)
+    override fun removeById(id: UUID): Commentary {
+        return _commentaryRepository.removeById(id)
     }
 }

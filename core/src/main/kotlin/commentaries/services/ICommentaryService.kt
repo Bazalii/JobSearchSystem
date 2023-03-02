@@ -5,9 +5,9 @@ import commentaries.models.CommentaryCreationModel
 import java.util.*
 
 interface ICommentaryService {
-    fun add(commentaryCreationModel: CommentaryCreationModel)
+    fun add(commentaryCreationModel: CommentaryCreationModel): Commentary
     fun getById(id: UUID): Commentary
     fun getAllByUserId(id: UUID): List<Commentary>
-    fun update(commentary: Commentary)
-    fun removeById(id: UUID)
+    fun update(commentary: Commentary): Commentary
+    fun removeById(id: UUID): Commentary
 }

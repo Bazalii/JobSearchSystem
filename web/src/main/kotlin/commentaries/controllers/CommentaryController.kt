@@ -19,14 +19,14 @@ class CommentaryController(
 ) {
 
     @POST
-    fun add(commentaryCreationRequest: CommentaryCreationRequest) {
-        _commentaryService.add(
+    fun add(commentaryCreationRequest: CommentaryCreationRequest): CommentaryResponse {
+        return _commentaryService.add(
             CommentaryCreationModel(
                 title = commentaryCreationRequest.title,
                 body = commentaryCreationRequest.body,
                 userId = commentaryCreationRequest.userId
             )
-        )
+        ).toResponseCommentary()
     }
 
     @GET
@@ -47,7 +47,7 @@ class CommentaryController(
 
     @DELETE
     @Path("/{id}")
-    fun removeById(id: UUID) {
-        _commentaryService.removeById(id)
+    fun removeById(id: UUID): CommentaryResponse {
+        return _commentaryService.removeById(id).toResponseCommentary()
     }
 }

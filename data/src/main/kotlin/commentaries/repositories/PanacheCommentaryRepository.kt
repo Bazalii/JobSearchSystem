@@ -9,8 +9,10 @@ import javax.enterprise.context.ApplicationScoped
 @ApplicationScoped
 class PanacheCommentaryRepository : PanacheRepositoryBase<CommentaryDbModel, UUID> {
 
-    fun add(commentaryDbModel: CommentaryDbModel) {
+    fun add(commentaryDbModel: CommentaryDbModel): CommentaryDbModel {
         persist(commentaryDbModel)
+
+        return commentaryDbModel
     }
 
     fun getById(id: UUID): CommentaryDbModel {
@@ -21,16 +23,20 @@ class PanacheCommentaryRepository : PanacheRepositoryBase<CommentaryDbModel, UUI
         return list("user_id", id)
     }
 
-    fun update(commentaryDbModel: CommentaryDbModel) {
+    fun update(commentaryDbModel: CommentaryDbModel): CommentaryDbModel {
         val dbModel = findById(commentaryDbModel.id) ?: throw EntityNotFoundException("Entity not found!")
 
         dbModel.title = commentaryDbModel.title
         dbModel.body = commentaryDbModel.body
+
+        return dbModel
     }
 
-    fun removeById(id: UUID) {
+    fun removeById(id: UUID): CommentaryDbModel {
         val dbModel = getById(id)
 
         deleteById(id)
+
+        return dbModel
     }
 }

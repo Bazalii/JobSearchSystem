@@ -15,15 +15,15 @@ class CommentaryRepository(
 ) : ICommentaryRepository {
 
     @Transactional
-    override fun add(commentary: Commentary) {
-        _panacheCommentaryRepository.add(
+    override fun add(commentary: Commentary): Commentary {
+        return _panacheCommentaryRepository.add(
             CommentaryDbModel(
                 id = commentary.id,
                 title = commentary.title,
                 body = commentary.body,
                 user = _panacheUserRepository.getById(commentary.userId)
             )
-        )
+        ).toCommentary()
     }
 
     override fun getById(id: UUID): Commentary {
@@ -39,19 +39,19 @@ class CommentaryRepository(
     }
 
     @Transactional
-    override fun update(commentary: Commentary) {
-        _panacheCommentaryRepository.update(
+    override fun update(commentary: Commentary): Commentary {
+        return _panacheCommentaryRepository.update(
             CommentaryDbModel(
                 id = commentary.id,
                 title = commentary.title,
                 body = commentary.body,
                 user = _panacheUserRepository.getById(commentary.userId)
             )
-        )
+        ).toCommentary()
     }
 
     @Transactional
-    override fun removeById(id: UUID) {
-        _panacheCommentaryRepository.removeById(id)
+    override fun removeById(id: UUID): Commentary {
+        return _panacheCommentaryRepository.removeById(id).toCommentary()
     }
 }
