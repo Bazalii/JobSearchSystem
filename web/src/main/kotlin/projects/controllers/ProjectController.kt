@@ -19,15 +19,15 @@ class ProjectController(
 ) {
 
     @POST
-    fun add(projectCreationRequest: ProjectCreationRequest) {
-        _projectService.add(
+    fun add(projectCreationRequest: ProjectCreationRequest): ProjectResponse {
+        return _projectService.add(
             ProjectCreationModel(
                 name = projectCreationRequest.name,
                 link = projectCreationRequest.link,
                 year = projectCreationRequest.year,
                 userId = projectCreationRequest.userId
             )
-        )
+        ).toProjectResponse()
     }
 
     @GET
@@ -48,7 +48,7 @@ class ProjectController(
 
     @DELETE
     @Path("/{id}")
-    fun removeById(id: UUID) {
-        _projectService.removeById(id)
+    fun removeById(id: UUID): ProjectResponse {
+        return _projectService.removeById(id).toProjectResponse()
     }
 }

@@ -12,8 +12,8 @@ class ProjectService(
     private var _projectRepository: IProjectRepository
 ) : IProjectService {
 
-    override fun add(projectCreationModel: ProjectCreationModel) {
-        _projectRepository.add(
+    override fun add(projectCreationModel: ProjectCreationModel): Project {
+        return _projectRepository.add(
             Project(
                 id = UUID.randomUUID(),
                 name = projectCreationModel.name,
@@ -32,11 +32,11 @@ class ProjectService(
         return _projectRepository.getAllByUserId(id)
     }
 
-    override fun update(project: Project) {
-        _projectRepository.update(project)
+    override fun update(project: Project): Project {
+        return _projectRepository.update(project)
     }
 
-    override fun removeById(id: UUID) {
-        _projectRepository.removeById(id)
+    override fun removeById(id: UUID): Project {
+        return _projectRepository.removeById(id)
     }
 }

@@ -15,8 +15,8 @@ class ProjectRepository(
 ) : IProjectRepository {
 
     @Transactional
-    override fun add(project: Project) {
-        _panacheProjectRepository.add(
+    override fun add(project: Project): Project {
+        return _panacheProjectRepository.add(
             ProjectDbModel(
                 id = project.id,
                 name = project.name,
@@ -24,7 +24,7 @@ class ProjectRepository(
                 year = project.year,
                 user = _panacheUserRepository.getById(project.userId)
             )
-        )
+        ).toProject()
     }
 
     override fun getById(id: UUID): Project {
@@ -40,8 +40,8 @@ class ProjectRepository(
     }
 
     @Transactional
-    override fun update(project: Project) {
-        _panacheProjectRepository.update(
+    override fun update(project: Project): Project {
+        return _panacheProjectRepository.update(
             ProjectDbModel(
                 id = project.id,
                 name = project.name,
@@ -49,11 +49,11 @@ class ProjectRepository(
                 year = project.year,
                 user = _panacheUserRepository.getById(project.userId)
             )
-        )
+        ).toProject()
     }
 
     @Transactional
-    override fun removeById(id: UUID) {
-        _panacheProjectRepository.removeById(id)
+    override fun removeById(id: UUID): Project {
+        return _panacheProjectRepository.removeById(id).toProject()
     }
 }
