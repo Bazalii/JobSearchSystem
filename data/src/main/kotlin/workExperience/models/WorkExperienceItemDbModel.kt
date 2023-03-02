@@ -1,6 +1,7 @@
 package workExperience.models
 
 import users.models.UserDbModel
+import java.time.LocalDate
 import java.util.*
 import javax.persistence.*
 
@@ -11,7 +12,8 @@ data class WorkExperienceItemDbModel(
     var id: UUID,
     var place: String,
     var position: String,
-    var dates: String,
+    var startDate: LocalDate,
+    var endDate: LocalDate,
 
     @ManyToOne
     @JoinColumn(name = "user_id")

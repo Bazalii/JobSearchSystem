@@ -7,6 +7,7 @@ fun WorkExperienceItem.toWorkExperienceItemResponse() = WorkExperienceItemRespon
     id,
     place,
     position,
-    dates,
+    startDate,
+    endDate,
     userId
 )

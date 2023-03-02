@@ -18,7 +18,8 @@ class WorkExperienceService(
                 id = UUID.randomUUID(),
                 place = workExperienceItemCreationModel.place,
                 position = workExperienceItemCreationModel.position,
-                dates = workExperienceItemCreationModel.dates,
+                startDate = workExperienceItemCreationModel.startDate,
+                endDate = workExperienceItemCreationModel.endDate,
                 userId = workExperienceItemCreationModel.userId
             )
         )

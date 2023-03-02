@@ -21,7 +21,8 @@ class WorkExperienceController(
             WorkExperienceItemCreationModel(
                 place = workExperienceItemCreationRequest.place,
                 position = workExperienceItemCreationRequest.position,
-                dates = workExperienceItemCreationRequest.dates,
+                startDate = workExperienceItemCreationRequest.startDate,
+                endDate = workExperienceItemCreationRequest.endDate,
                 userId = workExperienceItemCreationRequest.userId
             )
         )

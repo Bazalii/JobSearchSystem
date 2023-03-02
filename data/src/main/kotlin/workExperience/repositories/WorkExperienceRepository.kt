@@ -21,7 +21,8 @@ class WorkExperienceRepository(
                 id = workExperienceItem.id,
                 place = workExperienceItem.place,
                 position = workExperienceItem.position,
-                dates = workExperienceItem.dates,
+                startDate = workExperienceItem.startDate,
+                endDate = workExperienceItem.endDate,
                 user = _panacheUserRepository.getById(workExperienceItem.userId)
             )
         )
@@ -46,7 +47,8 @@ class WorkExperienceRepository(
                 id = workExperienceItem.id,
                 place = workExperienceItem.place,
                 position = workExperienceItem.position,
-                dates = workExperienceItem.dates,
+                startDate = workExperienceItem.startDate,
+                endDate = workExperienceItem.endDate,
                 user = _panacheUserRepository.getById(workExperienceItem.userId)
             )
         )

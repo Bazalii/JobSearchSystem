@@ -7,6 +7,7 @@ fun WorkExperienceItemDbModel.toWorkExperienceItem() = WorkExperienceItem(
     id,
     place,
     position,
-    dates,
+    startDate,
+    endDate,
     user.id
 )

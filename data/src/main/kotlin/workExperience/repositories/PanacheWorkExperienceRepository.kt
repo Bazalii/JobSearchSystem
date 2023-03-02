@@ -26,7 +26,8 @@ class PanacheWorkExperienceRepository : PanacheRepositoryBase<WorkExperienceItem
 
         dbModel.place = workExperienceItemDbModel.place
         dbModel.position = workExperienceItemDbModel.position
-        dbModel.dates = workExperienceItemDbModel.dates
+        dbModel.startDate = workExperienceItemDbModel.startDate
+        dbModel.endDate = workExperienceItemDbModel.endDate
     }
 
     fun removeById(id: UUID) {
