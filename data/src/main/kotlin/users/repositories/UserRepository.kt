@@ -13,8 +13,8 @@ class UserRepository(
 ) : IUserRepository {
 
     @Transactional
-    override fun add(user: User) {
-        _panacheUserRepository.add(user.toUserDbModel())
+    override fun add(user: User): User {
+        return _panacheUserRepository.add(user.toUserDbModel()).toUser()
     }
 
     override fun getById(id: UUID): User {
@@ -30,12 +30,12 @@ class UserRepository(
     }
 
     @Transactional
-    override fun updatePassword(userId: UUID, password: String) {
-        _panacheUserRepository.updatePassword(userId, password)
+    override fun updatePassword(userId: UUID, password: String): User {
+        return _panacheUserRepository.updatePassword(userId, password).toUser()
     }
 
     @Transactional
-    override fun removeById(id: UUID) {
-        _panacheUserRepository.removeById(id)
+    override fun removeById(id: UUID): User {
+        return _panacheUserRepository.removeById(id).toUser()
     }
 }

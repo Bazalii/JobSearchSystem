@@ -1,5 +1,6 @@
 package users.controllers
 
+import users.extensions.toUserResponse
 import users.models.*
 import users.services.IUserService
 import java.util.*
@@ -7,41 +8,35 @@ import javax.enterprise.context.RequestScoped
 import javax.ws.rs.*
 
 @RequestScoped
-@Path("/users")
+@Path("users")
 class UserController(
     private var _userService: IUserService,
 ) {
 
     @POST
-    fun add(userCreationRequest: UserCreationRequest) {
-        _userService.add(
+    fun add(userCreationRequest: UserCreationRequest): UserResponse {
+        return _userService.add(
             UserCreationModel(
                 login = userCreationRequest.login,
                 password = userCreationRequest.password
             )
-        )
+        ).toUserResponse()
     }
 
     @GET
     @Path("/{id}")
     fun getById(id: UUID): UserResponse {
-        val user = _userService.getById(id)
-
-        return UserResponse(
-            id = user.id,
-            login = user.login,
-            password = user.password
-        )
+        return _userService.getById(id).toUserResponse()
     }
 
     @PUT
-    fun updatePassword(updatePasswordRequest: UpdatePasswordRequest) {
-        _userService.updatePassword(updatePasswordRequest.id, updatePasswordRequest.password)
+    fun updatePassword(updatePasswordRequest: UpdatePasswordRequest): UserResponse {
+        return _userService.updatePassword(updatePasswordRequest.id, updatePasswordRequest.password).toUserResponse()
     }
 
     @DELETE
     @Path("/{id}")
-    fun removeById(id: UUID) {
-        _userService.removeById(id)
+    fun removeById(id: UUID): UserResponse {
+        return _userService.removeById(id).toUserResponse()
     }
 }

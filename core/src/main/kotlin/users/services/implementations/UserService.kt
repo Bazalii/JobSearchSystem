@@ -16,10 +16,10 @@ class UserService(
     private val _userPasswordValidator: UserPasswordValidator,
 ) : IUserService {
 
-    override fun add(userCreationModel: UserCreationModel) {
+    override fun add(userCreationModel: UserCreationModel): User {
         _userValidator.validate(userCreationModel)
 
-        _userRepository.add(
+        return _userRepository.add(
             User(
                 id = UUID.randomUUID(),
                 login = userCreationModel.login,
@@ -32,13 +32,13 @@ class UserService(
         return _userRepository.getById(id)
     }
 
-    override fun updatePassword(userId: UUID, password: String) {
+    override fun updatePassword(userId: UUID, password: String): User {
         _userPasswordValidator.validate(password)
 
-        _userRepository.updatePassword(userId, password)
+        return _userRepository.updatePassword(userId, password)
     }
 
-    override fun removeById(id: UUID) {
-        _userRepository.removeById(id)
+    override fun removeById(id: UUID): User {
+        return _userRepository.removeById(id)
     }
 }

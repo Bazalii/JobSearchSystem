@@ -9,8 +9,10 @@ import javax.enterprise.context.ApplicationScoped
 @ApplicationScoped
 class PanacheUserRepository : PanacheRepositoryBase<UserDbModel, UUID> {
 
-    fun add(user: UserDbModel) {
-        persist(user)
+    fun add(userDbModel: UserDbModel): UserDbModel {
+        persist(userDbModel)
+
+        return userDbModel
     }
 
     fun getById(id: UUID): UserDbModel {
@@ -21,16 +23,19 @@ class PanacheUserRepository : PanacheRepositoryBase<UserDbModel, UUID> {
         return list("login", login).firstOrNull() ?: throw EntityNotFoundException("User not found!")
     }
 
-    fun removeById(id: UUID) {
-        val user = getById(id)
+    fun removeById(id: UUID): UserDbModel {
+        val dbModel = getById(id)
 
         deleteById(id)
+
+        return dbModel
     }
 
-    fun updatePassword(userId: UUID, password: String) {
-        val userDbModel =
-            findById(userId) ?: throw EntityNotFoundException("Entity not found!")
+    fun updatePassword(userId: UUID, password: String): UserDbModel {
+        val dbModel = findById(userId) ?: throw EntityNotFoundException("Entity not found!")
 
-        userDbModel.password = password
+        dbModel.password = password
+
+        return dbModel
     }
 }

@@ -4,9 +4,9 @@ import users.models.User
 import java.util.*
 
 interface IUserRepository {
-    fun add(user: User)
+    fun add(user: User): User
     fun getById(id: UUID): User
     fun getByLogin(login: String): User
-    fun updatePassword(userId: UUID, password: String)
-    fun removeById(id: UUID)
+    fun updatePassword(userId: UUID, password: String): User
+    fun removeById(id: UUID): User
 }
