@@ -4,9 +4,9 @@ import workExperience.models.WorkExperienceItem
 import java.util.*
 
 interface IWorkExperienceRepository {
-    fun add(workExperienceItem: WorkExperienceItem)
+    fun add(workExperienceItem: WorkExperienceItem): WorkExperienceItem
     fun getById(id: UUID): WorkExperienceItem
     fun getAllByUserId(id: UUID): List<WorkExperienceItem>
-    fun update(workExperienceItem: WorkExperienceItem)
-    fun removeById(id: UUID)
+    fun update(workExperienceItem: WorkExperienceItem): WorkExperienceItem
+    fun removeById(id: UUID): WorkExperienceItem
 }

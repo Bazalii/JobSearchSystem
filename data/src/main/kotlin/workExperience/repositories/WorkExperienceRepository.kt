@@ -15,8 +15,8 @@ class WorkExperienceRepository(
 ) : IWorkExperienceRepository {
 
     @Transactional
-    override fun add(workExperienceItem: WorkExperienceItem) {
-        _panacheWorkExperienceRepository.add(
+    override fun add(workExperienceItem: WorkExperienceItem): WorkExperienceItem {
+        return _panacheWorkExperienceRepository.add(
             WorkExperienceItemDbModel(
                 id = workExperienceItem.id,
                 place = workExperienceItem.place,
@@ -25,7 +25,7 @@ class WorkExperienceRepository(
                 endDate = workExperienceItem.endDate,
                 user = _panacheUserRepository.getById(workExperienceItem.userId)
             )
-        )
+        ).toWorkExperienceItem()
     }
 
     override fun getById(id: UUID): WorkExperienceItem {
@@ -41,8 +41,8 @@ class WorkExperienceRepository(
     }
 
     @Transactional
-    override fun update(workExperienceItem: WorkExperienceItem) {
-        _panacheWorkExperienceRepository.update(
+    override fun update(workExperienceItem: WorkExperienceItem): WorkExperienceItem {
+        return _panacheWorkExperienceRepository.update(
             WorkExperienceItemDbModel(
                 id = workExperienceItem.id,
                 place = workExperienceItem.place,
@@ -51,11 +51,11 @@ class WorkExperienceRepository(
                 endDate = workExperienceItem.endDate,
                 user = _panacheUserRepository.getById(workExperienceItem.userId)
             )
-        )
+        ).toWorkExperienceItem()
     }
 
     @Transactional
-    override fun removeById(id: UUID) {
-        _panacheWorkExperienceRepository.removeById(id)
+    override fun removeById(id: UUID): WorkExperienceItem {
+        return _panacheWorkExperienceRepository.removeById(id).toWorkExperienceItem()
     }
 }

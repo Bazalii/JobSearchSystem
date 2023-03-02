@@ -16,8 +16,8 @@ class WorkExperienceController(
 ) {
 
     @POST
-    fun add(workExperienceItemCreationRequest: WorkExperienceItemCreationRequest) {
-        _workExperienceService.add(
+    fun add(workExperienceItemCreationRequest: WorkExperienceItemCreationRequest): WorkExperienceItemResponse {
+        return _workExperienceService.add(
             WorkExperienceItemCreationModel(
                 place = workExperienceItemCreationRequest.place,
                 position = workExperienceItemCreationRequest.position,
@@ -25,7 +25,7 @@ class WorkExperienceController(
                 endDate = workExperienceItemCreationRequest.endDate,
                 userId = workExperienceItemCreationRequest.userId
             )
-        )
+        ).toWorkExperienceItemResponse()
     }
 
     @GET
@@ -46,7 +46,7 @@ class WorkExperienceController(
 
     @DELETE
     @Path("/{id}")
-    fun removeById(id: UUID) {
-        _workExperienceService.removeById(id)
+    fun removeById(id: UUID): WorkExperienceItemResponse {
+        return _workExperienceService.removeById(id).toWorkExperienceItemResponse()
     }
 }

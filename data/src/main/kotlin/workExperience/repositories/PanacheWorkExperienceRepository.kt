@@ -9,8 +9,10 @@ import javax.enterprise.context.ApplicationScoped
 @ApplicationScoped
 class PanacheWorkExperienceRepository : PanacheRepositoryBase<WorkExperienceItemDbModel, UUID> {
 
-    fun add(workExperienceItemDbModel: WorkExperienceItemDbModel) {
+    fun add(workExperienceItemDbModel: WorkExperienceItemDbModel): WorkExperienceItemDbModel {
         persist(workExperienceItemDbModel)
+
+        return workExperienceItemDbModel
     }
 
     fun getById(id: UUID): WorkExperienceItemDbModel {
@@ -21,18 +23,22 @@ class PanacheWorkExperienceRepository : PanacheRepositoryBase<WorkExperienceItem
         return list("user_id", id)
     }
 
-    fun update(workExperienceItemDbModel: WorkExperienceItemDbModel) {
+    fun update(workExperienceItemDbModel: WorkExperienceItemDbModel): WorkExperienceItemDbModel {
         val dbModel = findById(workExperienceItemDbModel.id) ?: throw EntityNotFoundException("Entity not found!")
 
         dbModel.place = workExperienceItemDbModel.place
         dbModel.position = workExperienceItemDbModel.position
         dbModel.startDate = workExperienceItemDbModel.startDate
         dbModel.endDate = workExperienceItemDbModel.endDate
+
+        return dbModel
     }
 
-    fun removeById(id: UUID) {
+    fun removeById(id: UUID): WorkExperienceItemDbModel {
         val dbModel = getById(id)
 
         deleteById(id)
+
+        return dbModel
     }
 }

@@ -12,8 +12,8 @@ class WorkExperienceService(
     private var _workExperienceRepository: IWorkExperienceRepository,
 ) : IWorkExperienceService {
 
-    override fun add(workExperienceItemCreationModel: WorkExperienceItemCreationModel) {
-        _workExperienceRepository.add(
+    override fun add(workExperienceItemCreationModel: WorkExperienceItemCreationModel): WorkExperienceItem {
+        return _workExperienceRepository.add(
             WorkExperienceItem(
                 id = UUID.randomUUID(),
                 place = workExperienceItemCreationModel.place,
@@ -33,11 +33,11 @@ class WorkExperienceService(
         return _workExperienceRepository.getAllByUserId(id)
     }
 
-    override fun update(workExperienceItem: WorkExperienceItem) {
-        _workExperienceRepository.update(workExperienceItem)
+    override fun update(workExperienceItem: WorkExperienceItem): WorkExperienceItem {
+        return _workExperienceRepository.update(workExperienceItem)
     }
 
-    override fun removeById(id: UUID) {
-        _workExperienceRepository.removeById(id)
+    override fun removeById(id: UUID): WorkExperienceItem {
+        return _workExperienceRepository.removeById(id)
     }
 }
