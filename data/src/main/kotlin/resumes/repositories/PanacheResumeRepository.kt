@@ -9,8 +9,10 @@ import javax.enterprise.context.ApplicationScoped
 @ApplicationScoped
 class PanacheResumeRepository : PanacheRepositoryBase<ResumeDbModel, UUID> {
 
-    fun add(resumeDbModel: ResumeDbModel) {
+    fun add(resumeDbModel: ResumeDbModel): ResumeDbModel {
         persist(resumeDbModel)
+
+        return resumeDbModel
     }
 
     fun getById(id: UUID): ResumeDbModel {
@@ -21,7 +23,7 @@ class PanacheResumeRepository : PanacheRepositoryBase<ResumeDbModel, UUID> {
         return list("user_id", id)
     }
 
-    fun update(resumeDbModel: ResumeDbModel) {
+    fun update(resumeDbModel: ResumeDbModel): ResumeDbModel {
         val dbModel = findById(resumeDbModel.id) ?: throw EntityNotFoundException("Entity not found!")
 
         dbModel.id = resumeDbModel.id
@@ -33,11 +35,15 @@ class PanacheResumeRepository : PanacheRepositoryBase<ResumeDbModel, UUID> {
         dbModel.databases = resumeDbModel.databases
         dbModel.otherTechnologies = resumeDbModel.otherTechnologies
         dbModel.additionalInformation = resumeDbModel.additionalInformation
+
+        return dbModel
     }
 
-    fun removeById(id: UUID) {
+    fun removeById(id: UUID): ResumeDbModel {
         val dbModel = getById(id)
 
         deleteById(id)
+
+        return dbModel
     }
 }

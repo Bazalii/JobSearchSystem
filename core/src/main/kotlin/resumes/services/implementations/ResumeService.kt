@@ -12,8 +12,8 @@ class ResumeService(
     private var _resumeRepository: IResumeRepository
 ) : IResumeService {
 
-    override fun add(resumeCreationModel: ResumeCreationModel) {
-        _resumeRepository.add(
+    override fun add(resumeCreationModel: ResumeCreationModel): Resume {
+        return _resumeRepository.add(
             Resume(
                 id = UUID.randomUUID(),
                 name = resumeCreationModel.name,
@@ -37,11 +37,11 @@ class ResumeService(
         return _resumeRepository.getAllByUserId(id)
     }
 
-    override fun update(resume: Resume) {
-        _resumeRepository.update(resume)
+    override fun update(resume: Resume): Resume {
+        return _resumeRepository.update(resume)
     }
 
-    override fun removeById(id: UUID) {
-        _resumeRepository.removeById(id)
+    override fun removeById(id: UUID): Resume {
+        return _resumeRepository.removeById(id)
     }
 }

@@ -19,8 +19,8 @@ class ResumeController(
 ) {
 
     @POST
-    fun add(resumeCreationRequest: ResumeCreationRequest) {
-        _resumeService.add(
+    fun add(resumeCreationRequest: ResumeCreationRequest): ResumeResponse {
+        return _resumeService.add(
             ResumeCreationModel(
                 name = resumeCreationRequest.name,
                 currentJob = resumeCreationRequest.currentJob,
@@ -32,7 +32,7 @@ class ResumeController(
                 additionalInformation = resumeCreationRequest.additionalInformation,
                 userId = resumeCreationRequest.userId
             )
-        )
+        ).toResumeResponse()
     }
 
     @GET
@@ -53,7 +53,7 @@ class ResumeController(
 
     @DELETE
     @Path("/{id}")
-    fun removeById(id: UUID) {
-        _resumeService.removeById(id)
+    fun removeById(id: UUID): ResumeResponse {
+        return _resumeService.removeById(id).toResumeResponse()
     }
 }

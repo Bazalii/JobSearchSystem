@@ -15,8 +15,8 @@ class ResumeRepository(
 ) : IResumeRepository {
 
     @Transactional
-    override fun add(resume: Resume) {
-        _panacheResumeRepository.add(
+    override fun add(resume: Resume): Resume {
+        return _panacheResumeRepository.add(
             ResumeDbModel(
                 id = resume.id,
                 name = resume.name,
@@ -29,7 +29,7 @@ class ResumeRepository(
                 additionalInformation = resume.additionalInformation,
                 user = _panacheUserRepository.getById(resume.userId)
             )
-        )
+        ).toResume()
     }
 
     override fun getById(id: UUID): Resume {
@@ -45,8 +45,8 @@ class ResumeRepository(
     }
 
     @Transactional
-    override fun update(resume: Resume) {
-        _panacheResumeRepository.update(
+    override fun update(resume: Resume): Resume {
+        return _panacheResumeRepository.update(
             ResumeDbModel(
                 id = resume.id,
                 name = resume.name,
@@ -59,11 +59,11 @@ class ResumeRepository(
                 additionalInformation = resume.additionalInformation,
                 user = _panacheUserRepository.getById(resume.userId)
             )
-        )
+        ).toResume()
     }
 
     @Transactional
-    override fun removeById(id: UUID) {
-        _panacheResumeRepository.removeById(id)
+    override fun removeById(id: UUID): Resume {
+        return _panacheResumeRepository.removeById(id).toResume()
     }
 }
