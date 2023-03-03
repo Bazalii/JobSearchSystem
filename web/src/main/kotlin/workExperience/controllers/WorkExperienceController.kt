@@ -1,5 +1,7 @@
 package workExperience.controllers
 
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponses
 import workExperience.extensions.toWorkExperienceItemResponse
 import workExperience.models.WorkExperienceItemCreationModel
 import workExperience.models.WorkExperienceItemCreationRequest
@@ -15,6 +17,10 @@ class WorkExperienceController(
     private var _workExperienceService: IWorkExperienceService,
 ) {
 
+    @APIResponses(
+        APIResponse(responseCode = "200", description = "WorkExperienceItem is created"),
+        APIResponse(responseCode = "400", description = "Invalid WorkExperienceItem information")
+    )
     @POST
     fun add(workExperienceItemCreationRequest: WorkExperienceItemCreationRequest): WorkExperienceItemResponse {
         return _workExperienceService.add(
@@ -28,6 +34,10 @@ class WorkExperienceController(
         ).toWorkExperienceItemResponse()
     }
 
+    @APIResponses(
+        APIResponse(responseCode = "200", description = "Successful operation"),
+        APIResponse(responseCode = "404", description = "WorkExperienceItem with sent id does not exist")
+    )
     @GET
     @Path("/{id}")
     fun getById(id: UUID): WorkExperienceItemResponse {
@@ -36,6 +46,9 @@ class WorkExperienceController(
         return workExperienceItem.toWorkExperienceItemResponse()
     }
 
+    @APIResponses(
+        APIResponse(responseCode = "200", description = "Successful operation")
+    )
     @GET
     @Path("/{userId}")
     fun getAllByUserId(userId: UUID): List<WorkExperienceItemResponse> {
@@ -44,6 +57,10 @@ class WorkExperienceController(
         return workExperienceItems.map { it.toWorkExperienceItemResponse() }
     }
 
+    @APIResponses(
+        APIResponse(responseCode = "200", description = "Successful operation"),
+        APIResponse(responseCode = "404", description = "WorkExperienceItem with sent id does not exist")
+    )
     @DELETE
     @Path("/{id}")
     fun removeById(id: UUID): WorkExperienceItemResponse {

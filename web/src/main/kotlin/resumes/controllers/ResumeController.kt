@@ -1,5 +1,7 @@
 package resumes.controllers
 
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponses
 import resumes.extensions.toResumeResponse
 import resumes.models.ResumeCreationModel
 import resumes.models.ResumeCreationRequest
@@ -18,6 +20,10 @@ class ResumeController(
     private var _resumeService: IResumeService,
 ) {
 
+    @APIResponses(
+        APIResponse(responseCode = "200", description = "Resume is created"),
+        APIResponse(responseCode = "400", description = "Invalid resume information")
+    )
     @POST
     fun add(resumeCreationRequest: ResumeCreationRequest): ResumeResponse {
         return _resumeService.add(
@@ -35,6 +41,10 @@ class ResumeController(
         ).toResumeResponse()
     }
 
+    @APIResponses(
+        APIResponse(responseCode = "200", description = "Successful operation"),
+        APIResponse(responseCode = "404", description = "Resume with sent id does not exist")
+    )
     @GET
     @Path("/{id}")
     fun getById(id: UUID): ResumeResponse {
@@ -43,6 +53,9 @@ class ResumeController(
         return resume.toResumeResponse()
     }
 
+    @APIResponses(
+        APIResponse(responseCode = "200", description = "Successful operation")
+    )
     @GET
     @Path("/{userId}")
     fun getAllByUserId(userId: UUID): List<ResumeResponse> {
@@ -51,6 +64,10 @@ class ResumeController(
         return resumes.map { it.toResumeResponse() }
     }
 
+    @APIResponses(
+        APIResponse(responseCode = "200", description = "Successful operation"),
+        APIResponse(responseCode = "404", description = "Resume with sent id does not exist")
+    )
     @DELETE
     @Path("/{id}")
     fun removeById(id: UUID): ResumeResponse {
