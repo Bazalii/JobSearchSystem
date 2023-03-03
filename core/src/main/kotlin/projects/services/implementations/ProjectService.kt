@@ -1,5 +1,6 @@
 package projects.services.implementations
 
+import commonClasses.IThrowingValidator
 import projects.models.Project
 import projects.models.ProjectCreationModel
 import projects.repositories.IProjectRepository
@@ -9,19 +10,16 @@ import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class ProjectService(
-    private var _projectRepository: IProjectRepository
+    private var _projectRepository: IProjectRepository,
+    private var _projectValidator: IThrowingValidator<Project>,
 ) : IProjectService {
 
     override fun add(projectCreationModel: ProjectCreationModel): Project {
-        return _projectRepository.add(
-            Project(
-                id = UUID.randomUUID(),
-                name = projectCreationModel.name,
-                link = projectCreationModel.link,
-                year = projectCreationModel.year,
-                userId = projectCreationModel.userId
-            )
-        )
+        val project = projectCreationModel.toProject()
+
+        _projectValidator.validate(project)
+
+        return _projectRepository.add(project)
     }
 
     override fun getById(id: UUID): Project {
@@ -33,6 +31,8 @@ class ProjectService(
     }
 
     override fun update(project: Project): Project {
+        _projectValidator.validate(project)
+
         return _projectRepository.update(project)
     }
 

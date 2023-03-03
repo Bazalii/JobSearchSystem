@@ -4,23 +4,22 @@ import commentaries.models.Commentary
 import commentaries.models.CommentaryCreationModel
 import commentaries.repositories.ICommentaryRepository
 import commentaries.services.ICommentaryService
+import commonClasses.IThrowingValidator
 import java.util.*
 import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class CommentaryService(
     private var _commentaryRepository: ICommentaryRepository,
+    private var _commentaryValidator: IThrowingValidator<Commentary>,
 ) : ICommentaryService {
 
     override fun add(commentaryCreationModel: CommentaryCreationModel): Commentary {
-        return _commentaryRepository.add(
-            Commentary(
-                id = UUID.randomUUID(),
-                title = commentaryCreationModel.title,
-                body = commentaryCreationModel.body,
-                userId = commentaryCreationModel.userId
-            )
-        )
+        val commentary = commentaryCreationModel.toCommentary()
+
+        _commentaryValidator.validate(commentary)
+
+        return _commentaryRepository.add(commentary)
     }
 
     override fun getById(id: UUID): Commentary {
@@ -32,6 +31,8 @@ class CommentaryService(
     }
 
     override fun update(commentary: Commentary): Commentary {
+        _commentaryValidator.validate(commentary)
+
         return _commentaryRepository.update(commentary)
     }
 

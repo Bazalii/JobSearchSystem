@@ -1,5 +1,6 @@
 package workExperience.services.implementations
 
+import commonClasses.IThrowingValidator
 import workExperience.models.WorkExperienceItem
 import workExperience.models.WorkExperienceItemCreationModel
 import workExperience.repositories.IWorkExperienceRepository
@@ -10,19 +11,15 @@ import javax.enterprise.context.ApplicationScoped
 @ApplicationScoped
 class WorkExperienceService(
     private var _workExperienceRepository: IWorkExperienceRepository,
+    private var _workExperienceItemValidator: IThrowingValidator<WorkExperienceItem>,
 ) : IWorkExperienceService {
 
     override fun add(workExperienceItemCreationModel: WorkExperienceItemCreationModel): WorkExperienceItem {
-        return _workExperienceRepository.add(
-            WorkExperienceItem(
-                id = UUID.randomUUID(),
-                place = workExperienceItemCreationModel.place,
-                position = workExperienceItemCreationModel.position,
-                startDate = workExperienceItemCreationModel.startDate,
-                endDate = workExperienceItemCreationModel.endDate,
-                userId = workExperienceItemCreationModel.userId
-            )
-        )
+        val workExperienceItem = workExperienceItemCreationModel.toWorkExperienceItem()
+
+        _workExperienceItemValidator.validate(workExperienceItem)
+
+        return _workExperienceRepository.add(workExperienceItem)
     }
 
     override fun getById(id: UUID): WorkExperienceItem {
@@ -34,6 +31,8 @@ class WorkExperienceService(
     }
 
     override fun update(workExperienceItem: WorkExperienceItem): WorkExperienceItem {
+        _workExperienceItemValidator.validate(workExperienceItem)
+
         return _workExperienceRepository.update(workExperienceItem)
     }
 

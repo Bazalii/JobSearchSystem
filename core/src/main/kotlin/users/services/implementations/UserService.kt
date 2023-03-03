@@ -19,13 +19,7 @@ class UserService(
     override fun add(userCreationModel: UserCreationModel): User {
         _userValidator.validate(userCreationModel)
 
-        return _userRepository.add(
-            User(
-                id = UUID.randomUUID(),
-                login = userCreationModel.login,
-                password = userCreationModel.password
-            )
-        )
+        return _userRepository.add(userCreationModel.toUser())
     }
 
     override fun getById(id: UUID): User {

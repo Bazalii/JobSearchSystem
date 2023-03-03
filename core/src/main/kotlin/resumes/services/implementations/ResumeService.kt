@@ -1,5 +1,6 @@
 package resumes.services.implementations
 
+import commonClasses.IThrowingValidator
 import resumes.models.Resume
 import resumes.models.ResumeCreationModel
 import resumes.repositories.IResumeRepository
@@ -9,24 +10,16 @@ import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class ResumeService(
-    private var _resumeRepository: IResumeRepository
+    private var _resumeRepository: IResumeRepository,
+    private var _resumeValidator: IThrowingValidator<Resume>,
 ) : IResumeService {
 
     override fun add(resumeCreationModel: ResumeCreationModel): Resume {
-        return _resumeRepository.add(
-            Resume(
-                id = UUID.randomUUID(),
-                name = resumeCreationModel.name,
-                currentJob = resumeCreationModel.currentJob,
-                quote = resumeCreationModel.quote,
-                languages = resumeCreationModel.languages,
-                frameworks = resumeCreationModel.frameworks,
-                databases = resumeCreationModel.databases,
-                otherTechnologies = resumeCreationModel.otherTechnologies,
-                additionalInformation = resumeCreationModel.additionalInformation,
-                userId = resumeCreationModel.userId
-            )
-        )
+        val resume = resumeCreationModel.toResume()
+
+        _resumeValidator.validate(resume)
+
+        return _resumeRepository.add(resume)
     }
 
     override fun getById(id: UUID): Resume {
@@ -38,6 +31,8 @@ class ResumeService(
     }
 
     override fun update(resume: Resume): Resume {
+        _resumeValidator.validate(resume)
+
         return _resumeRepository.update(resume)
     }
 
