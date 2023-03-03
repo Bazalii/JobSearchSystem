@@ -9,4 +9,15 @@ data class WorkExperienceItemCreationModel(
     var startDate: LocalDate,
     var endDate: LocalDate,
     var userId: UUID,
-)
+) {
+    fun toWorkExperienceItem(): WorkExperienceItem {
+        return WorkExperienceItem(
+            id = UUID.randomUUID(),
+            place = place,
+            position = position,
+            startDate = startDate,
+            endDate = endDate,
+            userId = userId
+        )
+    }
+}
