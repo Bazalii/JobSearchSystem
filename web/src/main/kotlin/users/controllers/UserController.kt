@@ -22,12 +22,9 @@ class UserController(
     )
     @POST
     fun add(userCreationRequest: UserCreationRequest): UserResponse {
-        return _userService.add(
-            UserCreationModel(
-                login = userCreationRequest.login,
-                password = userCreationRequest.password
-            )
-        ).toUserResponse()
+        val creationModel = userCreationRequest.toCreationModel()
+
+        return _userService.add(creationModel).toUserResponse()
     }
 
     @APIResponses(

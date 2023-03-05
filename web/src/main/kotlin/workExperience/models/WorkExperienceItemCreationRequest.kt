@@ -9,4 +9,12 @@ data class WorkExperienceItemCreationRequest(
     var startDate: LocalDate,
     var endDate: LocalDate,
     var userId: UUID,
-)
+){
+    fun toCreationModel() = WorkExperienceItemCreationModel(
+        place = place,
+        position = position,
+        startDate = startDate,
+        endDate = endDate,
+        userId = userId
+    )
+}

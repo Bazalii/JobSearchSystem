@@ -23,15 +23,9 @@ class WorkExperienceController(
     )
     @POST
     fun add(workExperienceItemCreationRequest: WorkExperienceItemCreationRequest): WorkExperienceItemResponse {
-        return _workExperienceService.add(
-            WorkExperienceItemCreationModel(
-                place = workExperienceItemCreationRequest.place,
-                position = workExperienceItemCreationRequest.position,
-                startDate = workExperienceItemCreationRequest.startDate,
-                endDate = workExperienceItemCreationRequest.endDate,
-                userId = workExperienceItemCreationRequest.userId
-            )
-        ).toWorkExperienceItemResponse()
+        val creationModel = workExperienceItemCreationRequest.toCreationModel()
+
+        return _workExperienceService.add(creationModel).toWorkExperienceItemResponse()
     }
 
     @APIResponses(

@@ -1,7 +1,6 @@
 package commentaries.controllers
 
 import commentaries.extensions.toResponseCommentary
-import commentaries.models.CommentaryCreationModel
 import commentaries.models.CommentaryCreationRequest
 import commentaries.models.CommentaryResponse
 import commentaries.services.ICommentaryService
@@ -26,13 +25,9 @@ class CommentaryController(
     )
     @POST
     fun add(commentaryCreationRequest: CommentaryCreationRequest): CommentaryResponse {
-        return _commentaryService.add(
-            CommentaryCreationModel(
-                title = commentaryCreationRequest.title,
-                body = commentaryCreationRequest.body,
-                userId = commentaryCreationRequest.userId
-            )
-        ).toResponseCommentary()
+        val creationModel = commentaryCreationRequest.toCreationModel()
+
+        return _commentaryService.add(creationModel).toResponseCommentary()
     }
 
     @APIResponses(

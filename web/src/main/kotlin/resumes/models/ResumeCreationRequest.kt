@@ -12,4 +12,16 @@ data class ResumeCreationRequest(
     var otherTechnologies: String = "",
     var additionalInformation: String = "",
     var userId: UUID = UUID.fromString("00000000-0000-0000-0000-000000000000"),
-)
+){
+    fun toCreationModel() = ResumeCreationModel(
+        name = name,
+        currentJob = currentJob,
+        quote = quote,
+        languages = languages,
+        frameworks = frameworks,
+        databases = databases,
+        otherTechnologies = otherTechnologies,
+        additionalInformation = additionalInformation,
+        userId = userId
+    )
+}

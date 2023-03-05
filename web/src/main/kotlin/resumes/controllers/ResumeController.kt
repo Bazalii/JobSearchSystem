@@ -3,7 +3,6 @@ package resumes.controllers
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses
 import resumes.extensions.toResumeResponse
-import resumes.models.ResumeCreationModel
 import resumes.models.ResumeCreationRequest
 import resumes.models.ResumeResponse
 import resumes.services.IResumeService
@@ -26,19 +25,9 @@ class ResumeController(
     )
     @POST
     fun add(resumeCreationRequest: ResumeCreationRequest): ResumeResponse {
-        return _resumeService.add(
-            ResumeCreationModel(
-                name = resumeCreationRequest.name,
-                currentJob = resumeCreationRequest.currentJob,
-                quote = resumeCreationRequest.quote,
-                languages = resumeCreationRequest.languages,
-                frameworks = resumeCreationRequest.frameworks,
-                databases = resumeCreationRequest.databases,
-                otherTechnologies = resumeCreationRequest.otherTechnologies,
-                additionalInformation = resumeCreationRequest.additionalInformation,
-                userId = resumeCreationRequest.userId
-            )
-        ).toResumeResponse()
+        val creationModel = resumeCreationRequest.toCreationModel()
+
+        return _resumeService.add(creationModel).toResumeResponse()
     }
 
     @APIResponses(

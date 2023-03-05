@@ -26,14 +26,9 @@ class ProjectController(
     )
     @POST
     fun add(projectCreationRequest: ProjectCreationRequest): ProjectResponse {
-        return _projectService.add(
-            ProjectCreationModel(
-                name = projectCreationRequest.name,
-                link = projectCreationRequest.link,
-                year = projectCreationRequest.year,
-                userId = projectCreationRequest.userId
-            )
-        ).toProjectResponse()
+        val creationModel = projectCreationRequest.toCreationModel()
+
+        return _projectService.add(creationModel).toProjectResponse()
     }
 
     @APIResponses(
