@@ -1,7 +1,7 @@
 package programmingLanguages.models
 
 data class ProgrammingLanguageCreationRequest(
-    var name: String,
+    var name: String = "",
 ) {
     fun toCreationModel() = ProgrammingLanguageCreationModel(
         name = name

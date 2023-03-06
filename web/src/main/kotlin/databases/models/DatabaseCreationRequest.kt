@@ -1,7 +1,7 @@
 package databases.models
 
 data class DatabaseCreationRequest(
-    var name: String,
+    var name: String = "",
 ) {
     fun toCreationModel() = DatabaseCreationModel(
         name = name
