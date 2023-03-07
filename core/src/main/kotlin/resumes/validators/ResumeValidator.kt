@@ -21,18 +21,6 @@ class ResumeValidator : IThrowingValidator<Resume> {
             throw InvalidEntityException("Incorrect quote length! It should be less than 100 characters but more than 4.")
         }
 
-        if (checkedObject.languages.isEmpty() || checkedObject.languages.length > 200) {
-            throw InvalidEntityException("Incorrect languages section length! It should be less than 200 characters but more than 0.")
-        }
-
-        if (checkedObject.frameworks.isEmpty() || checkedObject.frameworks.length > 200) {
-            throw InvalidEntityException("Incorrect frameworks section length! It should be less than 200 characters but more than 0.")
-        }
-
-        if (checkedObject.databases.isEmpty() || checkedObject.databases.length > 200) {
-            throw InvalidEntityException("Incorrect databases section length! It should be less than 200 characters but more than 0.")
-        }
-
         if (checkedObject.otherTechnologies.length > 300) {
             throw InvalidEntityException("Incorrect other technologies section length! It should be less than 300 characters.")
         }
