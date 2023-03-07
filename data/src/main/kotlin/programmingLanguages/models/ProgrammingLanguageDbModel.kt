@@ -1,14 +1,16 @@
 package programmingLanguages.models
 
+import resumes.models.ResumeDbModel
 import java.util.*
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.Table
+import javax.persistence.*
 
 @Entity
 @Table(name = "\"programming_languages\"")
-data class ProgrammingLanguageDbModel(
+class ProgrammingLanguageDbModel(
     @Id
-    var id: UUID,
-    var name: String
+    var id: UUID = UUID.fromString("00000000-0000-0000-0000-000000000000"),
+    var name: String = "",
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "languages")
+    var resumes: MutableSet<ResumeDbModel> = mutableSetOf(),
 )

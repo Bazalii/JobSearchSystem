@@ -1,14 +1,16 @@
 package databases.models
 
-import java.util.UUID
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.Table
+import resumes.models.ResumeDbModel
+import java.util.*
+import javax.persistence.*
 
 @Entity
 @Table(name = "\"databases\"")
 data class DatabaseDbModel(
     @Id
-    var id: UUID,
-    var name: String
+    var id: UUID = UUID.fromString("00000000-0000-0000-0000-000000000000"),
+    var name: String = "",
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "databases")
+    var resumes: MutableSet<ResumeDbModel> = mutableSetOf(),
 )
