@@ -6,6 +6,7 @@ import java.util.*
 
 interface IProgrammingLanguageService {
     fun add(programmingLanguageCreationModel: ProgrammingLanguageCreationModel): ProgrammingLanguage
+    fun getById(id: UUID): ProgrammingLanguage
     fun getAll(): List<ProgrammingLanguage>
     fun removeById(id: UUID): ProgrammingLanguage
 }

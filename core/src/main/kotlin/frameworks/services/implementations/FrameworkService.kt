@@ -21,6 +21,10 @@ class FrameworkService(
         return _frameworkRepository.add(framework)
     }
 
+    override fun getById(id: UUID): Framework {
+        return _frameworkRepository.getById(id)
+    }
+
     override fun getAll(): List<Framework> {
         return _frameworkRepository.getAll()
     }

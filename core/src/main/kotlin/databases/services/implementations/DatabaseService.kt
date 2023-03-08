@@ -21,6 +21,10 @@ class DatabaseService(
         return _databaseRepository.add(database)
     }
 
+    override fun getById(id: UUID): Database {
+        return _databaseRepository.getById(id)
+    }
+
     override fun getAll(): List<Database> {
         return _databaseRepository.getAll()
     }

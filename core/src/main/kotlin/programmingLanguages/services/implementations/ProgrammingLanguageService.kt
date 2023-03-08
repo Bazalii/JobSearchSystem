@@ -21,6 +21,10 @@ class ProgrammingLanguageService(
         return _programmingLanguageRepository.add(programmingLanguage)
     }
 
+    override fun getById(id: UUID): ProgrammingLanguage {
+        return _programmingLanguageRepository.getById(id)
+    }
+
     override fun getAll(): List<ProgrammingLanguage> {
         return _programmingLanguageRepository.getAll()
     }
