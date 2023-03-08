@@ -1,5 +1,8 @@
 package resumes.repositories
 
+import databases.extensions.toDbModel
+import frameworks.extensions.toDbModel
+import programmingLanguages.extensions.toDbModel
 import resumes.extensions.toResume
 import resumes.models.Resume
 import resumes.models.ResumeDbModel
@@ -11,7 +14,7 @@ import javax.transaction.Transactional
 @ApplicationScoped
 class ResumeRepository(
     private var _panacheUserRepository: PanacheUserRepository,
-    private var _panacheResumeRepository: PanacheResumeRepository
+    private var _panacheResumeRepository: PanacheResumeRepository,
 ) : IResumeRepository {
 
     @Transactional
@@ -22,9 +25,9 @@ class ResumeRepository(
                 name = resume.name,
                 currentJob = resume.currentJob,
                 quote = resume.quote,
-                languages = resume.languages,
-                frameworks = resume.frameworks,
-                databases = resume.databases,
+                languages = resume.languages.map { it.toDbModel() }.toMutableSet(),
+                frameworks = resume.frameworks.map { it.toDbModel() }.toMutableSet(),
+                databases = resume.databases.map { it.toDbModel() }.toMutableSet(),
                 otherTechnologies = resume.otherTechnologies,
                 additionalInformation = resume.additionalInformation,
                 user = _panacheUserRepository.getById(resume.userId)
@@ -52,9 +55,9 @@ class ResumeRepository(
                 name = resume.name,
                 currentJob = resume.currentJob,
                 quote = resume.quote,
-                languages = resume.languages,
-                frameworks = resume.frameworks,
-                databases = resume.databases,
+                languages = resume.languages.map { it.toDbModel() }.toMutableSet(),
+                frameworks = resume.frameworks.map { it.toDbModel() }.toMutableSet(),
+                databases = resume.databases.map { it.toDbModel() }.toMutableSet(),
                 otherTechnologies = resume.otherTechnologies,
                 additionalInformation = resume.additionalInformation,
                 user = _panacheUserRepository.getById(resume.userId)

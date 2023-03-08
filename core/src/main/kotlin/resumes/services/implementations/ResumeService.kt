@@ -1,6 +1,9 @@
 package resumes.services.implementations
 
 import commonClasses.IThrowingValidator
+import databases.services.IDatabaseService
+import frameworks.services.IFrameworkService
+import programmingLanguages.services.IProgrammingLanguageService
 import resumes.models.Resume
 import resumes.models.ResumeCreationModel
 import resumes.repositories.IResumeRepository
@@ -10,12 +13,26 @@ import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class ResumeService(
+    private var _programmingLanguageService: IProgrammingLanguageService,
+    private var _frameworkService: IFrameworkService,
+    private var _databaseService: IDatabaseService,
     private var _resumeRepository: IResumeRepository,
     private var _resumeValidator: IThrowingValidator<Resume>,
 ) : IResumeService {
 
     override fun add(resumeCreationModel: ResumeCreationModel): Resume {
-        val resume = resumeCreationModel.toResume()
+        val resume = Resume(
+            id = UUID.randomUUID(),
+            name = resumeCreationModel.name,
+            currentJob = resumeCreationModel.currentJob,
+            quote = resumeCreationModel.quote,
+            languages = resumeCreationModel.languages.map { _programmingLanguageService.getById(it) }.toMutableSet(),
+            frameworks = resumeCreationModel.frameworks.map { _frameworkService.getById(it) }.toMutableSet(),
+            databases = resumeCreationModel.databases.map { _databaseService.getById(it) }.toMutableSet(),
+            otherTechnologies = resumeCreationModel.otherTechnologies,
+            additionalInformation = resumeCreationModel.additionalInformation,
+            userId = resumeCreationModel.userId
+        )
 
         _resumeValidator.validate(resume)
 
