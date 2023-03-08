@@ -1,8 +1,8 @@
 package programmingLanguages.repositories
 
+import programmingLanguages.extensions.toDbModel
 import programmingLanguages.extensions.toProgrammingLanguage
 import programmingLanguages.models.ProgrammingLanguage
-import programmingLanguages.models.ProgrammingLanguageDbModel
 import java.util.*
 import javax.enterprise.context.ApplicationScoped
 
@@ -12,12 +12,11 @@ class ProgrammingLanguageRepository(
 ) : IProgrammingLanguageRepository {
 
     override fun add(programmingLanguage: ProgrammingLanguage): ProgrammingLanguage {
-        return _panacheProgrammingLanguageRepository.add(
-            ProgrammingLanguageDbModel(
-                id = programmingLanguage.id,
-                name = programmingLanguage.name
-            )
-        ).toProgrammingLanguage()
+        return _panacheProgrammingLanguageRepository.add(programmingLanguage.toDbModel()).toProgrammingLanguage()
+    }
+
+    override fun getById(id: UUID): ProgrammingLanguage {
+        return _panacheProgrammingLanguageRepository.getById(id).toProgrammingLanguage()
     }
 
     override fun getAll(): List<ProgrammingLanguage> {

@@ -15,12 +15,18 @@ class PanacheFrameworkRepository : PanacheRepositoryBase<FrameworkDbModel, UUID>
         return frameworkDbModel
     }
 
+    fun getById(id: UUID): FrameworkDbModel {
+        return findById(id)?: throw EntityNotFoundException("Entity not found!")
+    }
+
     fun getAll(): List<FrameworkDbModel> {
         return listAll()
     }
 
     fun removeById(id: UUID): FrameworkDbModel {
         val dbModel = findById(id) ?: throw EntityNotFoundException("Entity not found!")
+
+        dbModel.resumes.forEach { resumeDbModel -> resumeDbModel.frameworks.remove(dbModel) }
 
         deleteById(id)
 

@@ -17,6 +17,10 @@ class PanacheProgrammingLanguageRepository : PanacheRepositoryBase<ProgrammingLa
         return programmingLanguageDbModel
     }
 
+    fun getById(id: UUID): ProgrammingLanguageDbModel {
+        return findById(id) ?: throw EntityNotFoundException("Entity not found!")
+    }
+
     fun getAll(): List<ProgrammingLanguageDbModel> {
         return listAll()
     }
@@ -24,6 +28,8 @@ class PanacheProgrammingLanguageRepository : PanacheRepositoryBase<ProgrammingLa
     @Transactional
     fun removeById(id: UUID): ProgrammingLanguageDbModel {
         val dbModel = findById(id) ?: throw EntityNotFoundException("Entity not found!")
+
+        dbModel.resumes.forEach { resumeDbModel -> resumeDbModel.languages.remove(dbModel) }
 
         deleteById(id)
 

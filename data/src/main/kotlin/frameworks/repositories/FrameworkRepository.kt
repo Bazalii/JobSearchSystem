@@ -1,8 +1,8 @@
 package frameworks.repositories
 
 import frameworks.extensions.toFramework
+import frameworks.extensions.toDbModel
 import frameworks.models.Framework
-import frameworks.models.FrameworkDbModel
 import java.util.*
 import javax.enterprise.context.ApplicationScoped
 import javax.transaction.Transactional
@@ -14,12 +14,11 @@ class FrameworkRepository(
 
     @Transactional
     override fun add(framework: Framework): Framework {
-        return _panacheFrameworkRepository.add(
-            FrameworkDbModel(
-                id = framework.id,
-                name = framework.name
-            )
-        ).toFramework()
+        return _panacheFrameworkRepository.add(framework.toDbModel()).toFramework()
+    }
+
+    override fun getById(id: UUID): Framework {
+        return _panacheFrameworkRepository.getById(id).toFramework()
     }
 
     override fun getAll(): List<Framework> {
