@@ -8,5 +8,5 @@ fun Project.toProjectResponse() = ProjectResponse(
     name,
     link,
     year,
-    userId
+    resumeId
 )

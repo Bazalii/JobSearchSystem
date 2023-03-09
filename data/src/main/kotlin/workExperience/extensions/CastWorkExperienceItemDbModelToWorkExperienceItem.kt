@@ -9,5 +9,5 @@ fun WorkExperienceItemDbModel.toWorkExperienceItem() = WorkExperienceItem(
     position,
     startDate,
     endDate,
-    user.id
+    resume.id
 )

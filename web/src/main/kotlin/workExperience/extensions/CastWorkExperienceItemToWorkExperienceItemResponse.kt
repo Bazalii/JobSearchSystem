@@ -9,5 +9,5 @@ fun WorkExperienceItem.toWorkExperienceItemResponse() = WorkExperienceItemRespon
     position,
     startDate,
     endDate,
-    userId
+    resumeId
 )

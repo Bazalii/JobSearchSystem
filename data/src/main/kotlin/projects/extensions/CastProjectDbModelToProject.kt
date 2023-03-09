@@ -8,5 +8,5 @@ fun ProjectDbModel.toProject() = Project(
     name,
     link,
     year,
-    user.id
+    resume.id
 )
