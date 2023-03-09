@@ -8,7 +8,7 @@ data class WorkExperienceItemCreationModel(
     var position: String,
     var startDate: LocalDate,
     var endDate: LocalDate,
-    var userId: UUID,
+    var resumeId: UUID,
 ) {
     fun toWorkExperienceItem(): WorkExperienceItem {
         return WorkExperienceItem(
@@ -17,7 +17,7 @@ data class WorkExperienceItemCreationModel(
             position = position,
             startDate = startDate,
             endDate = endDate,
-            userId = userId
+            resumeId = resumeId
         )
     }
 }

@@ -1,6 +1,6 @@
 package workExperience.repositories
 
-import users.repositories.PanacheUserRepository
+import resumes.repositories.PanacheResumeRepository
 import workExperience.extensions.toWorkExperienceItem
 import workExperience.models.WorkExperienceItem
 import workExperience.models.WorkExperienceItemDbModel
@@ -10,7 +10,7 @@ import javax.transaction.Transactional
 
 @ApplicationScoped
 class WorkExperienceRepository(
-    private var _panacheUserRepository: PanacheUserRepository,
+    private var _panacheResumeRepository: PanacheResumeRepository,
     private var _panacheWorkExperienceRepository: PanacheWorkExperienceRepository,
 ) : IWorkExperienceRepository {
 
@@ -23,7 +23,7 @@ class WorkExperienceRepository(
                 position = workExperienceItem.position,
                 startDate = workExperienceItem.startDate,
                 endDate = workExperienceItem.endDate,
-                user = _panacheUserRepository.getById(workExperienceItem.userId)
+                resume = _panacheResumeRepository.getById(workExperienceItem.resumeId)
             )
         ).toWorkExperienceItem()
     }
@@ -49,7 +49,7 @@ class WorkExperienceRepository(
                 position = workExperienceItem.position,
                 startDate = workExperienceItem.startDate,
                 endDate = workExperienceItem.endDate,
-                user = _panacheUserRepository.getById(workExperienceItem.userId)
+                resume = _panacheResumeRepository.getById(workExperienceItem.resumeId)
             )
         ).toWorkExperienceItem()
     }

@@ -1,6 +1,6 @@
 package projects.models
 
-import users.models.UserDbModel
+import resumes.models.ResumeDbModel
 import java.util.*
 import javax.persistence.*
 
@@ -14,6 +14,6 @@ data class ProjectDbModel(
     var year: Int,
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    var user: UserDbModel,
+    @JoinColumn(name = "resume_id")
+    var resume: ResumeDbModel,
 )

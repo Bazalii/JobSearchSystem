@@ -1,21 +1,21 @@
 package workExperience.models
 
-import users.models.UserDbModel
+import resumes.models.ResumeDbModel
 import java.time.LocalDate
 import java.util.*
 import javax.persistence.*
 
 @Entity
 @Table(name = "\"workExperienceItems\"")
-data class WorkExperienceItemDbModel(
+class WorkExperienceItemDbModel(
     @Id
-    var id: UUID,
-    var place: String,
-    var position: String,
-    var startDate: LocalDate,
-    var endDate: LocalDate,
+    var id: UUID = UUID.fromString("00000000-0000-0000-0000-000000000000"),
+    var place: String = "",
+    var position: String = "",
+    var startDate: LocalDate = LocalDate.MIN,
+    var endDate: LocalDate = LocalDate.MAX,
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    var user: UserDbModel,
+    var resume: ResumeDbModel = ResumeDbModel(),
 )

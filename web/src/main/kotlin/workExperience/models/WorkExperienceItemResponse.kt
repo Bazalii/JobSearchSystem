@@ -9,5 +9,5 @@ data class WorkExperienceItemResponse(
     var position: String,
     var startDate: LocalDate = LocalDate.MIN,
     var endDate: LocalDate = LocalDate.MAX,
-    var userId: UUID = UUID.fromString("00000000-0000-0000-0000-000000000000"),
+    var resumeId: UUID = UUID.fromString("00000000-0000-0000-0000-000000000000"),
 )

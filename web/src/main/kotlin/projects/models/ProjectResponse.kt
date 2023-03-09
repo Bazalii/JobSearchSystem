@@ -7,5 +7,5 @@ data class ProjectResponse(
     var name: String = "",
     var link: String = "",
     var year: Int = 0,
-    var userId: UUID = UUID.fromString("00000000-0000-0000-0000-000000000000"),
+    var resumeId: UUID = UUID.fromString("00000000-0000-0000-0000-000000000000"),
 )

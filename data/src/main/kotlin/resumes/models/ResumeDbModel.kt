@@ -3,7 +3,9 @@ package resumes.models
 import databases.models.DatabaseDbModel
 import frameworks.models.FrameworkDbModel
 import programmingLanguages.models.ProgrammingLanguageDbModel
+import projects.models.ProjectDbModel
 import users.models.UserDbModel
+import workExperience.models.WorkExperienceItemDbModel
 import java.util.*
 import javax.persistence.*
 
@@ -27,6 +29,12 @@ class ResumeDbModel(
 
     var otherTechnologies: String = "",
     var additionalInformation: String = "",
+
+    @OneToMany(mappedBy = "resume", cascade = [CascadeType.ALL], orphanRemoval = true)
+    var projects: MutableSet<ProjectDbModel> = mutableSetOf(),
+
+    @OneToMany(mappedBy = "resume", cascade = [CascadeType.ALL], orphanRemoval = true)
+    var workExperiences: MutableSet<WorkExperienceItemDbModel> = mutableSetOf(),
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")

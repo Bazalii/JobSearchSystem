@@ -6,7 +6,7 @@ data class ProjectCreationModel(
     var name: String,
     var link: String,
     var year: Int,
-    var userId: UUID
+    var resumeId: UUID
 ){
     fun toProject(): Project{
         return Project(
@@ -14,7 +14,7 @@ data class ProjectCreationModel(
             name = name,
             link = link,
             year = year,
-            userId = userId
+            resumeId = resumeId
         )
     }
 }

@@ -9,5 +9,5 @@ data class WorkExperienceItem(
     var position: String,
     var startDate: LocalDate,
     var endDate: LocalDate,
-    var userId: UUID
+    var resumeId: UUID
 )

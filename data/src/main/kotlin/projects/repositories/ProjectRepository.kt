@@ -3,14 +3,14 @@ package projects.repositories
 import projects.extensions.toProject
 import projects.models.Project
 import projects.models.ProjectDbModel
-import users.repositories.PanacheUserRepository
+import resumes.repositories.PanacheResumeRepository
 import java.util.*
 import javax.enterprise.context.ApplicationScoped
 import javax.transaction.Transactional
 
 @ApplicationScoped
 class ProjectRepository(
-    private var _panacheUserRepository: PanacheUserRepository,
+    private var _panacheResumeRepository: PanacheResumeRepository,
     private var _panacheProjectRepository: PanacheProjectRepository,
 ) : IProjectRepository {
 
@@ -22,7 +22,7 @@ class ProjectRepository(
                 name = project.name,
                 link = project.link,
                 year = project.year,
-                user = _panacheUserRepository.getById(project.userId)
+                resume = _panacheResumeRepository.getById(project.resumeId)
             )
         ).toProject()
     }
@@ -47,7 +47,7 @@ class ProjectRepository(
                 name = project.name,
                 link = project.link,
                 year = project.year,
-                user = _panacheUserRepository.getById(project.userId)
+                resume = _panacheResumeRepository.getById(project.resumeId)
             )
         ).toProject()
     }
