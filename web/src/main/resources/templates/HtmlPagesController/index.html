@@ -7,39 +7,16 @@
 
     <title>Обо мне</title>
 
-    <link href="/css/mainTags.css" rel="stylesheet">
-    <link href="/css/pictures.css" rel="stylesheet">
-    <link href="/css/text.css" rel="stylesheet">
-    <link href="/css/mediaRestrictions.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-
-    <script src="/js/configuration.js"></script>
-    <script src="/js/pageLoading.js"></script>
-    <script src="/js/interactiveMenu.js"></script>
-    <script src="/js/navigationLocation.js"></script>
-    <script src="/js/pageTemplates.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    {#include HtmlPagesController/headApplicationInformation /}
 </head>
 <body>
 <header>
-    {#include HtmlPagesController/header} {/include}
+    {#include HtmlPagesController/header /}
 </header>
 <main>
     <h1>Приветствую! Меня зовут Иван, я учусь на третьем курсе в университете ИТМО.</h1>
     <div class="flex-container">
         <img alt="моё фото" class="photoLayer" height="200" src="/img/AboutPagePhoto.jpg" width="200">
-        <pre class="asciiLayer">
-
-
-
-
-░█████╗░░░░██╗░██╗░  ░░░░░░░██╗░░  ░░██╗██████╗░
-██╔══██╗██████████╗  ██████╗╚██╗░  ░██╔╝╚════██╗
-██║░░╚═╝╚═██╔═██╔═╝  ╚═════╝░╚██╗  ██╔╝░░█████╔╝
-██║░░██╗██████████╗  ██████╗░██╔╝  ╚██╗░░╚═══██╗
-╚█████╔╝╚██╔═██╔══╝  ╚═════╝██╔╝░  ░╚██╗██████╔╝
-░╚════╝░░╚═╝░╚═╝░░░  ░░░░░░░╚═╝░░  ░░╚═╝╚═════╝░
-        </pre>
     </div>
     <div class="clear"></div>
     <section class="quote">
@@ -63,7 +40,7 @@
     </section>
 </main>
 <footer>
-    {#include HtmlPagesController/footer} {/include}
+    {#include HtmlPagesController/footer /}
 </footer>
 </body>
 </html>

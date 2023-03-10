@@ -6,27 +6,11 @@
 
     <title>Опыт работы</title>
 
-    <link href="/css/mainTags.css" rel="stylesheet">
-    <link href="/css/pictures.css" rel="stylesheet">
-    <link href="/css/text.css" rel="stylesheet">
-    <link href="/css/mediaRestrictions.css" rel="stylesheet">
-    <link href="/css/tables.css" rel="stylesheet">
-    <link href="/css/buttons.css" rel="stylesheet">
-    <link href="/css/forms.css" rel="stylesheet">
-
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-
-    <script src="/js/configuration.js"></script>
-    <script src="/js/pageLoading.js"></script>
-    <script src="/js/interactiveMenu.js"></script>
-    <script src="/js/navigationLocation.js"></script>
-    <script src="/js/dynamicTable.js"></script>
-    <script src="/js/pageTemplates.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    {#include HtmlPagesController/headApplicationInformation /}
 </head>
 <body>
 <header>
-    {#include HtmlPagesController/header} {/include}
+    {#include HtmlPagesController/header /}
 </header>
 <main>
     <button id="clearLocalStorage">ClearLocalStorage</button>
@@ -44,7 +28,7 @@
     <div id="customTable"></div>
 </main>
 <footer>
-    {#include HtmlPagesController/footer} {/include}
+    {#include HtmlPagesController/footer /}
 </footer>
 </body>
 </html>
