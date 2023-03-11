@@ -21,7 +21,8 @@ class ResumeController(
 
     @APIResponses(
         APIResponse(responseCode = "200", description = "Resume is created"),
-        APIResponse(responseCode = "400", description = "Invalid resume information")
+        APIResponse(responseCode = "400", description = "Invalid resume information"),
+        APIResponse(responseCode = "404", description = "User with sent id does not exist")
     )
     @POST
     fun add(resumeCreationRequest: ResumeCreationRequest): ResumeResponse {
@@ -46,7 +47,7 @@ class ResumeController(
         APIResponse(responseCode = "200", description = "Successful operation")
     )
     @GET
-    @Path("/{userId}")
+    @Path("/user/{userId}")
     fun getAllByUserId(userId: UUID): List<ResumeResponse> {
         val resumes = _resumeService.getAllByUserId(userId)
 

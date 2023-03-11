@@ -21,7 +21,8 @@ class CommentaryController(
 
     @APIResponses(
         APIResponse(responseCode = "200", description = "Commentary is created"),
-        APIResponse(responseCode = "400", description = "Invalid title or body")
+        APIResponse(responseCode = "400", description = "Invalid title or body"),
+        APIResponse(responseCode = "404", description = "User with sent id does not exist")
     )
     @POST
     fun add(commentaryCreationRequest: CommentaryCreationRequest): CommentaryResponse {
@@ -46,7 +47,7 @@ class CommentaryController(
         APIResponse(responseCode = "200", description = "Successful operation")
     )
     @GET
-    @Path("/{userId}")
+    @Path("/user/{userId}")
     fun getAllByUserId(userId: UUID): List<CommentaryResponse> {
         val commentaries = _commentaryService.getAllByUserId(userId)
 

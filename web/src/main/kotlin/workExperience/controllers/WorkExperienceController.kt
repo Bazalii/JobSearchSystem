@@ -19,7 +19,8 @@ class WorkExperienceController(
 
     @APIResponses(
         APIResponse(responseCode = "200", description = "WorkExperienceItem is created"),
-        APIResponse(responseCode = "400", description = "Invalid WorkExperienceItem information")
+        APIResponse(responseCode = "400", description = "Invalid WorkExperienceItem information"),
+        APIResponse(responseCode = "404", description = "Resume with sent id does not exist")
     )
     @POST
     fun add(workExperienceItemCreationRequest: WorkExperienceItemCreationRequest): WorkExperienceItemResponse {
@@ -44,7 +45,7 @@ class WorkExperienceController(
         APIResponse(responseCode = "200", description = "Successful operation")
     )
     @GET
-    @Path("/{userId}")
+    @Path("/user/{userId}")
     fun getAllByUserId(userId: UUID): List<WorkExperienceItemResponse> {
         val workExperienceItems = _workExperienceService.getAllByUserId(userId)
 

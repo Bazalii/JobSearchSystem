@@ -3,7 +3,6 @@ package projects.controllers
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses
 import projects.extensions.toProjectResponse
-import projects.models.ProjectCreationModel
 import projects.models.ProjectCreationRequest
 import projects.models.ProjectResponse
 import projects.services.IProjectService
@@ -22,7 +21,8 @@ class ProjectController(
 
     @APIResponses(
         APIResponse(responseCode = "200", description = "Project is created"),
-        APIResponse(responseCode = "400", description = "Invalid name, link or year")
+        APIResponse(responseCode = "400", description = "Invalid name, link or year"),
+        APIResponse(responseCode = "404", description = "Resume with sent id does not exist")
     )
     @POST
     fun add(projectCreationRequest: ProjectCreationRequest): ProjectResponse {
@@ -47,7 +47,7 @@ class ProjectController(
         APIResponse(responseCode = "200", description = "Successful operation")
     )
     @GET
-    @Path("/{userId}")
+    @Path("/user/{userId}")
     fun getAllByUserId(userId: UUID): List<ProjectResponse> {
         val projects = _projectService.getAllByUserId(userId)
 
