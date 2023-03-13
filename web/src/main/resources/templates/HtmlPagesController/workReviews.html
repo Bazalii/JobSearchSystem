@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Отзывы</title>
+
+    {#include HtmlPagesController/headApplicationInformation /}
+</head>
+<body>
+<header>
+    {#include HtmlPagesController/header /}
+</header>
+<main>
+    <button id="getReviewsButton" type="button">Load work reviews</button>
+    <div id="loading"></div>
+    <div class="reviews" id="reviews"></div>
+    <template id="reviewItem">
+        <div class="reviewItem">
+            <strong></strong>
+            <br><br>
+            <div></div>
+        </div>
+    </template>
+</main>
+<footer>
+    {#include HtmlPagesController/footer /}
+</footer>
+</body>
+</html>

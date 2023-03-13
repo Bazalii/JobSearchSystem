@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="c#, resume, резюме" name="keywords">
+
+    <title>Обо мне</title>
+
+    {#include HtmlPagesController/headApplicationInformation /}
+</head>
+<body>
+<header>
+    {#include HtmlPagesController/header /}
+</header>
+<main>
+    <h1>Приветствую! Меня зовут Иван, я учусь на третьем курсе в университете ИТМО.</h1>
+    <div class="flex-container">
+        <img alt="моё фото" class="photoLayer" height="200" src="/img/AboutPagePhoto.jpg" width="200">
+    </div>
+    <div class="clear"></div>
+    <section class="quote">
+        <q>Чем больше я знаю, тем больше я понимаю, что ничего не знаю </q> <cite>(c) Демокрит</cite> <br>
+        <div>s = x + y<sup>n</sup>, где s - успех, x - талант, y - приложенные усилия, n => +∞</div>
+    </section>
+
+    <section>
+        <h2>Skills</h2>
+        <ul>
+            <li><b>Языки:</b> C#, Kotlin, C++, C, Java, Python</li>
+            <li><b>Фреймворки:</b> ASP.NET Core, Entity Framework, Quarkus, Hibernate, Panache</li>
+            <li><b>Базы данных:</b> MySQL, PostgreSQL, SQL server</li>
+            <li><b>Другие технологии:</b> Git, Docker, Linux, Bash, Latex, Postman, Swagger</li>
+        </ul>
+        <code class="text">
+            main = putStrLn "А ещё я интересуюсь функциональным программированием и в свободное время пишу OpenSource
+            проекты"
+            <br><br>
+        </code>
+    </section>
+</main>
+<footer>
+    {#include HtmlPagesController/footer /}
+</footer>
+</body>
+</html>

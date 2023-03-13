@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     kotlin("jvm") version "1.8.10"
     id("io.quarkus")
@@ -6,6 +8,16 @@ plugins {
     id("org.jetbrains.kotlin.plugin.allopen") version "1.8.10"
     id("org.jetbrains.kotlin.plugin.jpa") version "1.8.10"
 
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions.jvmTarget = JavaVersion.VERSION_17.toString()
+    kotlinOptions.javaParameters = true
 }
 
 val quarkusPlatformGroupId: String by project

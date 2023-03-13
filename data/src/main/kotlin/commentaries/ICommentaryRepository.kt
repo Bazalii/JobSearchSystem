@@ -1,4 +1,0 @@
-package commentaries
-
-interface ICommentaryRepository {
-}

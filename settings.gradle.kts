@@ -10,6 +10,7 @@ pluginManagement {
         id(quarkusPluginId) version quarkusPluginVersion
     }
 }
+
 rootProject.name="cv-backend"
 include("web")
 include("data")
