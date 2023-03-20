@@ -23,6 +23,10 @@ class PanacheUserRepository : PanacheRepositoryBase<UserDbModel, UUID> {
         return list("login", login).firstOrNull() ?: throw EntityNotFoundException("User not found!")
     }
 
+    fun getByEmail(email: String): UserDbModel {
+        return list("email", email).firstOrNull() ?: throw EntityNotFoundException("User not found!")
+    }
+
     fun removeById(id: UUID): UserDbModel {
         val dbModel = getById(id)
 
@@ -30,6 +34,15 @@ class PanacheUserRepository : PanacheRepositoryBase<UserDbModel, UUID> {
 
         return dbModel
     }
+
+    fun updateRole(login: String, role: String): UserDbModel {
+        val dbModel = getByLogin(login)
+
+        dbModel.role = role
+
+        return dbModel
+    }
+
 
     fun updatePassword(userId: UUID, password: String): UserDbModel {
         val dbModel = findById(userId) ?: throw EntityNotFoundException("Entity not found!")
