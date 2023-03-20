@@ -7,6 +7,7 @@ import programmingLanguages.models.ProgrammingLanguageCreationRequest
 import programmingLanguages.models.ProgrammingLanguageResponse
 import programmingLanguages.services.IProgrammingLanguageService
 import java.util.*
+import javax.annotation.security.RolesAllowed
 import javax.enterprise.context.RequestScoped
 import javax.ws.rs.DELETE
 import javax.ws.rs.GET
@@ -24,6 +25,7 @@ class ProgrammingLanguageController(
         APIResponse(responseCode = "400", description = "Invalid name")
     )
     @POST
+    @RolesAllowed("Admin")
     fun add(programmingLanguageCreationRequest: ProgrammingLanguageCreationRequest): ProgrammingLanguageResponse {
         val creationModel = programmingLanguageCreationRequest.toCreationModel()
 
@@ -34,6 +36,7 @@ class ProgrammingLanguageController(
         APIResponse(responseCode = "200", description = "Successful operation")
     )
     @GET
+    @RolesAllowed("User", "HR", "Admin")
     fun getAll(): List<ProgrammingLanguageResponse> {
         return _programmingLanguageService.getAll().map { it.toProgrammingLanguageResponse() }
     }
@@ -44,6 +47,7 @@ class ProgrammingLanguageController(
     )
     @DELETE
     @Path("/{id}")
+    @RolesAllowed("Admin")
     fun removeById(id: UUID): ProgrammingLanguageResponse {
         return _programmingLanguageService.removeById(id).toProgrammingLanguageResponse()
     }
