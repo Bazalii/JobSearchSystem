@@ -11,9 +11,8 @@ data class ResumeCreationRequest(
     var databases: MutableSet<UUID> = mutableSetOf(),
     var otherTechnologies: String = "",
     var additionalInformation: String = "",
-    var userId: UUID = UUID.fromString("00000000-0000-0000-0000-000000000000"),
 ) {
-    fun toCreationModel() = ResumeCreationModel(
+    fun toCreationModel(userId: UUID) = ResumeCreationModel(
         name = name,
         currentJob = currentJob,
         quote = quote,

@@ -65,8 +65,10 @@
 
     create table "users" (
        id uuid not null,
+        email varchar(255),
         login varchar(255),
         password varchar(255),
+        role varchar(255),
         primary key (id)
     );
 

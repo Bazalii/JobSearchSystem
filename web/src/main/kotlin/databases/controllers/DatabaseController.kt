@@ -7,6 +7,7 @@ import databases.services.IDatabaseService
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses
 import java.util.*
+import javax.annotation.security.RolesAllowed
 import javax.enterprise.context.RequestScoped
 import javax.ws.rs.DELETE
 import javax.ws.rs.GET
@@ -24,6 +25,7 @@ class DatabaseController(
         APIResponse(responseCode = "400", description = "Invalid name")
     )
     @POST
+    @RolesAllowed("Admin")
     fun add(databaseCreationRequest: DatabaseCreationRequest): DatabaseResponse {
         val creationModel = databaseCreationRequest.toCreationModel()
 
@@ -34,6 +36,7 @@ class DatabaseController(
         APIResponse(responseCode = "200", description = "Successful operation")
     )
     @GET
+    @RolesAllowed("User", "HR", "Admin")
     fun getAll(): List<DatabaseResponse> {
         return _databaseService.getAll().map { it.toDatabaseResponse() }
     }
@@ -44,6 +47,7 @@ class DatabaseController(
     )
     @DELETE
     @Path("/{id}")
+    @RolesAllowed("Admin")
     fun removeById(id: UUID): DatabaseResponse {
         return _databaseService.removeById(id).toDatabaseResponse()
     }

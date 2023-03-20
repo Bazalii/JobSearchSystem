@@ -6,5 +6,7 @@ import users.models.UserDbModel
 fun UserDbModel.toUser() = User(
     id,
     login,
-    password
+    email,
+    password,
+    role
 )

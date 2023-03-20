@@ -29,9 +29,20 @@ class UserRepository(
         return userDbModel.toUser()
     }
 
+    override fun getByEmail(email: String): User {
+        val userDbModel = _panacheUserRepository.getByEmail(email)
+
+        return userDbModel.toUser()
+    }
+
     @Transactional
     override fun updatePassword(userId: UUID, password: String): User {
         return _panacheUserRepository.updatePassword(userId, password).toUser()
+    }
+
+    @Transactional
+    override fun updateRole(login: String, role: String): User {
+        return _panacheUserRepository.updateRole(login, role).toUser()
     }
 
     @Transactional

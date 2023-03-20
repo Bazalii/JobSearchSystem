@@ -26,10 +26,18 @@ class UserService(
         return _userRepository.getById(id)
     }
 
+    override fun getByLogin(login: String): User {
+        return _userRepository.getByLogin(login)
+    }
+
     override fun updatePassword(userId: UUID, password: String): User {
         _userPasswordValidator.validate(password)
 
         return _userRepository.updatePassword(userId, password)
+    }
+
+    override fun makeUserAdmin(login: String): User {
+        return _userRepository.updateRole(login, "Admin")
     }
 
     override fun removeById(id: UUID): User {
