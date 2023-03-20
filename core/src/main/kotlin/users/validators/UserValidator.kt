@@ -18,7 +18,13 @@ class UserValidator(
         try {
             _userRepository.getByLogin(checkedObject.login)
             throw EntityAlreadyExistsException("This login is taken!")
-        } catch (exception: EntityNotFoundException) {
+        } catch (_: EntityNotFoundException) {
+        }
+
+        try {
+            _userRepository.getByEmail(checkedObject.email)
+            throw EntityAlreadyExistsException("This email is taken!")
+        } catch (_: EntityNotFoundException) {
         }
 
         if (checkedObject.login.length < 5 || checkedObject.login.length > 30) {
