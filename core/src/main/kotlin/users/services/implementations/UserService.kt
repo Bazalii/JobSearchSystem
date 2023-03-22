@@ -1,5 +1,6 @@
 package users.services.implementations
 
+import commonClasses.hashing.IHashCreator
 import commonClasses.IThrowingValidator
 import users.models.User
 import users.models.UserCreationModel
@@ -14,10 +15,13 @@ class UserService(
     private var _userRepository: IUserRepository,
     private var _userValidator: IThrowingValidator<UserCreationModel>,
     private val _userPasswordValidator: UserPasswordValidator,
+    private val _hashCreator: IHashCreator,
 ) : IUserService {
 
     override fun add(userCreationModel: UserCreationModel): User {
         _userValidator.validate(userCreationModel)
+
+        userCreationModel.password = _hashCreator.hash(userCreationModel.password)
 
         return _userRepository.add(userCreationModel.toUser())
     }
