@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Регистрация</title>
+
+    <link href="/css/registration.css" rel="stylesheet">
+    <link href="/css/buttons.css" rel="stylesheet">
+    <link href="/css/select.css" rel="stylesheet">
+    <link href="/css/forms.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    <script src="js/registration.js"></script>
+</head>
+<body>
+<header>
+</header>
+<main>
+    <div class="centeringWrapper">
+        <h1>Регистрация</h1>
+    </div>
+    <form action="" id="registrationForm">
+        <input id="login"
+               class="inputTextField"
+               placeholder="Логин"
+               required="required">
+        <br>
+        <input id="email"
+               class="inputTextField"
+               placeholder="Почта"
+               required="required"
+               type="email">
+        <br>
+        <input id="password"
+               class="inputTextField"
+               placeholder="Пароль"
+               required="required"
+               type="password">
+        <br>
+        <div class="centeringWrapper">
+            <select id="role"
+                    required="required">
+                <option>Соискатель</option>
+                <option>HR</option>
+            </select>
+        </div>
+        <div class="centeringWrapper">
+            <input class="button"
+                   id="registrationButton"
+                   type="submit"
+                   value="Зарегистрироваться">
+        </div>
+    </form>
+</main>
+<footer>
+</footer>
+</body>
+</html>

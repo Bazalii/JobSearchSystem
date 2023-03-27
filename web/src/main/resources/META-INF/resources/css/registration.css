@@ -1,0 +1,15 @@
+body {
+    background-color: #187ADEFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+a {
+    color: #1CC5FA;
+}
+
+.centeringWrapper {
+    margin: 5px;
+    text-align: center;
+}
