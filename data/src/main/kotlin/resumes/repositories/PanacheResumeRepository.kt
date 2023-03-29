@@ -19,8 +19,8 @@ class PanacheResumeRepository : PanacheRepositoryBase<ResumeDbModel, UUID> {
         return findById(id) ?: throw EntityNotFoundException("Entity not found!")
     }
 
-    fun getAllByUserId(id: UUID): List<ResumeDbModel> {
-        return list("user_id", id)
+    fun getByUserId(id: UUID): ResumeDbModel {
+        return find("user_id", id).firstResult() ?: throw EntityNotFoundException("Entity not found!")
     }
 
     fun update(resumeDbModel: ResumeDbModel): ResumeDbModel {

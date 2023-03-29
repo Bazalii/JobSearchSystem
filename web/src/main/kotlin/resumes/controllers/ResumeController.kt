@@ -8,15 +8,13 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponses
 import resumes.extensions.toResumeResponse
 import resumes.models.ResumeCreationRequest
 import resumes.models.ResumeResponse
+import resumes.models.ResumeUpdateRequest
 import resumes.services.IResumeService
 import java.util.*
 import javax.annotation.security.RolesAllowed
 import javax.enterprise.context.RequestScoped
 import javax.inject.Inject
-import javax.ws.rs.DELETE
-import javax.ws.rs.GET
-import javax.ws.rs.POST
-import javax.ws.rs.Path
+import javax.ws.rs.*
 
 @RequestScoped
 @Path("resumes")
@@ -64,10 +62,27 @@ class ResumeController(
     @GET
     @Path("/user/{userId}")
     @RolesAllowed("Admin")
-    fun getAllByUserId(userId: UUID): List<ResumeResponse> {
-        val resumes = _resumeService.getAllByUserId(userId)
+    fun getByUserId(userId: UUID): ResumeResponse {
+        val resume = _resumeService.getByUserId(userId)
 
-        return resumes.map { it.toResumeResponse() }
+        return resume.toResumeResponse()
+    }
+
+    @APIResponses(
+        APIResponse(responseCode = "200", description = "Successful operation"),
+        APIResponse(responseCode = "404", description = "Resume with sent id does not exist")
+    )
+    @PUT
+    @Path("/{id}")
+    @RolesAllowed("User", "Admin")
+    fun update(@PathParam("id") resumeId: UUID, resumeUpdateRequest: ResumeUpdateRequest): ResumeResponse {
+        val resumeUpdateModel = resumeUpdateRequest.toResumeUpdateModel(resumeId, UUID.fromString(userId))
+
+        if (!groups.contains("Admin") && resumeUpdateModel.userId != UUID.fromString(userId)) {
+            throw NotEnoughRightsException("You do not have access to this resume!")
+        }
+
+        return _resumeService.update(resumeUpdateModel).toResumeResponse()
     }
 
     @APIResponses(

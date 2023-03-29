@@ -41,10 +41,10 @@ class ResumeRepository(
         return dbModel.toResume()
     }
 
-    override fun getAllByUserId(id: UUID): List<Resume> {
-        val dbModels = _panacheResumeRepository.getAllByUserId(id)
+    override fun getByUserId(id: UUID): Resume {
+        val dbModel = _panacheResumeRepository.getByUserId(id)
 
-        return dbModels.map { it.toResume() }
+        return dbModel.toResume()
     }
 
     @Transactional
