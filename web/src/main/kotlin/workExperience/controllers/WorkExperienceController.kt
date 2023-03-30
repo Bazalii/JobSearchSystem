@@ -63,8 +63,8 @@ class WorkExperienceController(
     @GET
     @Path("/user/{userId}")
     @RolesAllowed("Admin")
-    fun getAllByUserId(userId: UUID): List<WorkExperienceItemResponse> {
-        val workExperienceItems = _workExperienceService.getAllByUserId(userId)
+    fun getAllByResumeId(userId: UUID): List<WorkExperienceItemResponse> {
+        val workExperienceItems = _workExperienceService.getAllByResumeId(userId)
 
         return workExperienceItems.map { it.toWorkExperienceItemResponse() }
     }
@@ -76,7 +76,7 @@ class WorkExperienceController(
     @DELETE
     @Path("/{id}")
     @RolesAllowed("User", "Admin")
-    fun removeById(id: UUID): WorkExperienceItemResponse {
+    fun removeById(@PathParam("id") id: UUID): WorkExperienceItemResponse {
         val workExperienceItem = _workExperienceService.getById(id)
 
         val resume = _resumeService.getById(workExperienceItem.resumeId)

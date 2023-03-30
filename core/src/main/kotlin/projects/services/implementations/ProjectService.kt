@@ -26,8 +26,8 @@ class ProjectService(
         return _projectRepository.getById(id)
     }
 
-    override fun getAllByUserId(id: UUID): List<Project> {
-        return _projectRepository.getAllByUserId(id)
+    override fun getAllByResumeId(id: UUID): List<Project> {
+        return _projectRepository.getAllByResumeId(id)
     }
 
     override fun update(project: Project): Project {

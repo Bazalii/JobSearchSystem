@@ -34,8 +34,8 @@ class WorkExperienceRepository(
         return dbModel.toWorkExperienceItem()
     }
 
-    override fun getAllByUserId(id: UUID): List<WorkExperienceItem> {
-        val dbModels = _panacheWorkExperienceRepository.getAllByUserId(id)
+    override fun getAllByResumeId(id: UUID): List<WorkExperienceItem> {
+        val dbModels = _panacheWorkExperienceRepository.getAllByResumeId(id)
 
         return dbModels.map { it.toWorkExperienceItem() }
     }

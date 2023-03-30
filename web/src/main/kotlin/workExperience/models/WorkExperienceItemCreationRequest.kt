@@ -9,7 +9,7 @@ data class WorkExperienceItemCreationRequest(
     var startDate: LocalDate = LocalDate.MIN,
     var endDate: LocalDate = LocalDate.MAX,
     var resumeId: UUID = UUID.fromString("00000000-0000-0000-0000-000000000000"),
-){
+) {
     fun toCreationModel() = WorkExperienceItemCreationModel(
         place = place,
         position = position,

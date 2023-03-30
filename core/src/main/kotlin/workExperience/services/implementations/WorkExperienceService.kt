@@ -26,8 +26,8 @@ class WorkExperienceService(
         return _workExperienceRepository.getById(id)
     }
 
-    override fun getAllByUserId(id: UUID): List<WorkExperienceItem> {
-        return _workExperienceRepository.getAllByUserId(id)
+    override fun getAllByResumeId(id: UUID): List<WorkExperienceItem> {
+        return _workExperienceRepository.getAllByResumeId(id)
     }
 
     override fun update(workExperienceItem: WorkExperienceItem): WorkExperienceItem {

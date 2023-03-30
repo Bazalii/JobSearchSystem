@@ -18,6 +18,8 @@ import javax.ws.rs.DELETE
 import javax.ws.rs.GET
 import javax.ws.rs.POST
 import javax.ws.rs.Path
+import javax.ws.rs.PathParam
+import javax.ws.rs.QueryParam
 
 @RequestScoped
 @Path("projects")
@@ -66,8 +68,8 @@ class ProjectController(
     @GET
     @Path("/user/{userId}")
     @RolesAllowed("Admin")
-    fun getAllByUserId(userId: UUID): List<ProjectResponse> {
-        val projects = _projectService.getAllByUserId(userId)
+    fun getAllByResumeId(userId: UUID): List<ProjectResponse> {
+        val projects = _projectService.getAllByResumeId(userId)
 
         return projects.map { it.toProjectResponse() }
     }
@@ -79,7 +81,7 @@ class ProjectController(
     @DELETE
     @Path("/{id}")
     @RolesAllowed("User", "Admin")
-    fun removeById(id: UUID): ProjectResponse {
+    fun removeById(@PathParam("id") id: UUID): ProjectResponse {
         val project = _projectService.getById(id)
 
         val resume = _resumeService.getById(project.resumeId)

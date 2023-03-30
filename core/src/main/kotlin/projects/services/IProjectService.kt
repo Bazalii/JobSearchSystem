@@ -7,7 +7,7 @@ import java.util.*
 interface IProjectService {
     fun add(projectCreationModel: ProjectCreationModel): Project
     fun getById(id: UUID): Project
-    fun getAllByUserId(id: UUID): List<Project>
+    fun getAllByResumeId(id: UUID): List<Project>
     fun update(project: Project): Project
     fun removeById(id: UUID): Project
 }

@@ -16,6 +16,6 @@ class WorkExperienceItemDbModel(
     var endDate: LocalDate = LocalDate.MAX,
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "resume_id")
     var resume: ResumeDbModel = ResumeDbModel(),
 )

@@ -19,8 +19,8 @@ class PanacheWorkExperienceRepository : PanacheRepositoryBase<WorkExperienceItem
         return findById(id) ?: throw EntityNotFoundException("Entity not found!")
     }
 
-    fun getAllByUserId(id: UUID): List<WorkExperienceItemDbModel> {
-        return list("user_id", id)
+    fun getAllByResumeId(id: UUID): List<WorkExperienceItemDbModel> {
+        return list("resume_id", id)
     }
 
     fun update(workExperienceItemDbModel: WorkExperienceItemDbModel): WorkExperienceItemDbModel {

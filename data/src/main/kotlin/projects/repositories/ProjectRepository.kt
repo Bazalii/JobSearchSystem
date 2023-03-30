@@ -33,8 +33,8 @@ class ProjectRepository(
         return dbModel.toProject()
     }
 
-    override fun getAllByUserId(id: UUID): List<Project> {
-        val dbModels = _panacheProjectRepository.getAllByUserId(id)
+    override fun getAllByResumeId(id: UUID): List<Project> {
+        val dbModels = _panacheProjectRepository.getAllByResumeId(id)
 
         return dbModels.map { it.toProject() }
     }
