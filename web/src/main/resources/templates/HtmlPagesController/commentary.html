@@ -1,0 +1,14 @@
+<div class="commentary">
+    <h2>{commentary.title}</h2>
+    <br>
+    {commentary.body}
+    {#if commentary.userId == currentUserId || groups.contains("Admin")}
+    <form name="removeCommentaryForm">
+        <input id="{commentary.id}"
+               class="deleteButton"
+               name="removeCommentaryButton"
+               type="submit"
+               value="Remove">
+    </form>
+    {/if}
+</div>
