@@ -1,0 +1,79 @@
+<div class="resume">
+    <h2>
+        My name is {resume.name}.
+        <br>
+        I am {resume.currentJob}.
+        <br>
+        Hard skills:
+    </h2>
+    <ul>
+        <li><b>Programming languages:</b>
+            {#for language in resume.languages}
+                {#if language_isLast}
+                    {language.name}
+                {#else}
+                    {language.name},
+                {/if}
+            {/for}
+        </li>
+        <li><b>Frameworks:</b>
+            {#for framework in resume.frameworks}
+                {#if framework_isLast}
+                    {framework.name}
+                {#else}
+                    {framework.name},
+                {/if}
+            {/for}
+        </li>
+        <li><b>Databases:</b>
+            {#for database in resume.databases}
+                {#if database_isLast}
+                    {database.name}
+                {#else}
+                    {database.name},
+                {/if}
+            {/for}
+        </li>
+        <li><b>Other technologies:</b>
+            {resume.otherTechnologies}
+        </li>
+    </ul>
+    <div class="text">{resume.additionalInformation}</div>
+    <div class="quote">{resume.quote}</div>
+    {#if resume.projects.size != 0}
+    <h2>Projects:</h2>
+    <table style="grid-template-columns: repeat(3, minmax(100px, 200px));">
+        {#for project in resume.projects}
+        <tr>
+            <td>{project.name}</td>
+            <td>
+                <a href="{project.link}" class="classicHref" target="_blank">Source</a>
+            </td>
+            <td>{project.year}</td>
+        </tr>
+        {/for}
+    </table>
+    {/if}
+    {#if resume.workExperiences.size != 0}
+    <h2>Work experience:</h2>
+    <table style="grid-template-columns: repeat(4, minmax(100px, 200px));">
+        {#for workExperienceItem in resume.workExperiences}
+        <tr>
+            <td>{workExperienceItem.place}</td>
+            <td>{workExperienceItem.position}</td>
+            <td>{workExperienceItem.startDate}</td>
+            <td>{workExperienceItem.endDate}</td>
+        </tr>
+        {/for}
+    </table>
+    {/if}
+    {#if resume.userId == currentUserId || groups.contains("Admin")}
+    <form name="removeResumeForm">
+        <input id="{resume.id}"
+               class="deleteButton"
+               name="removeResumeButton"
+               type="submit"
+               value="Remove">
+    </form>
+    {/if}
+</div>

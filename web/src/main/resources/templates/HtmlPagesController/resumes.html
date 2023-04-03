@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="resume" name="keywords">
+
+    <title>Resumes</title>
+
+    <link href="/css/mainTags.css" rel="stylesheet">
+    <link href="/css/text.css" rel="stylesheet">
+    <link href="/css/buttons.css" rel="stylesheet">
+    <link href="/css/forms.css" rel="stylesheet">
+    <link href="/css/select.css" rel="stylesheet">
+    <link href="/css/tables.css" rel="stylesheet">
+    <link href="/css/resumes.css" rel="stylesheet">
+
+    <script src="/js/pageLoading.js"></script>
+    <script src="/js/interactiveMenu.js"></script>
+    <script src="/js/navigationLocation.js"></script>
+    <script src="/js/commonFunctions.js"></script>
+    <script src="/js/resumes.js"></script>
+
+</head>
+<body>
+<header>
+    {#if resumesRenderingInformation.groups.contains("User")}
+        {#include HtmlPagesController/userHeader /}
+    {#else if resumesRenderingInformation.groups.contains("Admin")}
+        {#include HtmlPagesController/adminHeader /}
+    {#else if resumesRenderingInformation.groups.contains("HR")}
+        {#include HtmlPagesController/hrHeader /}
+    {/if}
+</header>
+<main>
+    <div class="centeringWrapper">
+        {#for resume in resumesRenderingInformation.resumes}
+            {#include HtmlPagesController/resume resume=resume currentUserId=resumesRenderingInformation.currentUserId groups=resumesRenderingInformation.groups /}
+        {/for}
+        <br>
+        <nav>
+            {#let pageSize = 5}
+            {#let numberOfShownPages = 5}
+            <a href="/pages/resumes?pageIndex=0&pageSize={pageSize}" class="navigationMenuHref">First page</a>
+            {#let numberOfLeftPages = (resumesRenderingInformation.numberOfPages - resumesRenderingInformation.renderingPageNumber)}
+            {#if numberOfLeftPages < numberOfShownPages.minus(1)}
+                {#if resumesRenderingInformation.numberOfPages < numberOfShownPages}
+                    {#for pageNumber in resumesRenderingInformation.numberOfPages}
+                        {#if pageNumber == resumesRenderingInformation.renderingPageNumber}
+                            <a class="navigationMenuHref">{pageNumber}</a>
+                        {#else}
+                            <a href="/pages/resumes?pageIndex={pageNumber - 1}&pageSize={pageSize}" class="navigationMenuHref">{pageNumber}</a>
+                        {/if}
+                    {/for}
+                {#else}
+                    {#let startPageNumber = (resumesRenderingInformation.numberOfPages - numberOfShownPages + 1)}
+                    {#for pageNumber in numberOfShownPages}
+                        {#let currentPageNumber = (startPageNumber + pageNumber - 1)}
+                        {#if currentPageNumber == resumesRenderingInformation.renderingPageNumber}
+                            <a class="navigationMenuHref">{currentPageNumber}</a>
+                        {#else}
+                            <a href="/pages/resumes?pageIndex={currentPageNumber - 1}&pageSize={pageSize}" class="navigationMenuHref">{currentPageNumber}</a>
+                        {/if}
+                        {/let}
+                    {/for}
+                    {/let}
+                {/if}
+            {#else}
+                <a class="navigationMenuHref">{resumesRenderingInformation.renderingPageNumber}</a>
+                {#for pageNumber in (numberOfShownPages - 1)}
+                    {#let currentPageNumber = (resumesRenderingInformation.renderingPageNumber + pageNumber)}
+                    <a href="/pages/resumes?pageIndex={(currentPageNumber - 1)}&pageSize={pageSize}" class="navigationMenuHref">{currentPageNumber}</a>
+                    {/let}
+                {/for}
+            {/if}
+            {/let}
+            <a href="/pages/resumes?pageIndex={resumesRenderingInformation.numberOfPages - 1}&pageSize={pageSize}" class="navigationMenuHref">Last page</a>
+            {/let}
+            {/let}
+        </nav>
+    </div>
+    <br>
+</main>
+<footer>
+    {#include HtmlPagesController/footer requestStartTime=resumesRenderingInformation.requestStartTime /}
+</footer>
+</body>
+</html>
