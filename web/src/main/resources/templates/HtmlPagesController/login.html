@@ -4,17 +4,15 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Registration</title>
+    <title>Login</title>
 
     <link href="/css/mainTags.css" rel="stylesheet">
     <link href="/css/registration.css" rel="stylesheet">
     <link href="/css/buttons.css" rel="stylesheet">
-    <link href="/css/select.css" rel="stylesheet">
     <link href="/css/forms.css" rel="stylesheet">
-
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
-    <script src="/js/registration.js"></script>
+    <script src="/js/login.js"></script>
     <script src="/js/authentication.js"></script>
     <script src="/js/commonFunctions.js"></script>
 </head>
@@ -23,22 +21,14 @@
 </header>
 <main>
     <div class="centeringWrapper">
-        <h1>Registration</h1>
+        <h1>Login</h1>
 
-        <form id="registrationForm">
-            <label for="login"></label>
-            <input id="login"
+        <form action="" id="loginForm">
+            <label for="uniqueIdentifier"></label>
+            <input id="uniqueIdentifier"
                    class="inputTextField"
-                   placeholder="Login"
+                   placeholder="Login or email"
                    required="required">
-            <br>
-
-            <label for="email"></label>
-            <input id="email"
-                   class="inputTextField"
-                   placeholder="Email"
-                   required="required"
-                   type="email">
             <br>
 
             <label for="password"></label>
@@ -49,19 +39,15 @@
                    type="password">
             <br>
 
-            <label for="role"></label>
-            <select id="role"
-                    required="required">
-                <option>Applicant</option>
-                <option>HR</option>
-            </select>
-            <br>
-
             <input class="button"
-                   id="registrationButton"
+                   id="loginButton"
                    type="submit"
-                   value="Register">
+                   value="Login">
         </form>
+
+        Not registered yet?
+        <a href="/pages/registration">Registration</a>
+
     </div>
 </main>
 <footer>
