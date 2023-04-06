@@ -30,6 +30,14 @@ class CommentaryService(
         return _commentaryRepository.getAllByUserId(id)
     }
 
+    override fun getPage(pageIndex: Int, pageSize: Int): List<Commentary> {
+        return _commentaryRepository.getPage(pageIndex, pageSize)
+    }
+
+    override fun countAll(): Long {
+        return _commentaryRepository.countAll()
+    }
+
     override fun update(commentary: Commentary): Commentary {
         _commentaryValidator.validate(commentary)
 

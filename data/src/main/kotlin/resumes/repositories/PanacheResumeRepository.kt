@@ -23,6 +23,14 @@ class PanacheResumeRepository : PanacheRepositoryBase<ResumeDbModel, UUID> {
         return find("user_id", id).firstResult() ?: throw EntityNotFoundException("Entity not found!")
     }
 
+    fun getPage(pageIndex: Int, pageSize: Int): List<ResumeDbModel> {
+        return findAll().page(pageIndex, pageSize).list()
+    }
+
+    fun countAll(): Long {
+        return count()
+    }
+
     fun update(resumeDbModel: ResumeDbModel): ResumeDbModel {
         val dbModel = findById(resumeDbModel.id) ?: throw EntityNotFoundException("Entity not found!")
 

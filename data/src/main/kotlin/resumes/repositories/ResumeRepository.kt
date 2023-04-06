@@ -47,6 +47,16 @@ class ResumeRepository(
         return dbModel.toResume()
     }
 
+    override fun getPage(pageIndex: Int, pageSize: Int): List<Resume> {
+        val dbModels = _panacheResumeRepository.getPage(pageIndex, pageSize)
+
+        return dbModels.map { it.toResume() }
+    }
+
+    override fun countAll(): Long {
+        return _panacheResumeRepository.countAll()
+    }
+
     @Transactional
     override fun update(resume: Resume): Resume {
         return _panacheResumeRepository.update(

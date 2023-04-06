@@ -23,6 +23,14 @@ class PanacheCommentaryRepository : PanacheRepositoryBase<CommentaryDbModel, UUI
         return list("user_id", id)
     }
 
+    fun getPage(pageIndex: Int, pageSize: Int): List<CommentaryDbModel> {
+        return findAll().page(pageIndex, pageSize).list()
+    }
+
+    fun countAll(): Long {
+        return count()
+    }
+
     fun update(commentaryDbModel: CommentaryDbModel): CommentaryDbModel {
         val dbModel = findById(commentaryDbModel.id) ?: throw EntityNotFoundException("Entity not found!")
 

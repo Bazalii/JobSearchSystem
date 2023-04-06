@@ -48,6 +48,14 @@ class ResumeService(
         return _resumeRepository.getByUserId(id)
     }
 
+    override fun getPage(pageIndex: Int, pageSize: Int): List<Resume>{
+        return _resumeRepository.getPage(pageIndex, pageSize)
+    }
+
+    override fun countAll(): Long {
+        return _resumeRepository.countAll()
+    }
+
     override fun update(resumeUpdateModel: ResumeUpdateModel): Resume {
         val foundResume = _resumeRepository.getById(resumeUpdateModel.id)
 

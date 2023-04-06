@@ -38,6 +38,16 @@ class CommentaryRepository(
         return dbModels.map { it.toCommentary() }
     }
 
+    override fun getPage(pageIndex: Int, pageSize: Int): List<Commentary> {
+        val dbModels = _panacheCommentaryRepository.getPage(pageIndex, pageSize)
+
+        return dbModels.map { it.toCommentary() }
+    }
+
+    override fun countAll(): Long {
+        return _panacheCommentaryRepository.countAll()
+    }
+
     @Transactional
     override fun update(commentary: Commentary): Commentary {
         return _panacheCommentaryRepository.update(
