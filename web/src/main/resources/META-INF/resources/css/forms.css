@@ -4,13 +4,34 @@ input {
     text-align: left;
     color: #1CC5FA;
     text-indent: 0;
-    margin: 5px;
+    margin: 10px 0 0 0;
     padding: 10px;
     background-color: #1304a1;
     border-radius: 10px;
 }
 
-::placeholder {
-    color: #c31cfa;
-    opacity: 1;
+select {
+    font-size: 15px;
+    font-family: "Roboto", "Arial", sans-serif;
+    text-align: left;
+    color: #1CC5FA;
+    text-indent: 0;
+    margin: 10px 0 0 0;
+    padding: 10px;
+    background-color: #1304a1;
+    border-radius: 10px;
+    width: 200px;
+    height: fit-content;
+}
+
+option {
+    font-size: 15px;
+    font-family: "Roboto", "Arial", sans-serif;
+    text-align: left;
+    color: #1CC5FA;
+    text-indent: 0;
+    margin: 5px 0 0 0;
+    padding: 10px;
+    background-color: #1304a1;
+    border-radius: 10px;
 }

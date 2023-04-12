@@ -9,7 +9,7 @@ nav {
     flex-wrap: wrap;
 }
 
-a {
+.navigationMenuLink {
     font-size: 15px;
     font-family: "Roboto", "Arial", sans-serif;
     text-align: left;
@@ -19,6 +19,10 @@ a {
     padding: 10px;
     background-color: #1304a1;
     border-radius: 10px;
+}
+
+.classicHref {
+    color: #4444dd;
 }
 
 .loadInformation {
@@ -36,9 +40,6 @@ ul {
     font-size: 20px;
     font-family: "Roboto", "Arial", sans-serif;
     text-align: left;
-    color: #000000;
-    text-indent: 0;
-    letter-spacing: 0;
 }
 
 ul li a {
@@ -46,10 +47,6 @@ ul li a {
     font-family: "Roboto", "Arial", sans-serif;
     text-align: left;
     color: #34ff5e;
-    text-indent: 0;
-    letter-spacing: 0;
-    padding: 0 0 0 0;
-    background: none;
 }
 
 
@@ -58,10 +55,7 @@ h1 {
     font-family: "Roboto", "Arial", sans-serif;
     font-weight: normal;
     text-align: left;
-    color: #000000;
     text-indent: 10px;
-    letter-spacing: 0;
-    text-transform: none;
 }
 
 h2 {
@@ -71,8 +65,6 @@ h2 {
     text-align: left;
     color: #000000;
     text-indent: 0;
-    letter-spacing: 0;
-    text-transform: none;
 }
 
 .quote {
@@ -80,18 +72,15 @@ h2 {
     font-family: "Roboto", "Arial", sans-serif;
     font-weight: bold;
     text-align: left;
-    color: #000000;
-    text-indent: 15px;
-    letter-spacing: 0;
     text-decoration: underline;
 }
 
-.text {
+.navigationMenuHref {
     font-size: 15px;
     font-family: "Roboto", "Arial", sans-serif;
-    text-align: left;
-    color: #000000;
-    text-indent: 0;
-    letter-spacing: 0;
-    text-transform: none;
+    color: #1CC5FA;
+    background-color: #1304a1;
+    padding: 10px;
+    margin: 20px 20px 20px 20px;
+    border-radius: 10px;
 }

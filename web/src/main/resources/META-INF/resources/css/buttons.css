@@ -4,8 +4,11 @@ button {
     text-align: left;
     color: #1CC5FA;
     text-indent: 0;
-    margin: 5px;
     padding: 10px;
     background-color: #1304a1;
     border-radius: 10px;
+}
+
+.deleteButton {
+    background-color: #bd072d;
 }
