@@ -23,12 +23,16 @@ class ResumeController(
 ) {
 
     @Inject
-    @Claim(standard = Claims.upn)
-    private lateinit var userId: String
+    @Claim(standard = Claims.groups)
+    private lateinit var _groups: Set<String>
+    private lateinit var _userId: UUID
 
     @Inject
-    @Claim(standard = Claims.groups)
-    private lateinit var groups: Set<String>
+    private fun init(@Claim(standard = Claims.upn) userIdString: String?) {
+        if (userIdString != null) {
+            _userId = UUID.fromString(userIdString)
+        }
+    }
 
     @APIResponses(
         APIResponse(responseCode = "200", description = "Resume is created"),
@@ -38,7 +42,7 @@ class ResumeController(
     @POST
     @RolesAllowed("User")
     fun add(resumeCreationRequest: ResumeCreationRequest): ResumeResponse {
-        val creationModel = resumeCreationRequest.toCreationModel(UUID.fromString(userId))
+        val creationModel = resumeCreationRequest.toCreationModel(_userId)
 
         return _resumeService.add(creationModel).toResumeResponse()
     }
@@ -50,7 +54,7 @@ class ResumeController(
     @GET
     @Path("/{id}")
     @RolesAllowed("Admin")
-    fun getById(id: UUID): ResumeResponse {
+    fun getById(@PathParam("id") id: UUID): ResumeResponse {
         val resume = _resumeService.getById(id)
 
         return resume.toResumeResponse()
@@ -62,7 +66,7 @@ class ResumeController(
     @GET
     @Path("/user/{userId}")
     @RolesAllowed("Admin")
-    fun getByUserId(userId: UUID): ResumeResponse {
+    fun getByUserId(@PathParam("userId") userId: UUID): ResumeResponse {
         val resume = _resumeService.getByUserId(userId)
 
         return resume.toResumeResponse()
@@ -76,9 +80,9 @@ class ResumeController(
     @Path("/{id}")
     @RolesAllowed("User", "Admin")
     fun update(@PathParam("id") resumeId: UUID, resumeUpdateRequest: ResumeUpdateRequest): ResumeResponse {
-        val resumeUpdateModel = resumeUpdateRequest.toResumeUpdateModel(resumeId, UUID.fromString(userId))
+        val resumeUpdateModel = resumeUpdateRequest.toResumeUpdateModel(resumeId, _userId)
 
-        if (!groups.contains("Admin") && resumeUpdateModel.userId != UUID.fromString(userId)) {
+        if (!_groups.contains("Admin") && resumeUpdateModel.userId != _userId) {
             throw NotEnoughRightsException("You do not have access to this resume!")
         }
 
@@ -92,10 +96,10 @@ class ResumeController(
     @DELETE
     @Path("/{id}")
     @RolesAllowed("User", "Admin")
-    fun removeById(id: UUID): ResumeResponse {
+    fun removeById(@PathParam("id") id: UUID): ResumeResponse {
         val resume = _resumeService.getById(id)
 
-        if (!groups.contains("Admin") && resume.userId != UUID.fromString(userId)) {
+        if (!_groups.contains("Admin") && resume.userId != _userId) {
             throw NotEnoughRightsException("You do not have access to this resume!")
         }
 

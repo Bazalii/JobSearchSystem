@@ -9,10 +9,7 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponses
 import java.util.*
 import javax.annotation.security.RolesAllowed
 import javax.enterprise.context.RequestScoped
-import javax.ws.rs.DELETE
-import javax.ws.rs.GET
-import javax.ws.rs.POST
-import javax.ws.rs.Path
+import javax.ws.rs.*
 
 @RequestScoped
 @Path("frameworks")
@@ -48,7 +45,7 @@ class FrameworkController(
     @DELETE
     @Path("/{id}")
     @RolesAllowed("Admin")
-    fun removeById(id: UUID): FrameworkResponse {
+    fun removeById(@PathParam("id") id: UUID): FrameworkResponse {
         return _frameworkService.removeById(id).toFrameworkResponse()
     }
 }

@@ -9,10 +9,7 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponses
 import java.util.*
 import javax.annotation.security.RolesAllowed
 import javax.enterprise.context.RequestScoped
-import javax.ws.rs.DELETE
-import javax.ws.rs.GET
-import javax.ws.rs.POST
-import javax.ws.rs.Path
+import javax.ws.rs.*
 
 @RequestScoped
 @Path("databases")
@@ -48,7 +45,7 @@ class DatabaseController(
     @DELETE
     @Path("/{id}")
     @RolesAllowed("Admin")
-    fun removeById(id: UUID): DatabaseResponse {
+    fun removeById(@PathParam("id") id: UUID): DatabaseResponse {
         return _databaseService.removeById(id).toDatabaseResponse()
     }
 }

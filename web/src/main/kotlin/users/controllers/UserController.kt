@@ -20,9 +20,14 @@ class UserController(
     private var _userService: IUserService,
 ) {
 
+    private lateinit var _userId: UUID
+
     @Inject
-    @Claim(standard = Claims.upn)
-    private lateinit var userId: String
+    private fun init(@Claim(standard = Claims.upn) userIdString: String?) {
+        if (userIdString != null) {
+            _userId = UUID.fromString(userIdString)
+        }
+    }
 
     @APIResponses(
         APIResponse(responseCode = "200", description = "User is created"),
@@ -60,7 +65,7 @@ class UserController(
     @RolesAllowed("User", "HR", "Admin")
     fun updatePassword(updatePasswordRequest: UpdatePasswordRequest): UserResponse {
         return _userService.updatePassword(
-            UUID.fromString(userId),
+            _userId,
             updatePasswordRequest.password
         ).toUserResponse()
     }
@@ -85,6 +90,6 @@ class UserController(
     @Path("/{id}")
     @RolesAllowed("User", "HR", "Admin")
     fun removeById(): UserResponse {
-        return _userService.removeById(UUID.fromString(userId)).toUserResponse()
+        return _userService.removeById(_userId).toUserResponse()
     }
 }

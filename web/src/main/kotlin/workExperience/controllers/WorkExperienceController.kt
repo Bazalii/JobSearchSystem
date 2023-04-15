@@ -24,12 +24,16 @@ class WorkExperienceController(
 ) {
 
     @Inject
-    @Claim(standard = Claims.upn)
-    private lateinit var userId: String
+    @Claim(standard = Claims.groups)
+    private lateinit var _groups: Set<String>
+    private lateinit var _userId: UUID
 
     @Inject
-    @Claim(standard = Claims.groups)
-    private lateinit var groups: Set<String>
+    private fun init(@Claim(standard = Claims.upn) userIdString: String?) {
+        if (userIdString != null) {
+            _userId = UUID.fromString(userIdString)
+        }
+    }
 
     @APIResponses(
         APIResponse(responseCode = "200", description = "WorkExperienceItem is created"),
@@ -81,7 +85,7 @@ class WorkExperienceController(
 
         val resume = _resumeService.getById(workExperienceItem.resumeId)
 
-        if (!groups.contains("Admin") && resume.userId != UUID.fromString(userId)) {
+        if (!_groups.contains("Admin") && resume.userId != _userId) {
             throw NotEnoughRightsException("You do not have access to this work experience item!")
         }
 

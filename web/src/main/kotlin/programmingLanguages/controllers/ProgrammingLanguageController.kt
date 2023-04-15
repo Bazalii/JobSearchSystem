@@ -9,10 +9,7 @@ import programmingLanguages.services.IProgrammingLanguageService
 import java.util.*
 import javax.annotation.security.RolesAllowed
 import javax.enterprise.context.RequestScoped
-import javax.ws.rs.DELETE
-import javax.ws.rs.GET
-import javax.ws.rs.POST
-import javax.ws.rs.Path
+import javax.ws.rs.*
 
 @RequestScoped
 @Path("programmingLanguages")
@@ -48,7 +45,7 @@ class ProgrammingLanguageController(
     @DELETE
     @Path("/{id}")
     @RolesAllowed("Admin")
-    fun removeById(id: UUID): ProgrammingLanguageResponse {
+    fun removeById(@PathParam("id") id: UUID): ProgrammingLanguageResponse {
         return _programmingLanguageService.removeById(id).toProgrammingLanguageResponse()
     }
 }
