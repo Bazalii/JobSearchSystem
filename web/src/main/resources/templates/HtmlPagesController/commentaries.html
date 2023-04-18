@@ -11,14 +11,15 @@
     <link href="/css/text.css" rel="stylesheet">
     <link href="/css/buttons.css" rel="stylesheet">
     <link href="/css/forms.css" rel="stylesheet">
-    <link href="/css/select.css" rel="stylesheet">
     <link href="/css/tables.css" rel="stylesheet">
+    <link href="/css/alerts.css" rel="stylesheet">
     <link href="/css/commentaries.css" rel="stylesheet">
 
     <script src="/js/pageLoading.js"></script>
     <script src="/js/interactiveMenu.js"></script>
     <script src="/js/navigationLocation.js"></script>
     <script src="/js/commonFunctions.js"></script>
+    <script src="/js/alerts.js"></script>
     <script src="/js/commentaries.js"></script>
 
 </head>
@@ -33,29 +34,35 @@
     {/if}
 </header>
 <main>
+    <div id="interactiveAlert" class="popup">
+        <button type="button" onclick="location.reload()">Reload</button>
+        <button type="button" onclick="closePopup()">Cancel</button>
+    </div>
     <div class="centeringWrapper">
+        {#if commentariesRenderingInformation.renderingPageNumber == 1}
         <div class="commentary">
-        <form name="commentaryInformationForm">
-            <label for="commentaryTitle"></label>
-            <input id="commentaryTitle"
-                   class="inputTextField"
-                   placeholder="Commentary title"
-                   required="required">
-            <br>
+            <form name="commentaryInformationForm">
+                <label for="commentaryTitle"></label>
+                <input id="commentaryTitle"
+                       class="inputTextField"
+                       placeholder="Commentary title"
+                       required="required">
+                <br>
 
-            <label for="commentaryBody"></label>
-            <input id="commentaryBody"
-                   class="inputTextField"
-                   placeholder="Commentary body"
-                   required="required">
-            <br>
+                <label for="commentaryBody"></label>
+                <input id="commentaryBody"
+                       class="inputTextField"
+                       placeholder="Commentary body"
+                       required="required">
+                <br>
 
-            <input class="button"
-                   id="addCommentaryButton"
-                   type="submit"
-                   value="Add commentary">
-        </form>
+                <input class="button"
+                       id="addCommentaryButton"
+                       type="submit"
+                       value="Add commentary">
+            </form>
         </div>
+        {/if}
         {#for commentary in commentariesRenderingInformation.commentaries}
             {#include HtmlPagesController/commentary commentary=commentary currentUserId=commentariesRenderingInformation.currentUserId groups=commentariesRenderingInformation.groups /}
         {/for}

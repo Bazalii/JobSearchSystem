@@ -11,14 +11,15 @@
     <link href="/css/text.css" rel="stylesheet">
     <link href="/css/buttons.css" rel="stylesheet">
     <link href="/css/forms.css" rel="stylesheet">
-    <link href="/css/select.css" rel="stylesheet">
     <link href="/css/tables.css" rel="stylesheet">
+    <link href="/css/alerts.css" rel="stylesheet">
     <link href="/css/resumes.css" rel="stylesheet">
 
     <script src="/js/pageLoading.js"></script>
     <script src="/js/interactiveMenu.js"></script>
     <script src="/js/navigationLocation.js"></script>
     <script src="/js/commonFunctions.js"></script>
+    <script src="/js/alerts.js"></script>
     <script src="/js/resumes.js"></script>
 
 </head>
@@ -33,6 +34,10 @@
     {/if}
 </header>
 <main>
+    <div id="interactiveAlert" class="popup">
+        <button type="button" onclick="location.reload()">Reload</button>
+        <button type="button" onclick="closePopup()">Cancel</button>
+    </div>
     <div class="centeringWrapper">
         {#for resume in resumesRenderingInformation.resumes}
             {#include HtmlPagesController/resume resume=resume currentUserId=resumesRenderingInformation.currentUserId groups=resumesRenderingInformation.groups /}
