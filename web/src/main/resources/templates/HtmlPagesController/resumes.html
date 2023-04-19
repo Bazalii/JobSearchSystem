@@ -47,6 +47,13 @@
             {#let pageSize = 5}
             {#let numberOfShownPages = 5}
             <a href="/pages/resumes?pageIndex=0&pageSize={pageSize}" class="navigationMenuHref">First page</a>
+            {#let indexOfPreviousPage = resumesRenderingInformation.renderingPageNumber.minus(2)}
+            {#if indexOfPreviousPage < 0}
+                <a href="/pages/resumes?pageIndex=0&pageSize={pageSize}" class="navigationMenuHref">Previous page</a>
+            {#else}
+                <a href="/pages/resumes?pageIndex={indexOfPreviousPage}&pageSize={pageSize}" class="navigationMenuHref">Previous page</a>
+            {/if}
+            {/let}
             {#let numberOfLeftPages = (resumesRenderingInformation.numberOfPages - resumesRenderingInformation.renderingPageNumber)}
             {#if numberOfLeftPages < numberOfShownPages.minus(1)}
                 {#if resumesRenderingInformation.numberOfPages < numberOfShownPages}
@@ -77,6 +84,13 @@
                     <a href="/pages/resumes?pageIndex={(currentPageNumber - 1)}&pageSize={pageSize}" class="navigationMenuHref">{currentPageNumber}</a>
                     {/let}
                 {/for}
+            {/if}
+            {/let}
+            {#let indexOfNextPage = resumesRenderingInformation.renderingPageNumber}
+            {#if indexOfNextPage >= resumesRenderingInformation.numberOfPages}
+                <a href="/pages/resumes?pageIndex={resumesRenderingInformation.numberOfPages.minus(1)}&pageSize={pageSize}" class="navigationMenuHref">Next page</a>
+            {#else}
+                <a href="/pages/resumes?pageIndex={indexOfNextPage}&pageSize={pageSize}" class="navigationMenuHref">Next page</a>
             {/if}
             {/let}
             <a href="/pages/resumes?pageIndex={resumesRenderingInformation.numberOfPages - 1}&pageSize={pageSize}" class="navigationMenuHref">Last page</a>
