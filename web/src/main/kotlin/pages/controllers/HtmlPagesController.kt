@@ -1,6 +1,5 @@
 package pages.controllers
 
-import commentaries.models.CommentariesRenderingInformation
 import commentaries.services.ICommentaryService
 import databases.services.IDatabaseService
 import exceptions.EntityNotFoundException
@@ -11,11 +10,13 @@ import org.eclipse.microprofile.jwt.Claim
 import org.eclipse.microprofile.jwt.Claims
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses
+import pages.models.AdminPageRenderingInformation
+import pages.models.CommentariesRenderingInformation
+import pages.models.MyResumeRenderingInformation
+import pages.models.ResumesRenderingInformation
 import programmingLanguages.services.IProgrammingLanguageService
 import projects.services.IProjectService
-import resumes.models.MyResumeRenderingInformation
 import resumes.models.Resume
-import resumes.models.ResumesRenderingInformation
 import resumes.services.IResumeService
 import workExperience.services.IWorkExperienceService
 import java.time.LocalDateTime
@@ -62,7 +63,7 @@ class HtmlPagesController(
         external fun resumes(resumesRenderingInformation: ResumesRenderingInformation): TemplateInstance
 
         @JvmStatic
-        external fun admin(): TemplateInstance
+        external fun admin(adminPageRenderingInformation: AdminPageRenderingInformation): TemplateInstance
 
         @JvmStatic
         external fun commentaries(commentariesRenderingInformation: CommentariesRenderingInformation): TemplateInstance
@@ -179,7 +180,18 @@ class HtmlPagesController(
     @Produces(MediaType.TEXT_HTML)
     @RolesAllowed("Admin")
     fun getAdminPage(): TemplateInstance {
-        return Templates.admin()
+        val allLanguages = _programmingLanguageService.getAll()
+        val allFrameworks = _frameworkService.getAll()
+        val allDatabases = _databaseService.getAll()
+
+        return Templates.admin(
+            AdminPageRenderingInformation(
+                allLanguages,
+                allFrameworks,
+                allDatabases,
+                _requestStartTime
+            )
+        )
     }
 
     @APIResponses(
