@@ -4,31 +4,126 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Опыт работы</title>
+    <title>Admin</title>
 
-    {#include HtmlPagesController/headApplicationInformation /}
+    <link href="/css/mainTags.css" rel="stylesheet">
+    <link href="/css/text.css" rel="stylesheet">
+    <link href="/css/buttons.css" rel="stylesheet">
+    <link href="/css/forms.css" rel="stylesheet">
+    <link href="/css/tables.css" rel="stylesheet">
+
+    <script src="/js/pageLoading.js"></script>
+    <script src="/js/interactiveMenu.js"></script>
+    <script src="/js/navigationLocation.js"></script>
+    <script src="/js/commonFunctions.js"></script>
+    <script src="/js/admin.js"></script>
 </head>
 <body>
 <header>
-    {#include HtmlPagesController/header /}
+    {#include HtmlPagesController/adminHeader /}
 </header>
 <main>
-    <button id="clearLocalStorage">ClearLocalStorage</button>
-    <form action="" id="tableSizing">
-        <input id="columns" min="1" placeholder="Количество столбцов" required="required" step="1" type="number">
-        <input id="rows" min="1" placeholder="Количество строк" required="required" step="1" type="number">
-        <input id="tableSizingButton" type="submit" value="Send">
-    </form>
-    <form action="" id="tableInput">
-        <input id="column" min="1" placeholder="Столбец" required="required" step="1" type="number">
-        <input id="row" min="1" placeholder="Строка" required="required" step="1" type="number">
-        <input id="tableCellContent" placeholder="Значение" required="required" type="text">
-        <input id="tableInputButton" type="submit" value="Send">
-    </form>
-    <div id="customTable"></div>
+    <div class="centeringWrapper">
+        <h1>Hard skills</h1>
+        <form name="hardSkillInformationForm">
+            <label for="hardSkillName"></label>
+            <input id="hardSkillName"
+                   class="inputTextField"
+                   placeholder="Hard skill name"
+                   required="required">
+
+            <label for="hardSkillType"></label>
+            <select id="hardSkillType"
+                    required="required">
+                <option value="Programming language">Programming language</option>
+                <option value="Framework">Framework</option>
+                <option value="Database">Database</option>
+            </select>
+
+            <input class="button"
+                   id="addHardSkillButton"
+                   type="submit"
+                   value="Save">
+        </form>
+        <form id="removeProgrammingLanguage">
+            <label for="programmingLanguages"></label>
+            <select multiple
+                    id="programmingLanguages"
+                    required="required">
+                {#for language in adminPageRenderingInformation.allLanguages}
+                <option value="{language.id}">
+                    {language.name}
+                </option>
+                {/for}
+            </select>
+            <br>
+
+            <input class="deleteButton"
+                   id="removeProgrammingLanguagesButton"
+                   type="submit"
+                   value="Remove">
+        </form>
+        <form>
+            <label for="frameworks"></label>
+            <select multiple
+                    id="frameworks"
+                    required="required">
+                {#for framework in adminPageRenderingInformation.allFrameworks}
+                <option value="{framework.id}">
+                    {framework.name}
+                </option>
+                {/for}
+            </select>
+            <br>
+
+            <input class="deleteButton"
+                   id="removeFrameworksButton"
+                   type="submit"
+                   value="Remove">
+        </form>
+        <form>
+            <label for="databases"></label>
+            <select multiple
+                    id="databases"
+                    required="required">
+                {#for database in adminPageRenderingInformation.allDatabases}
+                <option value="{database.id}">
+                    {database.name}
+                </option>
+                {/for}
+            </select>
+            <br>
+
+            <input class="deleteButton"
+                   id="removeDatabasesButton"
+                   type="submit"
+                   value="Remove">
+        </form>
+        <h1>Change user role</h1>
+        <form name="changeRoleForm">
+            <label for="login"></label>
+            <input id="login"
+                   class="inputTextField"
+                   placeholder="User login"
+                   required="required">
+
+            <label for="role"></label>
+            <select id="role"
+                    required="required">
+                <option value="User">User</option>
+                <option value="HR">HR</option>
+                <option value="Admin">Admin</option>
+            </select>
+
+            <input class="button"
+                   id="changeRoleButton"
+                   type="submit"
+                   value="Update">
+        </form>
+    </div>
 </main>
 <footer>
-    {#include HtmlPagesController/footer /}
+    {#include HtmlPagesController/footer requestStartTime=adminPageRenderingInformation.requestStartTime /}
 </footer>
 </body>
 </html>
