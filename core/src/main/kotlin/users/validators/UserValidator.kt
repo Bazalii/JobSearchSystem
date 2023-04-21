@@ -12,6 +12,7 @@ import javax.enterprise.context.ApplicationScoped
 class UserValidator(
     private val _userRepository: IUserRepository,
     private val _userPasswordValidator: UserPasswordValidator,
+    private val _userRoleValidator: UserRoleValidator,
 ) : IThrowingValidator<UserCreationModel> {
 
     override fun validate(checkedObject: UserCreationModel) {
@@ -36,5 +37,7 @@ class UserValidator(
         }
 
         _userPasswordValidator.validate(checkedObject.password)
+
+        _userRoleValidator.validate(checkedObject.role)
     }
 }

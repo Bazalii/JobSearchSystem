@@ -76,10 +76,10 @@ class UserController(
         APIResponse(responseCode = "404", description = "User with sent id does not exist")
     )
     @PUT
-    @Path("/makeAdmin/{login}")
+    @Path("/updateRole")
     @RolesAllowed("User", "HR", "Admin")
-    fun makeUserAdmin(login: String): UserResponse {
-        return _userService.makeUserAdmin(login).toUserResponse()
+    fun updateRole(@QueryParam("login") login: String, @QueryParam("role") role: String): UserResponse {
+        return _userService.updateRole(login, role).toUserResponse()
     }
 
     @APIResponses(

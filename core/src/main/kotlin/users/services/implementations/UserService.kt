@@ -7,6 +7,7 @@ import users.models.UserCreationModel
 import users.repositories.IUserRepository
 import users.services.IUserService
 import users.validators.UserPasswordValidator
+import users.validators.UserRoleValidator
 import java.util.*
 import javax.enterprise.context.ApplicationScoped
 
@@ -15,6 +16,7 @@ class UserService(
     private var _userRepository: IUserRepository,
     private var _userValidator: IThrowingValidator<UserCreationModel>,
     private val _userPasswordValidator: UserPasswordValidator,
+    private val _userRoleValidator: UserRoleValidator,
     private val _hashCreator: IHashCreator,
 ) : IUserService {
 
@@ -40,8 +42,10 @@ class UserService(
         return _userRepository.updatePassword(userId, password)
     }
 
-    override fun makeUserAdmin(login: String): User {
-        return _userRepository.updateRole(login, "Admin")
+    override fun updateRole(login: String, role: String): User {
+        _userRoleValidator.validate(role)
+
+        return _userRepository.updateRole(login, role)
     }
 
     override fun removeById(id: UUID): User {
