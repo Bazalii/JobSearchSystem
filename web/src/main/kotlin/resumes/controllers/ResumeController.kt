@@ -10,6 +10,7 @@ import resumes.models.ResumeCreationRequest
 import resumes.models.ResumeResponse
 import resumes.models.ResumeUpdateRequest
 import resumes.services.IResumeService
+import updatesNotifications.notificators.IUpdatesNotificator
 import java.util.*
 import javax.annotation.security.RolesAllowed
 import javax.enterprise.context.RequestScoped
@@ -20,6 +21,7 @@ import javax.ws.rs.*
 @Path("resumes")
 class ResumeController(
     private var _resumeService: IResumeService,
+    private val _updatesNotificator: IUpdatesNotificator,
 ) {
 
     @Inject
@@ -44,7 +46,11 @@ class ResumeController(
     fun add(resumeCreationRequest: ResumeCreationRequest): ResumeResponse {
         val creationModel = resumeCreationRequest.toCreationModel(_userId)
 
-        return _resumeService.add(creationModel).toResumeResponse()
+        val resumeResponse = _resumeService.add(creationModel).toResumeResponse()
+
+        _updatesNotificator.notifyAll("Resume is added!")
+
+        return resumeResponse
     }
 
     @APIResponses(
@@ -103,6 +109,10 @@ class ResumeController(
             throw NotEnoughRightsException("You do not have access to this resume!")
         }
 
-        return _resumeService.removeById(id).toResumeResponse()
+        val resumeResponse = _resumeService.removeById(id).toResumeResponse()
+
+        _updatesNotificator.notifyAll("Resume is deleted!")
+
+        return resumeResponse
     }
 }

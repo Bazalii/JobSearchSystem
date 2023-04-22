@@ -10,6 +10,7 @@ import org.eclipse.microprofile.jwt.Claim
 import org.eclipse.microprofile.jwt.Claims
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses
+import updatesNotifications.notificators.IUpdatesNotificator
 import java.util.*
 import javax.annotation.security.RolesAllowed
 import javax.enterprise.context.RequestScoped
@@ -20,6 +21,7 @@ import javax.ws.rs.*
 @Path("commentaries")
 class CommentaryController(
     private var _commentaryService: ICommentaryService,
+    private val _updatesNotificator: IUpdatesNotificator,
 ) {
 
     @Inject
@@ -48,7 +50,11 @@ class CommentaryController(
             userId = _userId
         )
 
-        return _commentaryService.add(creationModel).toResponseCommentary()
+        val commentaryResponse = _commentaryService.add(creationModel).toResponseCommentary()
+
+        _updatesNotificator.notifyAll("Commentary is added!")
+
+        return commentaryResponse
     }
 
     @APIResponses(
@@ -90,6 +96,10 @@ class CommentaryController(
             throw NotEnoughRightsException("You do not have access to this commentary!")
         }
 
-        return _commentaryService.removeById(id).toResponseCommentary()
+        val commentaryResponse = _commentaryService.removeById(id).toResponseCommentary()
+
+        _updatesNotificator.notifyAll("Commentary is deleted!")
+
+        return commentaryResponse
     }
 }
