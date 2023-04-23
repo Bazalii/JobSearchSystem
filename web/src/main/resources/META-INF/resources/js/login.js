@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", event => setLoginButtonOnClickHandler())
+document.addEventListener("DOMContentLoaded", event => showChoiceAlert())
 window.addEventListener("load", event => redirectUserToAvailablePage());
 
 function setLoginButtonOnClickHandler() {
@@ -21,6 +22,14 @@ async function login() {
     )
 }
 
+function showChoiceAlert() {
+    if (!checkIfRefreshTokenExists()) {
+        return;
+    }
+
+    showInteractiveAlert("Do you want to continue with account that you are already logged in?");
+}
+
 async function redirectUserToAvailablePage() {
     let sessionToken = await getSessionToken()
 
@@ -31,9 +40,6 @@ async function redirectUserToAvailablePage() {
             let actualPath = window.location.href.substring(sharpIndex + 1)
 
             await renderApplicationPage(actualPath)
-            return;
         }
-
-        await renderApplicationPage("resumes")
     }
 }

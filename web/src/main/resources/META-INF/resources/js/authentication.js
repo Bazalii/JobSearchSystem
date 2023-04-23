@@ -18,6 +18,12 @@ async function getRefreshToken(userCredentials) {
     return refreshToken;
 }
 
+function checkIfRefreshTokenExists() {
+    let refreshToken = localStorage.getItem("refreshToken");
+
+    return refreshToken !== null
+}
+
 async function getSessionToken() {
     let refreshToken = localStorage.getItem("refreshToken");
 
@@ -69,5 +75,5 @@ async function backendLogin(credentials) {
         return;
     }
 
-    await renderApplicationPage("resumes")
+    await renderApplicationPage("/pages/resumes?pageIndex=0&pageSize=5")
 }
