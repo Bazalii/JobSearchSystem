@@ -1,12 +1,6 @@
-document.addEventListener("DOMContentLoaded", event => removePageReloadingFromForms())
-document.addEventListener("DOMContentLoaded", event => setSaveResumeButtonOnClickHandler())
-document.addEventListener("DOMContentLoaded", event => setDeleteResumeButtonOnClickHandler())
-document.addEventListener("DOMContentLoaded", event => setRemoveProjectButtonsOnClickHandler())
-document.addEventListener("DOMContentLoaded", event => setAddProjectButtonOnClickHandler())
-document.addEventListener("DOMContentLoaded", event => setRemoveWorkExperienceItemButtonsOnClickHandler())
-document.addEventListener("DOMContentLoaded", event => setAddWorkExperienceItemButtonOnClickHandler())
+window.addEventListener("load", event => addPagesRenderingForLinks());
 
-function removePageReloadingFromForms() {
+document.addEventListener("DOMContentLoaded", event => {
     let forms = []
 
     forms.push(document.getElementsByName("resumeInformationForm")[0]);
@@ -15,10 +9,14 @@ function removePageReloadingFromForms() {
     forms.push(...document.getElementsByName("removeProjectForm"));
     forms.push(...document.getElementsByName("removeWorkExperienceItemForm"));
 
-    for (let formIndex in forms) {
-        forms[formIndex].addEventListener("submit", event => removeDefaultEventHandler(event));
-    }
-}
+    removePageReloadingFromForms(forms);
+})
+document.addEventListener("DOMContentLoaded", event => setSaveResumeButtonOnClickHandler())
+document.addEventListener("DOMContentLoaded", event => setDeleteResumeButtonOnClickHandler())
+document.addEventListener("DOMContentLoaded", event => setRemoveProjectButtonsOnClickHandler())
+document.addEventListener("DOMContentLoaded", event => setAddProjectButtonOnClickHandler())
+document.addEventListener("DOMContentLoaded", event => setRemoveWorkExperienceItemButtonsOnClickHandler())
+document.addEventListener("DOMContentLoaded", event => setAddWorkExperienceItemButtonOnClickHandler())
 
 function setSaveResumeButtonOnClickHandler() {
     let saveResumeButton = document.getElementById("saveResumeButton");
@@ -76,7 +74,6 @@ async function addProject() {
     let response = await doBackendRequest(
         "http://localhost:8080/projects/",
         "POST",
-        "",
         body
     );
 
@@ -136,9 +133,8 @@ async function addProject() {
 
 async function removeProject(event) {
     let response = await doBackendRequest(
-        "http://localhost:8080/projects/",
+        `http://localhost:8080/projects/${event.target.id}`,
         "DELETE",
-        `${event.target.id}`
     );
 
     if (response.status !== 200) {
@@ -174,7 +170,6 @@ async function addWorkExperienceItem() {
     let response = await doBackendRequest(
         "http://localhost:8080/workExperiences/",
         "POST",
-        "",
         body
     );
 
@@ -230,9 +225,8 @@ async function addWorkExperienceItem() {
 
 async function removeWorkExperienceItem(event) {
     let response = await doBackendRequest(
-        "http://localhost:8080/workExperiences/",
+        `http://localhost:8080/workExperiences/${event.target.id}`,
         "DELETE",
-        `${event.target.id}`
     );
 
     if (response.status !== 200) {
@@ -301,7 +295,6 @@ async function saveOrUpdateResume() {
         let response = await doBackendRequest(
             `http://localhost:8080/resumes/`,
             "POST",
-            "",
             body
         );
 
@@ -315,7 +308,6 @@ async function saveOrUpdateResume() {
     await doBackendRequest(
         `http://localhost:8080/resumes/${resumeForm.id}`,
         "PUT",
-        "",
         body
     );
 }
@@ -331,6 +323,5 @@ async function removeResume() {
     await doBackendRequest(
         `http://localhost:8080/resumes/${resumeId}`,
         "DELETE",
-        ""
     );
 }

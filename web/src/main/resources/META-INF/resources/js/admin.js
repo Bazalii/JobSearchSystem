@@ -1,18 +1,16 @@
-document.addEventListener("DOMContentLoaded", event => removePageReloadingFromForms())
-document.addEventListener("DOMContentLoaded", event => setAddHardSkillButtonOnClickHandler())
-document.addEventListener("DOMContentLoaded", event => setRemoveHardSkillButtonsOnClickHandlers())
-document.addEventListener("DOMContentLoaded", event => setChangeRoleButtonOnClickHandler())
+window.addEventListener("load", event => addPagesRenderingForLinks());
 
-function removePageReloadingFromForms() {
+document.addEventListener("DOMContentLoaded", event => {
     let forms = []
 
     forms.push(document.getElementsByName("hardSkillInformationForm")[0]);
     forms.push(document.getElementsByName("changeRoleForm")[0]);
 
-    for (let formIndex in forms) {
-        forms[formIndex].addEventListener("submit", event => removeDefaultEventHandler(event));
-    }
-}
+    removePageReloadingFromForms(forms);
+})
+document.addEventListener("DOMContentLoaded", event => setAddHardSkillButtonOnClickHandler())
+document.addEventListener("DOMContentLoaded", event => setRemoveHardSkillButtonsOnClickHandlers())
+document.addEventListener("DOMContentLoaded", event => setChangeRoleButtonOnClickHandler())
 
 function setChangeRoleButtonOnClickHandler() {
     let button = document.getElementById("changeRoleButton");
@@ -54,7 +52,6 @@ function removeHardSkills(hardSkillsList, controllerPath) {
             doBackendRequest(
                 `/${controllerPath}/${hardSkill.value}`,
                 "DELETE",
-                ""
             )
         }
     }
@@ -74,7 +71,6 @@ async function sendHardSkill() {
             doBackendRequest(
                 "/programmingLanguages",
                 "POST",
-                "",
                 body
             )
             break
@@ -82,7 +78,6 @@ async function sendHardSkill() {
             doBackendRequest(
                 "/frameworks",
                 "POST",
-                "",
                 body
             )
             break
@@ -90,7 +85,6 @@ async function sendHardSkill() {
             doBackendRequest(
                 "/databases",
                 "POST",
-                "",
                 body
             )
             break
@@ -104,6 +98,5 @@ function updateUserRole() {
     doBackendRequest(
         `/users/updateRole?login=${login}&role=${role}`,
         "PUT",
-        ""
     );
 }

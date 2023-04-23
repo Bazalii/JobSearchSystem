@@ -1,12 +1,22 @@
-document.addEventListener("DOMContentLoaded", event => removePageReloadingFromForms())
+window.addEventListener("load", event => addPagesRenderingForLinks());
+
+document.addEventListener("DOMContentLoaded", event => {
+    let forms = [];
+
+    forms.push(document.getElementsByName("commentaryInformationForm")[0]);
+    forms.push(...document.getElementsByName("removeCommentaryForm"));
+
+    removePageReloadingFromForms(forms);
+})
 document.addEventListener("DOMContentLoaded", event => setAddCommentaryButtonOnClickHandler())
 document.addEventListener("DOMContentLoaded", event => setRemoveCommentaryButtonsOnClickHandlers())
-
-function removePageReloadingFromForms() {
-    let commentaryInformationForm = document.getElementsByName("commentaryInformationForm")[0];
-
-    commentaryInformationForm.addEventListener("submit", event => removeDefaultEventHandler(event));
-}
+document.addEventListener("DOMContentLoaded", event => connectToWebsocket(
+    (event) => {
+        if (event.data.includes("Commentary")) {
+            showInteractiveAlert(event.data);
+        }
+    }
+))
 
 function setAddCommentaryButtonOnClickHandler() {
     let addCommentaryButton = document.getElementById("addCommentaryButton");
@@ -34,15 +44,17 @@ async function addCommentary() {
     await doBackendRequest(
         "http://localhost:8080/commentaries/",
         "POST",
-        "",
         body
     );
+
+    location.reload();
 }
 
 async function removeCommentary(event) {
     let response = await doBackendRequest(
-        "http://localhost:8080/commentaries/",
+        `http://localhost:8080/commentaries/${event.target.id}`,
         "DELETE",
-        `${event.target.id}`
     );
+
+    location.reload();
 }
