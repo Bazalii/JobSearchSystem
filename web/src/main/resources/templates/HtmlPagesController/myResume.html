@@ -1,25 +1,11 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
     <title>MyResume</title>
 
-    <link href="/css/mainTags.css" rel="stylesheet">
-    <link href="/css/text.css" rel="stylesheet">
-    <link href="/css/buttons.css" rel="stylesheet">
-    <link href="/css/forms.css" rel="stylesheet">
-    <link href="/css/select.css" rel="stylesheet">
-    <link href="/css/tables.css" rel="stylesheet">
+    {#include HtmlPagesController/commonHeadInformation /}
 
-    <script src="/js/pageLoading.js"></script>
-    <script src="/js/interactiveMenu.js"></script>
-    <script src="/js/navigationLocation.js"></script>
-    <script src="/js/commonFunctions.js"></script>
     <script src="/js/myResume.js"></script>
-
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
 <header>
@@ -30,7 +16,7 @@
         <h1>Resume information</h1>
         <form id="{resumeRenderingInformation.resume.id}"
               name="resumeInformationForm">
-            <div class="centeringWrapper">
+
                 <label for="name"></label>
                 <input id="name"
                        class="inputTextField"
@@ -121,12 +107,12 @@
                        type="submit"
                        value="Save resume">
                 <br>
-            </div>
+
         </form>
     </section>
     <section>
         <h1>Projects</h1>
-        <div id="wrapperForProjectsTable" class="centeringWrapper">
+        <div id="wrapperForProjectsTable">
             {#if resumeRenderingInformation.projects.size != 0}
             <table id="projectsTable" style="grid-template-columns: repeat(4, minmax(100px, 200px));">
                 {#for project in resumeRenderingInformation.projects}
@@ -178,7 +164,7 @@
     </section>
     <section>
         <h1>Work experience</h1>
-        <div id="wrapperForWorkExperienceTable" class="centeringWrapper">
+        <div id="wrapperForWorkExperienceTable">
             {#if resumeRenderingInformation.workExperienceItems.size != 0}
             <table id="workExperienceTable" style="grid-template-columns: repeat(5, minmax(100px, 200px));">
                 {#for workExperienceItem in resumeRenderingInformation.workExperienceItems}
@@ -235,14 +221,12 @@
             </form>
         </div>
     </section>
-    <div class="centeringWrapper">
         <form>
             <input class="deleteButton"
                    id="deleteResumeButton"
                    type="submit"
                    value="Completely delete resume">
         </form>
-    </div>
 </main>
 <footer>
     {#include HtmlPagesController/footer requestStartTime=resumeRenderingInformation.requestStartTime /}

@@ -1,22 +1,14 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
     <title>Login</title>
 
-    <link href="/css/mainTags.css" rel="stylesheet">
+    {#include HtmlPagesController/commonHeadInformation /}
+
     <link href="/css/registration.css" rel="stylesheet">
-    <link href="/css/buttons.css" rel="stylesheet">
-    <link href="/css/forms.css" rel="stylesheet">
-    <link href="/css/alerts.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
     <script src="/js/login.js"></script>
     <script src="/js/authentication.js"></script>
-    <script src="/js/commonFunctions.js"></script>
-    <script src="/js/alerts.js"></script>
 </head>
 <body>
 <header>
@@ -26,9 +18,7 @@
         <button type="button" onclick="renderApplicationPage()">Yes</button>
         <button type="button" onclick="closePopup()">No</button>
     </div>
-    <div class="centeringWrapper">
         <h1>Login</h1>
-
         <form action="" id="loginForm">
             <label for="uniqueIdentifier"></label>
             <input id="uniqueIdentifier"
@@ -52,9 +42,8 @@
         </form>
 
         Not registered yet?
+        <br>
         <a href="/pages/registration">Registration</a>
-
-    </div>
 </main>
 <footer>
 </footer>

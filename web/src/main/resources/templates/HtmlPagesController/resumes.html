@@ -1,27 +1,13 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="resume" name="keywords">
-
     <title>Resumes</title>
 
-    <link href="/css/mainTags.css" rel="stylesheet">
-    <link href="/css/text.css" rel="stylesheet">
-    <link href="/css/buttons.css" rel="stylesheet">
-    <link href="/css/forms.css" rel="stylesheet">
-    <link href="/css/tables.css" rel="stylesheet">
-    <link href="/css/alerts.css" rel="stylesheet">
+    {#include HtmlPagesController/commonHeadInformation /}
+
     <link href="/css/resumes.css" rel="stylesheet">
 
-    <script src="/js/pageLoading.js"></script>
-    <script src="/js/interactiveMenu.js"></script>
-    <script src="/js/navigationLocation.js"></script>
-    <script src="/js/commonFunctions.js"></script>
-    <script src="/js/alerts.js"></script>
     <script src="/js/resumes.js"></script>
-
 </head>
 <body>
 <header>
@@ -38,7 +24,6 @@
         <button type="button" onclick="location.reload()">Reload</button>
         <button type="button" onclick="closePopup()">Cancel</button>
     </div>
-    <div class="centeringWrapper">
         {#for resume in resumesRenderingInformation.resumes}
             {#include HtmlPagesController/resume resume=resume currentUserId=resumesRenderingInformation.currentUserId groups=resumesRenderingInformation.groups /}
         {/for}
@@ -97,7 +82,6 @@
             {/let}
             {/let}
         </nav>
-    </div>
     <br>
 </main>
 <footer>
