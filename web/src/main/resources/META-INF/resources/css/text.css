@@ -54,7 +54,7 @@ h1 {
     font-size: 35px;
     font-family: "Roboto", "Arial", sans-serif;
     font-weight: normal;
-    text-align: left;
+    text-align: center;
     text-indent: 10px;
 }
 
@@ -83,4 +83,10 @@ h2 {
     padding: 10px;
     margin: 20px 20px 20px 20px;
     border-radius: 10px;
+}
+
+.text {
+    font-size: 15 px;
+    font-family: "Roboto", "Arial", sans-serif;
+    text-align: left;
 }
