@@ -13,8 +13,8 @@ function handleMouseOut(event) {
 
     if (target.text === document.title) return;
 
-    target.style.background = '';
-    target.style.color = '';
+    target.style.background = "";
+    target.style.color = "";
 }
 
 function setMouseOnHandlers(selectors, background, color) {
@@ -28,6 +28,3 @@ function setMouseOutHandlers(selectors) {
 
     elements.forEach(element => element.onmouseout = event => handleMouseOut(event, selectors));
 }
-
-
-

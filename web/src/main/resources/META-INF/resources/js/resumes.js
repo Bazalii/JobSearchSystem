@@ -1,20 +1,20 @@
 window.addEventListener("load", event => addPagesRenderingForLinks());
 
 document.addEventListener("DOMContentLoaded", event => {
-    let forms = []
+    let forms = [];
 
     forms.push(...document.getElementsByName("removeResumeForm"));
 
     removePageReloadingFromForms(forms);
-})
-document.addEventListener("DOMContentLoaded", event => setRemoveResumeButtonsOnClickHandlers())
+});
+document.addEventListener("DOMContentLoaded", event => setRemoveResumeButtonsOnClickHandlers());
 document.addEventListener("DOMContentLoaded", event => connectToWebsocket(
     (event) => {
         if (event.data.includes("Resume")) {
             showInteractiveAlert(event.data);
         }
     }
-))
+));
 
 function setRemoveResumeButtonsOnClickHandlers() {
     let removeResumeButtons = document.getElementsByName("removeResumeButton");
@@ -30,5 +30,5 @@ async function removeResume(event) {
         "DELETE",
     );
 
-     location.reload();
+    location.reload();
 }

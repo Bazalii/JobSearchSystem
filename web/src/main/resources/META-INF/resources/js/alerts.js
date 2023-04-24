@@ -1,11 +1,11 @@
-function showInteractiveAlert(message){
+function showInteractiveAlert(message) {
     let alert = document.getElementById("interactiveAlert");
 
     let messageNode = document.createElement("h2");
     messageNode.innerHTML = message;
 
     alert.insertBefore(messageNode, alert.firstChild);
-    alert.classList.add('open-popup');
+    alert.classList.add("open-popup");
 }
 
 function closePopup() {
@@ -13,5 +13,5 @@ function closePopup() {
 
     alert.removeChild(alert.firstChild);
 
-    alert.classList.remove('open-popup');
+    alert.classList.remove("open-popup");
 }

@@ -8,7 +8,7 @@ async function getRefreshToken(userCredentials) {
     });
 
     if (response.status === 404) {
-        return ""
+        return "";
     }
 
     let refreshToken = await response.text();
@@ -21,7 +21,7 @@ async function getRefreshToken(userCredentials) {
 function checkIfRefreshTokenExists() {
     let refreshToken = localStorage.getItem("refreshToken");
 
-    return refreshToken !== null
+    return refreshToken !== null;
 }
 
 async function getSessionToken() {
@@ -51,14 +51,14 @@ async function getSessionToken() {
 }
 
 async function getTokenPair(userCredentials) {
-    let refreshToken = await getRefreshToken(userCredentials)
+    let refreshToken = await getRefreshToken(userCredentials);
 
     if (refreshToken === "") {
         alert("Invalid credentials!");
         return false;
     }
 
-    await getSessionToken()
+    await getSessionToken();
 
     return true;
 }
@@ -69,11 +69,11 @@ async function backendLogin(credentials) {
             uniqueIdentifier: credentials.uniqueIdentifier,
             password: credentials.password
         }
-    )
+    );
 
     if (!tokenGettingSuccess) {
         return;
     }
 
-    await renderApplicationPage("/pages/resumes?pageIndex=0&pageSize=5")
+    await renderApplicationPage("/pages/resumes?pageIndex=0&pageSize=5");
 }

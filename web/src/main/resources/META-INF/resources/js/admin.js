@@ -1,27 +1,27 @@
 window.addEventListener("load", event => addPagesRenderingForLinks());
 
 document.addEventListener("DOMContentLoaded", event => {
-    let forms = []
+    let forms = [];
 
     forms.push(document.getElementsByName("hardSkillInformationForm")[0]);
     forms.push(document.getElementsByName("changeRoleForm")[0]);
 
     removePageReloadingFromForms(forms);
-})
-document.addEventListener("DOMContentLoaded", event => setAddHardSkillButtonOnClickHandler())
-document.addEventListener("DOMContentLoaded", event => setRemoveHardSkillButtonsOnClickHandlers())
-document.addEventListener("DOMContentLoaded", event => setChangeRoleButtonOnClickHandler())
+});
+document.addEventListener("DOMContentLoaded", event => setAddHardSkillButtonOnClickHandler());
+document.addEventListener("DOMContentLoaded", event => setRemoveHardSkillButtonsOnClickHandlers());
+document.addEventListener("DOMContentLoaded", event => setChangeRoleButtonOnClickHandler());
 
 function setChangeRoleButtonOnClickHandler() {
     let button = document.getElementById("changeRoleButton");
 
-    button.addEventListener("click", event => updateUserRole());
+    button.addEventListener("click", async event => await updateUserRole());
 }
 
 function setAddHardSkillButtonOnClickHandler() {
     let saveResumeButton = document.getElementById("addHardSkillButton");
 
-    saveResumeButton.addEventListener("click", event => sendHardSkill());
+    saveResumeButton.addEventListener("click", async event => await sendHardSkill());
 }
 
 function setRemoveHardSkillButtonsOnClickHandlers() {
@@ -29,73 +29,73 @@ function setRemoveHardSkillButtonsOnClickHandlers() {
     let removeFrameworksButton = document.getElementById("removeFrameworksButton");
     let removeDatabasesButton = document.getElementById("removeDatabasesButton");
 
-    removeProgrammingLanguagesButton.addEventListener("click", event =>
-        removeHardSkills(
+    removeProgrammingLanguagesButton.addEventListener("click", async event =>
+        await removeHardSkills(
             document.getElementById("programmingLanguages").options,
             "programmingLanguages"
         ));
-    removeFrameworksButton.addEventListener("click", event =>
-        removeHardSkills(
+    removeFrameworksButton.addEventListener("click", async event =>
+        await removeHardSkills(
             document.getElementById("frameworks").options,
             "frameworks"
-    ));
-    removeDatabasesButton.addEventListener("click", event =>
-        removeHardSkills(
+        ));
+    removeDatabasesButton.addEventListener("click", async event =>
+        await removeHardSkills(
             document.getElementById("databases").options,
             "databases"
-    ));
+        ));
 }
 
-function removeHardSkills(hardSkillsList, controllerPath) {
+async function removeHardSkills(hardSkillsList, controllerPath) {
     for (let hardSkill of hardSkillsList) {
         if (hardSkill.selected) {
-            doBackendRequest(
+            await doBackendRequest(
                 `/${controllerPath}/${hardSkill.value}`,
                 "DELETE",
-            )
+            );
         }
     }
 }
 
 async function sendHardSkill() {
-    let name = document.getElementById("hardSkillName").value
-    let type = document.getElementById("hardSkillType").value
+    let name = document.getElementById("hardSkillName").value;
+    let type = document.getElementById("hardSkillType").value;
 
     let body =
         {
             name: name
-        }
+        };
 
     switch (type) {
         case "Programming language":
-            doBackendRequest(
+            await doBackendRequest(
                 "/programmingLanguages",
                 "POST",
                 body
-            )
-            break
+            );
+            break;
         case "Framework":
-            doBackendRequest(
+            await doBackendRequest(
                 "/frameworks",
                 "POST",
                 body
-            )
-            break
+            );
+            break;
         case "Database":
-            doBackendRequest(
+            await doBackendRequest(
                 "/databases",
                 "POST",
                 body
-            )
-            break
+            );
+            break;
     }
 }
 
-function updateUserRole() {
-    let login = document.getElementById("login").value
-    let role = document.getElementById("role").value
+async function updateUserRole() {
+    let login = document.getElementById("login").value;
+    let role = document.getElementById("role").value;
 
-    doBackendRequest(
+    await doBackendRequest(
         `/users/updateRole?login=${login}&role=${role}`,
         "PUT",
     );

@@ -1,26 +1,26 @@
-document.addEventListener("DOMContentLoaded", event => setRegistrationButtonOnClickHandlers())
+document.addEventListener("DOMContentLoaded", event => setRegistrationButtonOnClickHandlers());
 
 function setRegistrationButtonOnClickHandlers() {
     let registrationButton = document.getElementById("registrationButton");
     let registrationForm = document.getElementById("registrationForm");
 
-    registrationButton.addEventListener("click", event => sendUser());
+    registrationButton.addEventListener("click", async event => await sendUser());
     registrationForm.addEventListener("submit", event => removeDefaultEventHandler(event));
 }
 
 async function sendUser() {
-    let login = document.getElementById("login").value
-    let email = document.getElementById("email").value
-    let password = document.getElementById("password").value
-    let role = document.getElementById("role").value
+    let login = document.getElementById("login").value;
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+    let role = document.getElementById("role").value;
 
     switch (role) {
         case "Applicant":
-            role = "User"
-            break
+            role = "User";
+            break;
         case "HR":
-            role = "HR"
-            break
+            role = "HR";
+            break;
     }
 
     let user = {
@@ -28,7 +28,7 @@ async function sendUser() {
         email: email,
         password: password,
         role: role
-    }
+    };
 
     let response = await fetch("http://localhost:8080/users", {
         method: "POST",
@@ -36,7 +36,7 @@ async function sendUser() {
             "Content-Type": "application/json",
         },
         body: JSON.stringify(user)
-    })
+    });
 
     if (response.status === 200) {
         await backendLogin(
@@ -44,6 +44,6 @@ async function sendUser() {
                 uniqueIdentifier: login,
                 password: password
             }
-        )
+        );
     }
 }

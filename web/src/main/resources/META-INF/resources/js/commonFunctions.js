@@ -6,7 +6,7 @@ async function doBackendRequest(path, method, body) {
     let sessionToken = localStorage.getItem("sessionToken");
 
     if (sessionToken === null) {
-        sessionToken = await getSessionToken()
+        sessionToken = await getSessionToken();
     }
 
     if (sessionToken === "") {
@@ -41,7 +41,7 @@ async function doBackendRequest(path, method, body) {
         alert(exception);
     }
 
-    return response
+    return response;
 }
 
 async function doRequest(path, method, body, sessionToken) {
@@ -76,12 +76,12 @@ async function renderApplicationPage(page = "/pages/resumes?pageIndex=0&pageSize
     let htmlPage = await pageRequest.text();
 
     document.open();
-    document.write(htmlPage)
+    document.write(htmlPage);
     document.close();
 }
 
 function connectToWebsocket(socketOnMessageFunction) {
-    let id = crypto.randomUUID()
+    let id = crypto.randomUUID();
 
     let websocket = new WebSocket(`ws://${location.host}/updatesNotificator/${id}`);
 
@@ -97,11 +97,11 @@ function addPagesRenderingForLinks() {
 
             if (href.includes("/pages")) {
                 links[i].onclick = async (event) => {
-                    removeDefaultEventHandler(event)
+                    removeDefaultEventHandler(event);
 
                     await renderApplicationPage(
                         href
-                    )
+                    );
                 };
             }
         }

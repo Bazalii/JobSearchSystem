@@ -7,16 +7,16 @@ document.addEventListener("DOMContentLoaded", event => {
     forms.push(...document.getElementsByName("removeCommentaryForm"));
 
     removePageReloadingFromForms(forms);
-})
-document.addEventListener("DOMContentLoaded", event => setAddCommentaryButtonOnClickHandler())
-document.addEventListener("DOMContentLoaded", event => setRemoveCommentaryButtonsOnClickHandlers())
+});
+document.addEventListener("DOMContentLoaded", event => setAddCommentaryButtonOnClickHandler());
+document.addEventListener("DOMContentLoaded", event => setRemoveCommentaryButtonsOnClickHandlers());
 document.addEventListener("DOMContentLoaded", event => connectToWebsocket(
     (event) => {
         if (event.data.includes("Commentary")) {
             showInteractiveAlert(event.data);
         }
     }
-))
+));
 
 function setAddCommentaryButtonOnClickHandler() {
     let addCommentaryButton = document.getElementById("addCommentaryButton");
@@ -51,7 +51,7 @@ async function addCommentary() {
 }
 
 async function removeCommentary(event) {
-    let response = await doBackendRequest(
+    await doBackendRequest(
         `http://localhost:8080/commentaries/${event.target.id}`,
         "DELETE",
     );

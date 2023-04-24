@@ -1,7 +1,7 @@
 window.addEventListener("load", event => addPagesRenderingForLinks());
 
 document.addEventListener("DOMContentLoaded", event => {
-    let forms = []
+    let forms = [];
 
     forms.push(document.getElementsByName("resumeInformationForm")[0]);
     forms.push(document.getElementsByName("projectInformationForm")[0]);
@@ -10,13 +10,13 @@ document.addEventListener("DOMContentLoaded", event => {
     forms.push(...document.getElementsByName("removeWorkExperienceItemForm"));
 
     removePageReloadingFromForms(forms);
-})
-document.addEventListener("DOMContentLoaded", event => setSaveResumeButtonOnClickHandler())
-document.addEventListener("DOMContentLoaded", event => setDeleteResumeButtonOnClickHandler())
-document.addEventListener("DOMContentLoaded", event => setRemoveProjectButtonsOnClickHandler())
-document.addEventListener("DOMContentLoaded", event => setAddProjectButtonOnClickHandler())
-document.addEventListener("DOMContentLoaded", event => setRemoveWorkExperienceItemButtonsOnClickHandler())
-document.addEventListener("DOMContentLoaded", event => setAddWorkExperienceItemButtonOnClickHandler())
+});
+document.addEventListener("DOMContentLoaded", event => setSaveResumeButtonOnClickHandler());
+document.addEventListener("DOMContentLoaded", event => setDeleteResumeButtonOnClickHandler());
+document.addEventListener("DOMContentLoaded", event => setRemoveProjectButtonsOnClickHandler());
+document.addEventListener("DOMContentLoaded", event => setAddProjectButtonOnClickHandler());
+document.addEventListener("DOMContentLoaded", event => setRemoveWorkExperienceItemButtonsOnClickHandler());
+document.addEventListener("DOMContentLoaded", event => setAddWorkExperienceItemButtonOnClickHandler());
 
 function setSaveResumeButtonOnClickHandler() {
     let saveResumeButton = document.getElementById("saveResumeButton");
@@ -59,17 +59,17 @@ function setRemoveWorkExperienceItemButtonsOnClickHandler() {
 }
 
 async function addProject() {
-    let name = document.getElementById("projectName").value
-    let link = document.getElementById("projectLink").value
-    let year = document.getElementById("projectYear").value
-    let resumeId = document.getElementsByName("resumeInformationForm")[0].id
+    let name = document.getElementById("projectName").value;
+    let link = document.getElementById("projectLink").value;
+    let year = document.getElementById("projectYear").value;
+    let resumeId = document.getElementsByName("resumeInformationForm")[0].id;
 
     let body = {
         name: name,
         link: link,
         year: year,
         resumeId: resumeId
-    }
+    };
 
     let response = await doBackendRequest(
         "http://localhost:8080/projects/",
@@ -106,9 +106,9 @@ async function addProject() {
     let fourthCell = newRow.insertCell(3);
 
     let linkNode = document.createElement("a");
-    linkNode.href = `${responseEntity.link}`
-    linkNode.classList.add("classicHref")
-    linkNode.target = "_blank"
+    linkNode.href = `${responseEntity.link}`;
+    linkNode.classList.add("classicHref");
+    linkNode.target = "_blank";
     linkNode.innerHTML = "Source";
 
     let removeProjectFormNode = document.createElement("form");
@@ -153,11 +153,11 @@ async function removeProject(event) {
 }
 
 async function addWorkExperienceItem() {
-    let place = document.getElementById("workExperienceItemPlace").value
-    let position = document.getElementById("workExperienceItemPosition").value
-    let startDate = document.getElementById("workExperienceItemStartDate").value
-    let endDate = document.getElementById("workExperienceItemEndDate").value
-    let resumeId = document.getElementsByName("resumeInformationForm")[0].id
+    let place = document.getElementById("workExperienceItemPlace").value;
+    let position = document.getElementById("workExperienceItemPosition").value;
+    let startDate = document.getElementById("workExperienceItemStartDate").value;
+    let endDate = document.getElementById("workExperienceItemEndDate").value;
+    let resumeId = document.getElementsByName("resumeInformationForm")[0].id;
 
     let body = {
         place: place,
@@ -165,7 +165,7 @@ async function addWorkExperienceItem() {
         startDate: startDate,
         endDate: endDate,
         resumeId: resumeId
-    }
+    };
 
     let response = await doBackendRequest(
         "http://localhost:8080/workExperiences/",
@@ -245,37 +245,37 @@ async function removeWorkExperienceItem(event) {
 }
 
 async function saveOrUpdateResume() {
-    let resumeForm = document.getElementsByName("resumeInformationForm")[0]
+    let resumeForm = document.getElementsByName("resumeInformationForm")[0];
 
-    let name = document.getElementById("name").value
-    let currentJob = document.getElementById("currentJob").value
-    let quote = document.getElementById("quote").value
-    let otherTechnologies = document.getElementById("otherTechnologies").value
-    let additionalInformation = document.getElementById("additionalInformation").value
+    let name = document.getElementById("name").value;
+    let currentJob = document.getElementById("currentJob").value;
+    let quote = document.getElementById("quote").value;
+    let otherTechnologies = document.getElementById("otherTechnologies").value;
+    let additionalInformation = document.getElementById("additionalInformation").value;
 
-    let languages = document.getElementById("programmingLanguages").options
-    let frameworks = document.getElementById("frameworks").options
-    let databases = document.getElementById("databases").options
+    let languages = document.getElementById("programmingLanguages").options;
+    let frameworks = document.getElementById("frameworks").options;
+    let databases = document.getElementById("databases").options;
 
-    let selectedLanguages = []
-    let selectedFrameworks = []
-    let selectedDatabases = []
+    let selectedLanguages = [];
+    let selectedFrameworks = [];
+    let selectedDatabases = [];
 
     for (let language of languages) {
         if (language.selected) {
-            selectedLanguages.push(language.value)
+            selectedLanguages.push(language.value);
         }
     }
 
     for (let framework of frameworks) {
         if (framework.selected) {
-            selectedFrameworks.push(framework.value)
+            selectedFrameworks.push(framework.value);
         }
     }
 
     for (let database of databases) {
         if (database.selected) {
-            selectedDatabases.push(database.value)
+            selectedDatabases.push(database.value);
         }
     }
 
@@ -288,7 +288,7 @@ async function saveOrUpdateResume() {
         databases: selectedDatabases,
         otherTechnologies: otherTechnologies,
         additionalInformation: additionalInformation
-    }
+    };
 
     if (resumeForm.id === "00000000-0000-0000-0000-000000000000") {
 
@@ -298,9 +298,9 @@ async function saveOrUpdateResume() {
             body
         );
 
-        let result = await response.json()
+        let result = await response.json();
 
-        resumeForm.id = result.id
+        resumeForm.id = result.id;
 
         return;
     }
@@ -313,7 +313,7 @@ async function saveOrUpdateResume() {
 }
 
 async function removeResume() {
-    let resumeId = document.getElementsByName("resumeInformationForm")[0].id
+    let resumeId = document.getElementsByName("resumeInformationForm")[0].id;
 
     if (resumeId === "00000000-0000-0000-0000-000000000000") {
         alert("Save resume first!");

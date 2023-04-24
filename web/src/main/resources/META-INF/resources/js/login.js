@@ -1,6 +1,7 @@
-document.addEventListener("DOMContentLoaded", event => setLoginButtonOnClickHandler())
-document.addEventListener("DOMContentLoaded", event => showChoiceAlert())
 window.addEventListener("load", event => redirectUserToAvailablePage());
+
+document.addEventListener("DOMContentLoaded", event => setLoginButtonOnClickHandler());
+document.addEventListener("DOMContentLoaded", event => showChoiceAlert());
 
 function setLoginButtonOnClickHandler() {
     let loginButton = document.getElementById("loginButton");
@@ -11,15 +12,15 @@ function setLoginButtonOnClickHandler() {
 }
 
 async function login() {
-    let uniqueIdentifier = document.getElementById("uniqueIdentifier").value
-    let password = document.getElementById("password").value
+    let uniqueIdentifier = document.getElementById("uniqueIdentifier").value;
+    let password = document.getElementById("password").value;
 
     await backendLogin(
         {
             uniqueIdentifier: uniqueIdentifier,
             password: password
         }
-    )
+    );
 }
 
 function showChoiceAlert() {
@@ -31,15 +32,15 @@ function showChoiceAlert() {
 }
 
 async function redirectUserToAvailablePage() {
-    let sessionToken = await getSessionToken()
+    let sessionToken = await getSessionToken();
 
     if (sessionToken !== "") {
-        let sharpIndex = window.location.href.indexOf("#")
+        let sharpIndex = window.location.href.indexOf("#");
 
         if (sharpIndex !== -1) {
-            let actualPath = window.location.href.substring(sharpIndex + 1)
+            let actualPath = window.location.href.substring(sharpIndex + 1);
 
-            await renderApplicationPage(actualPath)
+            await renderApplicationPage(actualPath);
         }
     }
 }
