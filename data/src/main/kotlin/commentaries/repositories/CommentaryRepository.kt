@@ -21,6 +21,7 @@ class CommentaryRepository(
                 id = commentary.id,
                 title = commentary.title,
                 body = commentary.body,
+                creationTime = commentary.creationTime,
                 user = _panacheUserRepository.getById(commentary.userId)
             )
         ).toCommentary()
@@ -55,6 +56,7 @@ class CommentaryRepository(
                 id = commentary.id,
                 title = commentary.title,
                 body = commentary.body,
+                creationTime = commentary.creationTime,
                 user = _panacheUserRepository.getById(commentary.userId)
             )
         ).toCommentary()

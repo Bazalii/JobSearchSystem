@@ -5,6 +5,8 @@ import commentaries.models.CommentaryCreationModel
 import commentaries.repositories.ICommentaryRepository
 import commentaries.services.ICommentaryService
 import commonClasses.IThrowingValidator
+import java.time.LocalDateTime
+import java.time.ZoneOffset
 import java.util.*
 import javax.enterprise.context.ApplicationScoped
 
@@ -40,6 +42,8 @@ class CommentaryService(
 
     override fun update(commentary: Commentary): Commentary {
         _commentaryValidator.validate(commentary)
+
+        commentary.creationTime = LocalDateTime.now(ZoneOffset.UTC)
 
         return _commentaryRepository.update(commentary)
     }

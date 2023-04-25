@@ -7,5 +7,6 @@ fun CommentaryDbModel.toCommentary() = Commentary(
     id,
     title,
     body,
+    creationTime,
     user.id
 )

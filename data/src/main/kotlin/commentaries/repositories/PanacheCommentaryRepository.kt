@@ -3,6 +3,7 @@ package commentaries.repositories
 import commentaries.models.CommentaryDbModel
 import exceptions.EntityNotFoundException
 import io.quarkus.hibernate.orm.panache.kotlin.PanacheRepositoryBase
+import io.quarkus.panache.common.Sort
 import java.util.*
 import javax.enterprise.context.ApplicationScoped
 
@@ -24,7 +25,7 @@ class PanacheCommentaryRepository : PanacheRepositoryBase<CommentaryDbModel, UUI
     }
 
     fun getPage(pageIndex: Int, pageSize: Int): List<CommentaryDbModel> {
-        return findAll().page(pageIndex, pageSize).list()
+        return findAll(Sort.by("creation_time").descending()).page(pageIndex, pageSize).list()
     }
 
     fun countAll(): Long {
