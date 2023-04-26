@@ -49,8 +49,8 @@
                 </form>
             </div>
         {/if}
-        {#for commentary in commentariesRenderingInformation.commentaries}
-            {#include HtmlPagesController/commentary commentary=commentary currentUserId=commentariesRenderingInformation.currentUserId groups=commentariesRenderingInformation.groups /}
+        {#for commentaryRenderingInformation in commentariesRenderingInformation.commentaries}
+            {#include HtmlPagesController/commentary commentaryRenderingInformation=commentaryRenderingInformation currentUserId=commentariesRenderingInformation.currentUserId groups=commentariesRenderingInformation.groups /}
         {/for}
         <br>
         <nav>

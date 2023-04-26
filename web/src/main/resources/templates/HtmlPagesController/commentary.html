@@ -1,5 +1,10 @@
 <div class="commentary">
+    {#let commentary = commentaryRenderingInformation.commentary}
     <h2>{commentary.title}</h2>
+    <h3>{commentaryRenderingInformation.creatorLogin}</h3>
+    <h4>{commentary.creationTime.dayOfMonth}.{commentary.creationTime.month.value}.{commentary.creationTime.year}
+        {commentary.creationTime.hour}h {commentary.creationTime.minute}min (Utc)
+    </h4>
     <br>
     {commentary.body}
     {#if commentary.userId == currentUserId || groups.contains("Admin")}
@@ -11,4 +16,5 @@
                value="Remove">
     </form>
     {/if}
+    {/let}
 </div>

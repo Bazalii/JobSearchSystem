@@ -10,16 +10,15 @@ import org.eclipse.microprofile.jwt.Claim
 import org.eclipse.microprofile.jwt.Claims
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses
-import pages.models.AdminPageRenderingInformation
-import pages.models.CommentariesRenderingInformation
-import pages.models.MyResumeRenderingInformation
-import pages.models.ResumesRenderingInformation
+import pages.models.*
 import programmingLanguages.services.IProgrammingLanguageService
 import projects.services.IProjectService
 import resumes.models.Resume
 import resumes.services.IResumeService
+import users.services.IUserService
 import workExperience.services.IWorkExperienceService
 import java.time.LocalDateTime
+import java.time.ZoneOffset
 import java.util.*
 import javax.annotation.security.RolesAllowed
 import javax.enterprise.context.RequestScoped
@@ -30,6 +29,7 @@ import javax.ws.rs.core.MediaType
 @RequestScoped
 @Path("pages")
 class HtmlPagesController(
+    private val _userService: IUserService,
     private val _resumeService: IResumeService,
     private val _programmingLanguageService: IProgrammingLanguageService,
     private val _frameworkService: IFrameworkService,
@@ -51,7 +51,7 @@ class HtmlPagesController(
             _userId = UUID.fromString(userIdString)
         }
 
-        _requestStartTime = LocalDateTime.now()
+        _requestStartTime = LocalDateTime.now(ZoneOffset.UTC)
     }
 
     @CheckedTemplate
@@ -162,7 +162,9 @@ class HtmlPagesController(
 
         return Templates.commentaries(
             CommentariesRenderingInformation(
-                commentaries,
+                commentaries.map {
+                    CommentaryRenderingInformation(it, _userService.getById(it.userId).login)
+                },
                 pageIndex + 1,
                 numberOfPages,
                 _groups,
