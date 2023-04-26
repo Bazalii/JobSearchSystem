@@ -21,7 +21,7 @@ function setChangeRoleButtonOnClickHandler() {
 function setAddHardSkillButtonOnClickHandler() {
     let saveResumeButton = document.getElementById("addHardSkillButton");
 
-    saveResumeButton.addEventListener("click", async event => await sendHardSkill());
+    saveResumeButton.addEventListener("click", async event => await addHardSkill());
 }
 
 function setRemoveHardSkillButtonsOnClickHandlers() {
@@ -57,7 +57,7 @@ async function removeHardSkills(hardSkillsList, controllerPath) {
     }
 }
 
-async function sendHardSkill() {
+async function addHardSkill() {
     let name = document.getElementById("hardSkillName").value;
     let type = document.getElementById("hardSkillType").value;
 
@@ -89,6 +89,8 @@ async function sendHardSkill() {
             );
             break;
     }
+
+    location.reload()
 }
 
 async function updateUserRole() {
