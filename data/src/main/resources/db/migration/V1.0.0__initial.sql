@@ -2,6 +2,7 @@
     create table "commentaries" (
        id uuid not null,
         body varchar(255),
+        creation_time timestamp,
         title varchar(255),
         user_id uuid,
         primary key (id)
