@@ -24,8 +24,8 @@
         <button type="button" onclick="location.reload()">Reload</button>
         <button type="button" onclick="closePopup()">Cancel</button>
     </div>
-        {#for resume in resumesRenderingInformation.resumes}
-            {#include HtmlPagesController/resume resume=resume currentUserId=resumesRenderingInformation.currentUserId groups=resumesRenderingInformation.groups /}
+        {#for resumeRenderingInformation in resumesRenderingInformation.resumes}
+            {#include HtmlPagesController/resume resumeRenderingInformation=resumeRenderingInformation currentUserId=resumesRenderingInformation.currentUserId groups=resumesRenderingInformation.groups /}
         {/for}
         <br>
         <nav>

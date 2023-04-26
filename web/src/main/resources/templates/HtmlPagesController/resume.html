@@ -1,6 +1,7 @@
 <div class="resume">
+    {#let resume = resumeRenderingInformation.resume}
     <h2>
-        My name is {resume.name}.
+        My name is {resume.name}({resumeRenderingInformation.creatorEmail}).
         <br>
         I am {resume.currentJob}.
         <br>
@@ -76,4 +77,5 @@
                value="Remove">
     </form>
     {/if}
+    {/let}
 </div>

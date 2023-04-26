@@ -131,7 +131,9 @@ class HtmlPagesController(
 
         return Templates.resumes(
             ResumesRenderingInformation(
-                resumes,
+                resumes.map {
+                    ResumeRenderingInformation(it, _userService.getById(it.userId).email)
+                },
                 pageIndex + 1,
                 numberOfPages,
                 _groups,
