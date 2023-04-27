@@ -2,8 +2,8 @@ package resumes.validators
 
 import commonClasses.IThrowingValidator
 import exceptions.InvalidEntityException
+import jakarta.enterprise.context.ApplicationScoped
 import resumes.models.Resume
-import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class ResumeValidator : IThrowingValidator<Resume> {

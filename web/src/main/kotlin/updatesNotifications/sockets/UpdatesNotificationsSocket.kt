@@ -1,9 +1,9 @@
+import jakarta.enterprise.context.ApplicationScoped
+import jakarta.websocket.*
+import jakarta.websocket.server.PathParam
+import jakarta.websocket.server.ServerEndpoint
 import updatesNotifications.notificators.IUpdatesNotificator
 import java.util.*
-import javax.enterprise.context.ApplicationScoped
-import javax.websocket.*
-import javax.websocket.server.PathParam
-import javax.websocket.server.ServerEndpoint
 
 
 @ServerEndpoint("/updatesNotificator/{clientId}")

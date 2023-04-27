@@ -2,9 +2,9 @@ package users.repositories
 
 import exceptions.EntityNotFoundException
 import io.quarkus.hibernate.orm.panache.kotlin.PanacheRepositoryBase
+import jakarta.enterprise.context.ApplicationScoped
 import users.models.UserDbModel
 import java.util.*
-import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class PanacheUserRepository : PanacheRepositoryBase<UserDbModel, UUID> {

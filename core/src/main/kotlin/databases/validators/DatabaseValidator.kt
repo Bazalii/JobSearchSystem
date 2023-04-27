@@ -3,7 +3,7 @@ package databases.validators
 import commonClasses.IThrowingValidator
 import databases.models.Database
 import exceptions.InvalidEntityException
-import javax.enterprise.context.ApplicationScoped
+import jakarta.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class DatabaseValidator : IThrowingValidator<Database> {

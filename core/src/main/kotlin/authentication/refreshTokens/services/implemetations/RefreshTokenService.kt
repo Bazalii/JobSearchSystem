@@ -8,9 +8,9 @@ import exceptions.InvalidCredentialsException
 import io.smallrye.jwt.algorithm.SignatureAlgorithm
 import io.smallrye.jwt.build.Jwt
 import io.smallrye.jwt.util.KeyUtils
+import jakarta.enterprise.context.ApplicationScoped
 import users.models.User
 import users.repositories.IUserRepository
-import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class RefreshTokenService(

@@ -2,6 +2,7 @@ package users.services.implementations
 
 import commonClasses.IThrowingValidator
 import commonClasses.hashing.IHashCreator
+import jakarta.enterprise.context.ApplicationScoped
 import users.models.User
 import users.models.UserCreationModel
 import users.repositories.IUserRepository
@@ -9,7 +10,6 @@ import users.services.IUserService
 import users.validators.UserPasswordValidator
 import users.validators.UserRoleValidator
 import java.util.*
-import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class UserService(

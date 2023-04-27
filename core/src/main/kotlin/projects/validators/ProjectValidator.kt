@@ -2,8 +2,8 @@ package projects.validators
 
 import commonClasses.IThrowingValidator
 import exceptions.InvalidEntityException
+import jakarta.enterprise.context.ApplicationScoped
 import projects.models.Project
-import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class ProjectValidator : IThrowingValidator<Project> {

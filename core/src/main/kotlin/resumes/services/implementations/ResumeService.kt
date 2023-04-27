@@ -3,6 +3,7 @@ package resumes.services.implementations
 import commonClasses.IThrowingValidator
 import databases.services.IDatabaseService
 import frameworks.services.IFrameworkService
+import jakarta.enterprise.context.ApplicationScoped
 import programmingLanguages.services.IProgrammingLanguageService
 import resumes.models.Resume
 import resumes.models.ResumeCreationModel
@@ -10,7 +11,6 @@ import resumes.models.ResumeUpdateModel
 import resumes.repositories.IResumeRepository
 import resumes.services.IResumeService
 import java.util.*
-import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class ResumeService(

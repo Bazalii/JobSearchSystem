@@ -2,12 +2,12 @@ package resumes.models
 
 import databases.models.DatabaseDbModel
 import frameworks.models.FrameworkDbModel
+import jakarta.persistence.*
 import programmingLanguages.models.ProgrammingLanguageDbModel
 import projects.models.ProjectDbModel
 import users.models.UserDbModel
 import workExperience.models.WorkExperienceItemDbModel
 import java.util.*
-import javax.persistence.*
 
 @Entity
 @Table(name = "\"resumes\"")

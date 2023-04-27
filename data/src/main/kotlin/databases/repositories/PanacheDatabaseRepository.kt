@@ -3,8 +3,8 @@ package databases.repositories
 import databases.models.DatabaseDbModel
 import exceptions.EntityNotFoundException
 import io.quarkus.hibernate.orm.panache.kotlin.PanacheRepositoryBase
+import jakarta.enterprise.context.ApplicationScoped
 import java.util.*
-import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class PanacheDatabaseRepository : PanacheRepositoryBase<DatabaseDbModel, UUID> {

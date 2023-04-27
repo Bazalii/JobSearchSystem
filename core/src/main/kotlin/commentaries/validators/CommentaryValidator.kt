@@ -3,7 +3,7 @@ package commentaries.validators
 import commentaries.models.Commentary
 import commonClasses.IThrowingValidator
 import exceptions.InvalidEntityException
-import javax.enterprise.context.ApplicationScoped
+import jakarta.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class CommentaryValidator : IThrowingValidator<Commentary> {

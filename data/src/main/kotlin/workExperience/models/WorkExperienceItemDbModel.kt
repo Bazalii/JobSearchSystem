@@ -1,9 +1,9 @@
 package workExperience.models
 
+import jakarta.persistence.*
 import resumes.models.ResumeDbModel
 import java.time.LocalDate
 import java.util.*
-import javax.persistence.*
 
 @Entity
 @Table(name = "\"workExperienceItems\"")

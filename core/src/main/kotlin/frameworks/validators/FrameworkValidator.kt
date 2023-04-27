@@ -3,7 +3,7 @@ package frameworks.validators
 import commonClasses.IThrowingValidator
 import exceptions.InvalidEntityException
 import frameworks.models.Framework
-import javax.enterprise.context.ApplicationScoped
+import jakarta.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class FrameworkValidator : IThrowingValidator<Framework> {

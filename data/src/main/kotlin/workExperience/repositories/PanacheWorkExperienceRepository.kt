@@ -2,9 +2,9 @@ package workExperience.repositories
 
 import exceptions.EntityNotFoundException
 import io.quarkus.hibernate.orm.panache.kotlin.PanacheRepositoryBase
+import jakarta.enterprise.context.ApplicationScoped
 import workExperience.models.WorkExperienceItemDbModel
 import java.util.*
-import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class PanacheWorkExperienceRepository : PanacheRepositoryBase<WorkExperienceItemDbModel, UUID> {
@@ -20,7 +20,7 @@ class PanacheWorkExperienceRepository : PanacheRepositoryBase<WorkExperienceItem
     }
 
     fun getAllByResumeId(id: UUID): List<WorkExperienceItemDbModel> {
-        return list("resume_id", id)
+        return list("resume.id", id)
     }
 
     fun update(workExperienceItemDbModel: WorkExperienceItemDbModel): WorkExperienceItemDbModel {

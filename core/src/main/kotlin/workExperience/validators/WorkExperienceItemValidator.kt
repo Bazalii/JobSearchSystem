@@ -2,8 +2,8 @@ package workExperience.validators
 
 import commonClasses.IThrowingValidator
 import exceptions.InvalidEntityException
+import jakarta.enterprise.context.ApplicationScoped
 import workExperience.models.WorkExperienceItem
-import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class WorkExperienceItemValidator : IThrowingValidator<WorkExperienceItem> {

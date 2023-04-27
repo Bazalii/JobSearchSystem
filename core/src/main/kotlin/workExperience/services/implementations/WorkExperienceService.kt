@@ -1,12 +1,12 @@
 package workExperience.services.implementations
 
 import commonClasses.IThrowingValidator
+import jakarta.enterprise.context.ApplicationScoped
 import workExperience.models.WorkExperienceItem
 import workExperience.models.WorkExperienceItemCreationModel
 import workExperience.repositories.IWorkExperienceRepository
 import workExperience.services.IWorkExperienceService
 import java.util.*
-import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class WorkExperienceService(

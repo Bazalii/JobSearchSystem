@@ -1,9 +1,9 @@
 package commentaries.models
 
+import jakarta.persistence.*
 import users.models.UserDbModel
 import java.time.LocalDateTime
 import java.util.*
-import javax.persistence.*
 
 @Entity
 @Table(name = "\"commentaries\"")

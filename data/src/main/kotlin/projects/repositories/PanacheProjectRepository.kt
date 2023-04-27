@@ -2,9 +2,9 @@ package projects.repositories
 
 import exceptions.EntityNotFoundException
 import io.quarkus.hibernate.orm.panache.kotlin.PanacheRepositoryBase
+import jakarta.enterprise.context.ApplicationScoped
 import projects.models.ProjectDbModel
 import java.util.*
-import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class PanacheProjectRepository : PanacheRepositoryBase<ProjectDbModel, UUID> {
@@ -20,7 +20,7 @@ class PanacheProjectRepository : PanacheRepositoryBase<ProjectDbModel, UUID> {
     }
 
     fun getAllByResumeId(id: UUID): List<ProjectDbModel> {
-        return list("resume_id", id)
+        return list("resume.id", id)
     }
 
     fun update(projectDbModel: ProjectDbModel): ProjectDbModel {

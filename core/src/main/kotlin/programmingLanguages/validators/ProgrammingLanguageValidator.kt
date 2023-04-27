@@ -2,8 +2,8 @@ package programmingLanguages.validators
 
 import commonClasses.IThrowingValidator
 import exceptions.InvalidEntityException
+import jakarta.enterprise.context.ApplicationScoped
 import programmingLanguages.models.ProgrammingLanguage
-import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class ProgrammingLanguageValidator : IThrowingValidator<ProgrammingLanguage> {

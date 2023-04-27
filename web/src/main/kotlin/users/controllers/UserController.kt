@@ -1,6 +1,10 @@
 package users.controllers
 
 import exceptions.InvalidEntityException
+import jakarta.annotation.security.RolesAllowed
+import jakarta.enterprise.context.RequestScoped
+import jakarta.inject.Inject
+import jakarta.ws.rs.*
 import org.eclipse.microprofile.jwt.Claim
 import org.eclipse.microprofile.jwt.Claims
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse
@@ -9,10 +13,6 @@ import users.extensions.toUserResponse
 import users.models.*
 import users.services.IUserService
 import java.util.*
-import javax.annotation.security.RolesAllowed
-import javax.enterprise.context.RequestScoped
-import javax.inject.Inject
-import javax.ws.rs.*
 
 @RequestScoped
 @Path("users")

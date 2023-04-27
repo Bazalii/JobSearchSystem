@@ -1,11 +1,11 @@
 package users.repositories
 
+import jakarta.enterprise.context.ApplicationScoped
+import jakarta.transaction.Transactional
 import users.extensions.toUser
 import users.extensions.toUserDbModel
 import users.models.User
 import java.util.*
-import javax.enterprise.context.ApplicationScoped
-import javax.transaction.Transactional
 
 @ApplicationScoped
 class UserRepository(

@@ -2,14 +2,14 @@ package resumes.repositories
 
 import databases.extensions.toDbModel
 import frameworks.extensions.toDbModel
+import jakarta.enterprise.context.ApplicationScoped
+import jakarta.transaction.Transactional
 import programmingLanguages.extensions.toDbModel
 import resumes.extensions.toResume
 import resumes.models.Resume
 import resumes.models.ResumeDbModel
 import users.repositories.PanacheUserRepository
 import java.util.*
-import javax.enterprise.context.ApplicationScoped
-import javax.transaction.Transactional
 
 @ApplicationScoped
 class ResumeRepository(

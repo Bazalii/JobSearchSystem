@@ -1,12 +1,12 @@
 package projects.services.implementations
 
 import commonClasses.IThrowingValidator
+import jakarta.enterprise.context.ApplicationScoped
 import projects.models.Project
 import projects.models.ProjectCreationModel
 import projects.repositories.IProjectRepository
 import projects.services.IProjectService
 import java.util.*
-import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class ProjectService(

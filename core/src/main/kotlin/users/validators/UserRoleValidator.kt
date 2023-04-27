@@ -2,7 +2,7 @@ package users.validators
 
 import commonClasses.IThrowingValidator
 import exceptions.InvalidEntityException
-import javax.enterprise.context.ApplicationScoped
+import jakarta.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class UserRoleValidator : IThrowingValidator<String> {

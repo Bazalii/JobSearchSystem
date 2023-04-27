@@ -3,10 +3,10 @@ package commentaries.repositories
 import commentaries.extensions.toCommentary
 import commentaries.models.Commentary
 import commentaries.models.CommentaryDbModel
+import jakarta.enterprise.context.ApplicationScoped
+import jakarta.transaction.Transactional
 import users.repositories.PanacheUserRepository
 import java.util.*
-import javax.enterprise.context.ApplicationScoped
-import javax.transaction.Transactional
 
 @ApplicationScoped
 class CommentaryRepository(

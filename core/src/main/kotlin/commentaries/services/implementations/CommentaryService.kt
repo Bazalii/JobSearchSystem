@@ -5,10 +5,10 @@ import commentaries.models.CommentaryCreationModel
 import commentaries.repositories.ICommentaryRepository
 import commentaries.services.ICommentaryService
 import commonClasses.IThrowingValidator
+import jakarta.enterprise.context.ApplicationScoped
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 import java.util.*
-import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class CommentaryService(

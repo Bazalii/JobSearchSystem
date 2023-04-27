@@ -1,12 +1,12 @@
 package projects.repositories
 
+import jakarta.enterprise.context.ApplicationScoped
+import jakarta.transaction.Transactional
 import projects.extensions.toProject
 import projects.models.Project
 import projects.models.ProjectDbModel
 import resumes.repositories.PanacheResumeRepository
 import java.util.*
-import javax.enterprise.context.ApplicationScoped
-import javax.transaction.Transactional
 
 @ApplicationScoped
 class ProjectRepository(

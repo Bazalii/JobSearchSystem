@@ -1,7 +1,7 @@
 package updatesNotifications.notificators
 
+import jakarta.websocket.Session
 import java.util.*
-import javax.websocket.Session
 
 interface IUpdatesNotificator {
     fun notify(clientId: UUID, message: String)

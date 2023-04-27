@@ -5,8 +5,8 @@ import databases.models.Database
 import databases.models.DatabaseCreationModel
 import databases.repositories.IDatabaseRepository
 import databases.services.IDatabaseService
+import jakarta.enterprise.context.ApplicationScoped
 import java.util.*
-import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class DatabaseService(

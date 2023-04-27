@@ -4,12 +4,12 @@ import frameworks.extensions.toFrameworkResponse
 import frameworks.models.FrameworkCreationRequest
 import frameworks.models.FrameworkResponse
 import frameworks.services.IFrameworkService
+import jakarta.annotation.security.RolesAllowed
+import jakarta.enterprise.context.RequestScoped
+import jakarta.ws.rs.*
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses
 import java.util.*
-import javax.annotation.security.RolesAllowed
-import javax.enterprise.context.RequestScoped
-import javax.ws.rs.*
 
 @RequestScoped
 @Path("frameworks")

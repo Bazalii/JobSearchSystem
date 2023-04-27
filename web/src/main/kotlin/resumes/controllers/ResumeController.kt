@@ -1,6 +1,10 @@
 package resumes.controllers
 
 import exceptions.NotEnoughRightsException
+import jakarta.annotation.security.RolesAllowed
+import jakarta.enterprise.context.RequestScoped
+import jakarta.inject.Inject
+import jakarta.ws.rs.*
 import org.eclipse.microprofile.jwt.Claim
 import org.eclipse.microprofile.jwt.Claims
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse
@@ -12,10 +16,6 @@ import resumes.models.ResumeUpdateRequest
 import resumes.services.IResumeService
 import updatesNotifications.notificators.IUpdatesNotificator
 import java.util.*
-import javax.annotation.security.RolesAllowed
-import javax.enterprise.context.RequestScoped
-import javax.inject.Inject
-import javax.ws.rs.*
 
 @RequestScoped
 @Path("resumes")

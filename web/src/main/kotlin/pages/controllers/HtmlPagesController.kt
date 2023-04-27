@@ -6,6 +6,11 @@ import exceptions.EntityNotFoundException
 import frameworks.services.IFrameworkService
 import io.quarkus.qute.CheckedTemplate
 import io.quarkus.qute.TemplateInstance
+import jakarta.annotation.security.RolesAllowed
+import jakarta.enterprise.context.RequestScoped
+import jakarta.inject.Inject
+import jakarta.ws.rs.*
+import jakarta.ws.rs.core.MediaType
 import org.eclipse.microprofile.jwt.Claim
 import org.eclipse.microprofile.jwt.Claims
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse
@@ -20,11 +25,6 @@ import workExperience.services.IWorkExperienceService
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 import java.util.*
-import javax.annotation.security.RolesAllowed
-import javax.enterprise.context.RequestScoped
-import javax.inject.Inject
-import javax.ws.rs.*
-import javax.ws.rs.core.MediaType
 
 @RequestScoped
 @Path("pages")

@@ -4,9 +4,9 @@ import commonClasses.IThrowingValidator
 import exceptions.EntityAlreadyExistsException
 import exceptions.EntityNotFoundException
 import exceptions.InvalidEntityException
+import jakarta.enterprise.context.ApplicationScoped
 import users.models.UserCreationModel
 import users.repositories.IUserRepository
-import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class UserValidator(

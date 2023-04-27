@@ -1,10 +1,10 @@
 package updatesNotifications.notificators.implementations
 
+import jakarta.enterprise.context.ApplicationScoped
+import jakarta.websocket.Session
 import updatesNotifications.notificators.IUpdatesNotificator
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
-import javax.enterprise.context.ApplicationScoped
-import javax.websocket.Session
 
 @ApplicationScoped
 class UpdatesNotificator : IUpdatesNotificator {
