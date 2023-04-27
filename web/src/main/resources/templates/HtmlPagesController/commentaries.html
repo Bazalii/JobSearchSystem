@@ -29,15 +29,15 @@
             <div class="commentary">
                 <form name="commentaryInformationForm">
                     <label for="commentaryTitle"></label>
-                    <input id="commentaryTitle"
-                           class="inputTextField"
+                    <input class="inputTextField"
+                           id="commentaryTitle"
                            placeholder="Commentary title"
                            required="required">
                     <br>
 
                     <label for="commentaryBody"></label>
-                    <input id="commentaryBody"
-                           class="inputTextField"
+                    <input class="inputTextField"
+                           id="commentaryBody"
                            placeholder="Commentary body"
                            required="required">
                     <br>
@@ -56,12 +56,12 @@
         <nav>
             {#let pageSize = 5}
             {#let numberOfShownPages = 5}
-            <a href="/pages/commentaries?pageIndex=0&pageSize={pageSize}" class="navigationMenuHref">First page</a>
+            <a class="navigationMenuHref" href="/pages/commentaries?pageIndex=0&pageSize={pageSize}">First page</a>
             {#let indexOfPreviousPage = commentariesRenderingInformation.renderingPageNumber.minus(2)}
             {#if indexOfPreviousPage < 0}
-                <a href="/pages/commentaries?pageIndex=0&pageSize={pageSize}" class="navigationMenuHref">Previous page</a>
+                <a class="navigationMenuHref" href="/pages/commentaries?pageIndex=0&pageSize={pageSize}">Previous page</a>
             {#else}
-                <a href="/pages/commentaries?pageIndex={indexOfPreviousPage}&pageSize={pageSize}" class="navigationMenuHref">Previous page</a>
+                <a class="navigationMenuHref" href="/pages/commentaries?pageIndex={indexOfPreviousPage}&pageSize={pageSize}">Previous page</a>
             {/if}
             {/let}
             {#let numberOfLeftPages = (commentariesRenderingInformation.numberOfPages - commentariesRenderingInformation.renderingPageNumber)}
@@ -71,7 +71,7 @@
                         {#if pageNumber == commentariesRenderingInformation.renderingPageNumber}
                             <a class="navigationMenuHref">{pageNumber}</a>
                         {#else}
-                            <a href="/pages/commentaries?pageIndex={pageNumber - 1}&pageSize={pageSize}" class="navigationMenuHref">{pageNumber}</a>
+                            <a class="navigationMenuHref" href="/pages/commentaries?pageIndex={pageNumber - 1}&pageSize={pageSize}">{pageNumber}</a>
                         {/if}
                     {/for}
                 {#else}
@@ -81,7 +81,7 @@
                         {#if currentPageNumber == commentariesRenderingInformation.renderingPageNumber}
                             <a class="navigationMenuHref">{currentPageNumber}</a>
                         {#else}
-                            <a href="/pages/commentaries?pageIndex={currentPageNumber - 1}&pageSize={pageSize}" class="navigationMenuHref">{currentPageNumber}</a>
+                            <a class="navigationMenuHref" href="/pages/commentaries?pageIndex={currentPageNumber - 1}&pageSize={pageSize}">{currentPageNumber}</a>
                         {/if}
                         {/let}
                     {/for}
@@ -91,19 +91,19 @@
                 <a class="navigationMenuHref">{commentariesRenderingInformation.renderingPageNumber}</a>
                 {#for pageNumber in (numberOfShownPages - 1)}
                     {#let currentPageNumber = (commentariesRenderingInformation.renderingPageNumber + pageNumber)}
-                    <a href="/pages/commentaries?pageIndex={currentPageNumber - 1}&pageSize={pageSize}" class="navigationMenuHref">{currentPageNumber}</a>
+                    <a class="navigationMenuHref" href="/pages/commentaries?pageIndex={currentPageNumber - 1}&pageSize={pageSize}">{currentPageNumber}</a>
                     {/let}
                 {/for}
             {/if}
             {/let}
             {#let indexOfNextPage = commentariesRenderingInformation.renderingPageNumber}
             {#if indexOfNextPage >= commentariesRenderingInformation.numberOfPages}
-                <a href="/pages/commentaries?pageIndex={commentariesRenderingInformation.numberOfPages.minus(1)}&pageSize={pageSize}" class="navigationMenuHref">Next page</a>
+                <a class="navigationMenuHref" href="/pages/commentaries?pageIndex={commentariesRenderingInformation.numberOfPages.minus(1)}&pageSize={pageSize}">Next page</a>
             {#else}
-                <a href="/pages/commentaries?pageIndex={indexOfNextPage}&pageSize={pageSize}" class="navigationMenuHref">Next page</a>
+                <a class="navigationMenuHref" href="/pages/commentaries?pageIndex={indexOfNextPage}&pageSize={pageSize}">Next page</a>
             {/if}
             {/let}
-            <a href="/pages/commentaries?pageIndex={commentariesRenderingInformation.numberOfPages - 1}&pageSize={pageSize}" class="navigationMenuHref">Last page</a>
+            <a class="navigationMenuHref" href="/pages/commentaries?pageIndex={commentariesRenderingInformation.numberOfPages - 1}&pageSize={pageSize}">Last page</a>
             {/let}
             {/let}
         </nav>

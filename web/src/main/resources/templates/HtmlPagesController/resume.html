@@ -48,7 +48,7 @@
         <tr>
             <td>{project.name}</td>
             <td>
-                <a href="{project.link}" class="classicHref" target="_blank">Source</a>
+                <a class="classicHref" href="{project.link}" target="_blank">Source</a>
             </td>
             <td>{project.year}</td>
         </tr>
@@ -70,8 +70,8 @@
     {/if}
     {#if resume.userId == currentUserId || groups.contains("Admin")}
     <form name="removeResumeForm">
-        <input id="{resume.id}"
-               class="deleteButton"
+        <input class="deleteButton"
+               id="{resume.id}"
                name="removeResumeButton"
                type="submit"
                value="Remove">

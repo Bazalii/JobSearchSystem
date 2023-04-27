@@ -18,32 +18,32 @@
               name="resumeInformationForm">
 
                 <label for="name"></label>
-                <input id="name"
-                       class="inputTextField"
+                <input class="inputTextField"
+                       id="name"
                        placeholder="name"
                        value="{resumeRenderingInformation.resume.name}"
                        required="required">
                 <br>
 
                 <label for="currentJob"></label>
-                <input id="currentJob"
-                       class="inputTextField"
+                <input class="inputTextField"
+                       id="currentJob"
                        placeholder="job"
                        value="{resumeRenderingInformation.resume.currentJob}"
                        required="required">
                 <br>
 
                 <label for="quote"></label>
-                <input id="quote"
-                       class="inputTextField"
+                <input class="inputTextField"
+                       id="quote"
                        placeholder="quote"
                        value="{resumeRenderingInformation.resume.quote}"
                        required="required">
                 <br>
 
                 <label for="programmingLanguages"></label>
-                <select multiple
-                        id="programmingLanguages"
+                <select id="programmingLanguages"
+                        multiple
                         required="required">
                     {#for language in resumeRenderingInformation.allLanguages}
                     <option value="{language.id}"
@@ -57,8 +57,8 @@
                 <br>
 
                 <label for="frameworks"></label>
-                <select multiple
-                        id="frameworks"
+                <select id="frameworks"
+                        multiple
                         required="required">
                     {#for framework in resumeRenderingInformation.allFrameworks}
                     <option value="{framework.id}"
@@ -72,8 +72,8 @@
                 <br>
 
                 <label for="databases"></label>
-                <select multiple
-                        id="databases"
+                <select id="databases"
+                        multiple
                         required="required">
                     {#for database in resumeRenderingInformation.allDatabases}
                     <option value="{database.id}"
@@ -87,16 +87,16 @@
                 <br>
 
                 <label for="otherTechnologies"></label>
-                <input id="otherTechnologies"
-                       class="inputTextField"
+                <input class="inputTextField"
+                       id="otherTechnologies"
                        placeholder="other technologies"
                        value="{resumeRenderingInformation.resume.otherTechnologies}"
                        required="required">
                 <br>
 
                 <label for="additionalInformation"></label>
-                <input id="additionalInformation"
-                       class="inputTextField"
+                <input class="inputTextField"
+                       id="additionalInformation"
                        placeholder="additional information"
                        value="{resumeRenderingInformation.resume.additionalInformation}"
                        required="required">
@@ -119,13 +119,13 @@
                 <tr>
                     <td>{project.name}</td>
                     <td>
-                        <a href="{project.link}" class="classicHref" target="_blank">Source</a>
+                        <a class="classicHref" href="{project.link}" target="_blank">Source</a>
                     </td>
                     <td>{project.year}</td>
                     <td>
                         <form name="removeProjectForm">
-                            <input id="{project.id}"
-                                   class="deleteButton"
+                            <input class="deleteButton"
+                                   id="{project.id}"
                                    name="removeProjectButton"
                                    type="submit"
                                    value="Remove">
@@ -137,20 +137,20 @@
             {/if}
             <form name="projectInformationForm">
                 <label for="projectName"></label>
-                <input id="projectName"
-                       class="inputTextField"
+                <input class="inputTextField"
+                       id="projectName"
                        placeholder="Project name"
                        required="required">
 
                 <label for="projectLink"></label>
-                <input id="projectLink"
-                       class="inputTextField"
+                <input class="inputTextField"
+                       id="projectLink"
                        placeholder="Project link"
                        required="required">
 
                 <label for="projectYear"></label>
-                <input id="projectYear"
-                       class="inputTextField"
+                <input class="inputTextField"
+                       id="projectYear"
                        type="number"
                        placeholder="Project year"
                        required="required">
@@ -175,8 +175,8 @@
                     <td>{workExperienceItem.endDate}</td>
                     <td>
                         <form name="removeWorkExperienceItemForm">
-                            <input id="{workExperienceItem.id}"
-                                   class="deleteButton"
+                            <input class="deleteButton"
+                                   id="{workExperienceItem.id}"
                                    name="removeWorkExperienceItemButton"
                                    type="submit"
                                    value="Remove">
@@ -189,27 +189,27 @@
 
             <form name="workExperienceItemInformationForm">
                 <label for="workExperienceItemPlace"></label>
-                <input id="workExperienceItemPlace"
-                       class="inputTextField"
+                <input class="inputTextField"
+                       id="workExperienceItemPlace"
                        placeholder="Work experience item place"
                        required="required">
 
                 <label for="workExperienceItemPosition"></label>
-                <input id="workExperienceItemPosition"
-                       class="inputTextField"
+                <input class="inputTextField"
+                       id="workExperienceItemPosition"
                        placeholder="Work experience item position"
                        required="required">
 
                 <label for="workExperienceItemStartDate"></label>
-                <input id="workExperienceItemStartDate"
-                       class="inputTextField"
+                <input class="inputTextField"
+                       id="workExperienceItemStartDate"
                        type="date"
                        placeholder="Work experience item start date"
                        required="required">
 
                 <label for="workExperienceItemEndDate"></label>
-                <input id="workExperienceItemEndDate"
-                       class="inputTextField"
+                <input class="inputTextField"
+                       id="workExperienceItemEndDate"
                        type="date"
                        placeholder="Work experience item end date"
                        required="required">

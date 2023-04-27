@@ -14,36 +14,36 @@
 <header>
 </header>
 <main>
-    <div id="interactiveAlert" class="popup">
-        <button type="button" onclick="renderApplicationPage()">Yes</button>
-        <button type="button" onclick="closePopup()">No</button>
+    <div class="popup" id="interactiveAlert">
+        <button onclick="renderApplicationPage()" type="button">Yes</button>
+        <button onclick="closePopup()" type="button">No</button>
     </div>
-        <h1>Login</h1>
-        <form action="" id="loginForm">
-            <label for="uniqueIdentifier"></label>
-            <input id="uniqueIdentifier"
-                   class="inputTextField"
-                   placeholder="Login or email"
-                   required="required">
-            <br>
-
-            <label for="password"></label>
-            <input id="password"
-                   class="inputTextField"
-                   placeholder="Password"
-                   required="required"
-                   type="password">
-            <br>
-
-            <input class="button"
-                   id="loginButton"
-                   type="submit"
-                   value="Login">
-        </form>
-
-        Not registered yet?
+    <h1>Login</h1>
+    <form action="" id="loginForm">
+        <label for="uniqueIdentifier"></label>
+        <input class="inputTextField"
+               id="uniqueIdentifier"
+               placeholder="Login or email"
+               required="required">
         <br>
-        <a href="/pages/registration">Registration</a>
+
+        <label for="password"></label>
+        <input class="inputTextField"
+               id="password"
+               placeholder="Password"
+               required="required"
+               type="password">
+        <br>
+
+        <input class="button"
+               id="loginButton"
+               type="submit"
+               value="Login">
+    </form>
+
+    Not registered yet?
+    <br>
+    <a href="/pages/registration">Registration</a>
 </main>
 <footer>
 </footer>

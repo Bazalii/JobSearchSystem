@@ -31,12 +31,12 @@
         <nav>
             {#let pageSize = 5}
             {#let numberOfShownPages = 5}
-            <a href="/pages/resumes?pageIndex=0&pageSize={pageSize}" class="navigationMenuHref">First page</a>
+            <a class="navigationMenuHref" href="/pages/resumes?pageIndex=0&pageSize={pageSize}">First page</a>
             {#let indexOfPreviousPage = resumesRenderingInformation.renderingPageNumber.minus(2)}
             {#if indexOfPreviousPage < 0}
-                <a href="/pages/resumes?pageIndex=0&pageSize={pageSize}" class="navigationMenuHref">Previous page</a>
+                <a class="navigationMenuHref" href="/pages/resumes?pageIndex=0&pageSize={pageSize}">Previous page</a>
             {#else}
-                <a href="/pages/resumes?pageIndex={indexOfPreviousPage}&pageSize={pageSize}" class="navigationMenuHref">Previous page</a>
+                <a class="navigationMenuHref" href="/pages/resumes?pageIndex={indexOfPreviousPage}&pageSize={pageSize}">Previous page</a>
             {/if}
             {/let}
             {#let numberOfLeftPages = (resumesRenderingInformation.numberOfPages - resumesRenderingInformation.renderingPageNumber)}
@@ -46,7 +46,7 @@
                         {#if pageNumber == resumesRenderingInformation.renderingPageNumber}
                             <a class="navigationMenuHref">{pageNumber}</a>
                         {#else}
-                            <a href="/pages/resumes?pageIndex={pageNumber - 1}&pageSize={pageSize}" class="navigationMenuHref">{pageNumber}</a>
+                            <a class="navigationMenuHref" href="/pages/resumes?pageIndex={pageNumber - 1}&pageSize={pageSize}">{pageNumber}</a>
                         {/if}
                     {/for}
                 {#else}
@@ -56,7 +56,7 @@
                         {#if currentPageNumber == resumesRenderingInformation.renderingPageNumber}
                             <a class="navigationMenuHref">{currentPageNumber}</a>
                         {#else}
-                            <a href="/pages/resumes?pageIndex={currentPageNumber - 1}&pageSize={pageSize}" class="navigationMenuHref">{currentPageNumber}</a>
+                            <a class="navigationMenuHref" href="/pages/resumes?pageIndex={currentPageNumber - 1}&pageSize={pageSize}">{currentPageNumber}</a>
                         {/if}
                         {/let}
                     {/for}
@@ -66,19 +66,19 @@
                 <a class="navigationMenuHref">{resumesRenderingInformation.renderingPageNumber}</a>
                 {#for pageNumber in (numberOfShownPages - 1)}
                     {#let currentPageNumber = (resumesRenderingInformation.renderingPageNumber + pageNumber)}
-                    <a href="/pages/resumes?pageIndex={(currentPageNumber - 1)}&pageSize={pageSize}" class="navigationMenuHref">{currentPageNumber}</a>
+                    <a class="navigationMenuHref" href="/pages/resumes?pageIndex={(currentPageNumber - 1)}&pageSize={pageSize}">{currentPageNumber}</a>
                     {/let}
                 {/for}
             {/if}
             {/let}
             {#let indexOfNextPage = resumesRenderingInformation.renderingPageNumber}
             {#if indexOfNextPage >= resumesRenderingInformation.numberOfPages}
-                <a href="/pages/resumes?pageIndex={resumesRenderingInformation.numberOfPages.minus(1)}&pageSize={pageSize}" class="navigationMenuHref">Next page</a>
+                <a class="navigationMenuHref" href="/pages/resumes?pageIndex={resumesRenderingInformation.numberOfPages.minus(1)}&pageSize={pageSize}">Next page</a>
             {#else}
-                <a href="/pages/resumes?pageIndex={indexOfNextPage}&pageSize={pageSize}" class="navigationMenuHref">Next page</a>
+                <a class="navigationMenuHref" href="/pages/resumes?pageIndex={indexOfNextPage}&pageSize={pageSize}">Next page</a>
             {/if}
             {/let}
-            <a href="/pages/resumes?pageIndex={resumesRenderingInformation.numberOfPages - 1}&pageSize={pageSize}" class="navigationMenuHref">Last page</a>
+            <a class="navigationMenuHref" href="/pages/resumes?pageIndex={resumesRenderingInformation.numberOfPages - 1}&pageSize={pageSize}">Last page</a>
             {/let}
             {/let}
         </nav>
