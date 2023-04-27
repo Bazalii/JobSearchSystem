@@ -11,7 +11,7 @@ pluginManagement {
     }
 }
 
-rootProject.name="cv-backend"
+rootProject.name = "cv-backend"
 include("web")
 include("data")
 include("core")

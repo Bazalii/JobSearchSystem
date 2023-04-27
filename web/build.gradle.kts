@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.8.20"
+    kotlin("jvm") version "1.8.21"
     id("io.quarkus")
 }
 
@@ -21,8 +21,9 @@ val quarkusPlatformVersion: String by project
 
 dependencies {
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
+    implementation(enforcedPlatform("${quarkusPlatformGroupId}:quarkus-camel-bom:${quarkusPlatformVersion}"))
     implementation("io.quarkus:quarkus-kotlin")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.20")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.21")
     implementation("io.quarkus:quarkus-arc")
     implementation("io.quarkus:quarkus-smallrye-jwt")
     implementation("io.quarkus:quarkus-smallrye-jwt-build")

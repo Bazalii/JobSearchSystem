@@ -1,12 +1,12 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.8.20"
+    kotlin("jvm") version "1.8.21"
     id("io.quarkus")
     id("org.flywaydb.flyway") version "9.16.3"
-    id("org.jetbrains.kotlin.plugin.noarg") version "1.8.20"
-    id("org.jetbrains.kotlin.plugin.allopen") version "1.8.20"
-    id("org.jetbrains.kotlin.plugin.jpa") version "1.8.20"
+    id("org.jetbrains.kotlin.plugin.noarg") version "1.8.21"
+    id("org.jetbrains.kotlin.plugin.allopen") version "1.8.21"
+    id("org.jetbrains.kotlin.plugin.jpa") version "1.8.21"
 
 }
 
@@ -27,9 +27,10 @@ val quarkusPlatformVersion: String by project
 
 dependencies {
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
+    implementation(enforcedPlatform("${quarkusPlatformGroupId}:quarkus-camel-bom:${quarkusPlatformVersion}"))
     implementation("io.quarkus:quarkus-hibernate-orm-panache-kotlin")
     implementation("io.quarkus:quarkus-kotlin")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.20")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.21")
     implementation("io.quarkus:quarkus-arc")
     implementation("io.quarkus:quarkus-security-jpa")
     implementation("io.quarkus:quarkus-jdbc-postgresql")
