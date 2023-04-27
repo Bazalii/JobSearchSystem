@@ -6,9 +6,9 @@ data class ProjectCreationModel(
     var name: String,
     var link: String,
     var year: Int,
-    var resumeId: UUID
-){
-    fun toProject(): Project{
+    var resumeId: UUID,
+) {
+    fun toProject(): Project {
         return Project(
             id = UUID.randomUUID(),
             name = name,

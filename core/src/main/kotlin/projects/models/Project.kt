@@ -7,5 +7,5 @@ data class Project(
     var name: String,
     var link: String,
     var year: Int,
-    var resumeId: UUID
+    var resumeId: UUID,
 )

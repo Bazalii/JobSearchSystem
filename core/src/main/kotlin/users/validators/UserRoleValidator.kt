@@ -10,7 +10,8 @@ class UserRoleValidator : IThrowingValidator<String> {
     override fun validate(checkedObject: String) {
         if (checkedObject != "User" &&
             checkedObject != "HR" &&
-            checkedObject != "Admin") {
+            checkedObject != "Admin"
+        ) {
             throw InvalidEntityException("Invalid role!")
         }
     }

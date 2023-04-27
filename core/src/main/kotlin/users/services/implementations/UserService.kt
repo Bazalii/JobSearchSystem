@@ -1,7 +1,7 @@
 package users.services.implementations
 
-import commonClasses.hashing.IHashCreator
 import commonClasses.IThrowingValidator
+import commonClasses.hashing.IHashCreator
 import users.models.User
 import users.models.UserCreationModel
 import users.repositories.IUserRepository

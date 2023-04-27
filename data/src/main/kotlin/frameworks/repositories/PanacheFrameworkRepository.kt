@@ -16,7 +16,7 @@ class PanacheFrameworkRepository : PanacheRepositoryBase<FrameworkDbModel, UUID>
     }
 
     fun getById(id: UUID): FrameworkDbModel {
-        return findById(id)?: throw EntityNotFoundException("Entity not found!")
+        return findById(id) ?: throw EntityNotFoundException("Entity not found!")
     }
 
     fun getAll(): List<FrameworkDbModel> {

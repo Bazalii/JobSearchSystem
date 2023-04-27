@@ -5,7 +5,7 @@ import io.smallrye.jwt.algorithm.SignatureAlgorithm
 import io.smallrye.jwt.build.Jwt
 import io.smallrye.jwt.util.KeyUtils
 import users.repositories.IUserRepository
-import java.util.UUID
+import java.util.*
 import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped

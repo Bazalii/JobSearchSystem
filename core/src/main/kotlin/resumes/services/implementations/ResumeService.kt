@@ -48,7 +48,7 @@ class ResumeService(
         return _resumeRepository.getByUserId(id)
     }
 
-    override fun getPage(pageIndex: Int, pageSize: Int): List<Resume>{
+    override fun getPage(pageIndex: Int, pageSize: Int): List<Resume> {
         return _resumeRepository.getPage(pageIndex, pageSize)
     }
 

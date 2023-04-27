@@ -13,11 +13,11 @@ class LoginRedirectionMiddleware : ContainerRequestFilter {
 
     override fun filter(requestContext: ContainerRequestContext) {
         val requestUri = requestContext.uriInfo.requestUri.toString()
-        val wantedPage = requestUri.substringAfter("pages/")
+        val wantedPage = "/pages/" + requestUri.substringAfter("pages/")
 
         if (requestUri.contains("pages") &&
-            wantedPage != "login" &&
-            wantedPage != "registration" &&
+            wantedPage != "/pages/login" &&
+            wantedPage != "/pages/registration" &&
             !requestContext.headers.containsKey("Authorization")
         ) {
             requestContext.abortWith(
