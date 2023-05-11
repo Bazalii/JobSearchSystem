@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm") version "1.8.21"
     id("io.quarkus")
-    id("org.flywaydb.flyway") version "9.16.3"
+    id("org.flywaydb.flyway") version "9.17.0"
     id("org.jetbrains.kotlin.plugin.noarg") version "1.8.21"
     id("org.jetbrains.kotlin.plugin.allopen") version "1.8.21"
     id("org.jetbrains.kotlin.plugin.jpa") version "1.8.21"

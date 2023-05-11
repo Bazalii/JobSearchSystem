@@ -4,7 +4,7 @@ import java.util.*
 
 plugins {
     kotlin("jvm") version "1.8.21"
-    id("io.quarkus") version "3.0.1.Final"
+    id("io.quarkus") version "3.0.3.Final"
     kotlin("plugin.allopen") version "1.8.21"
     id("com.github.ben-manes.versions") version "0.46.0"
 }

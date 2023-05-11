@@ -1,4 +1,4 @@
-FROM gradle:7.5.1-alpine AS build
+FROM gradle:8.1-alpine AS build
 COPY --chown=gradle:gradle . /home/gradle/src
 WORKDIR /home/gradle/src
 RUN gradle web:build --no-daemon
