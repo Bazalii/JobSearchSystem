@@ -1,14 +1,14 @@
 package middlewares
 
-import jakarta.annotation.Priority
 import jakarta.ws.rs.container.ContainerRequestContext
 import jakarta.ws.rs.container.ContainerRequestFilter
+import jakarta.ws.rs.container.PreMatching
 import jakarta.ws.rs.core.Response
 import jakarta.ws.rs.ext.Provider
 import java.net.URI
 
 @Provider
-@Priority(1000)
+@PreMatching
 class LoginRedirectionMiddleware : ContainerRequestFilter {
 
     override fun filter(requestContext: ContainerRequestContext) {
