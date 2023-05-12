@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Resumes</title>
+
+    {#include HtmlPagesController/commonHeadInformation /}
+
+    <link href="/css/resumes.css" rel="stylesheet">
+
+    <script src="/js/resumes.js"></script>
+</head>
+<body>
+<header>
+    {#if resumesRenderingInformation.groups.contains("User")}
+        {#include HtmlPagesController/userHeader /}
+    {#else if resumesRenderingInformation.groups.contains("Admin")}
+        {#include HtmlPagesController/adminHeader /}
+    {#else if resumesRenderingInformation.groups.contains("HR")}
+        {#include HtmlPagesController/hrHeader /}
+    {/if}
+</header>
+<main>
+    <div id="interactiveAlert" class="popup">
+        <button type="button" onclick="location.reload()">Reload</button>
+        <button type="button" onclick="closePopup()">Cancel</button>
+    </div>
+        {#for resumeRenderingInformation in resumesRenderingInformation.resumes}
+            {#include HtmlPagesController/resume resumeRenderingInformation=resumeRenderingInformation currentUserId=resumesRenderingInformation.currentUserId groups=resumesRenderingInformation.groups /}
+        {/for}
+        <br>
+        <nav>
+            {#let pageSize = 5}
+            {#let numberOfShownPages = 5}
+            <a class="navigationMenuHref" href="/pages/resumes?pageIndex=0&pageSize={pageSize}">First page</a>
+            {#let indexOfPreviousPage = resumesRenderingInformation.renderingPageNumber.minus(2)}
+            {#if indexOfPreviousPage < 0}
+                <a class="navigationMenuHref" href="/pages/resumes?pageIndex=0&pageSize={pageSize}">Previous page</a>
+            {#else}
+                <a class="navigationMenuHref" href="/pages/resumes?pageIndex={indexOfPreviousPage}&pageSize={pageSize}">Previous page</a>
+            {/if}
+            {/let}
+            {#let numberOfLeftPages = (resumesRenderingInformation.numberOfPages - resumesRenderingInformation.renderingPageNumber)}
+            {#if numberOfLeftPages < numberOfShownPages.minus(1)}
+                {#if resumesRenderingInformation.numberOfPages < numberOfShownPages}
+                    {#for pageNumber in resumesRenderingInformation.numberOfPages}
+                        {#if pageNumber == resumesRenderingInformation.renderingPageNumber}
+                            <a class="navigationMenuHref">{pageNumber}</a>
+                        {#else}
+                            <a class="navigationMenuHref" href="/pages/resumes?pageIndex={pageNumber - 1}&pageSize={pageSize}">{pageNumber}</a>
+                        {/if}
+                    {/for}
+                {#else}
+                    {#let startPageNumber = (resumesRenderingInformation.numberOfPages - numberOfShownPages + 1)}
+                    {#for pageNumber in numberOfShownPages}
+                        {#let currentPageNumber = (startPageNumber + pageNumber - 1)}
+                        {#if currentPageNumber == resumesRenderingInformation.renderingPageNumber}
+                            <a class="navigationMenuHref">{currentPageNumber}</a>
+                        {#else}
+                            <a class="navigationMenuHref" href="/pages/resumes?pageIndex={currentPageNumber - 1}&pageSize={pageSize}">{currentPageNumber}</a>
+                        {/if}
+                        {/let}
+                    {/for}
+                    {/let}
+                {/if}
+            {#else}
+                <a class="navigationMenuHref">{resumesRenderingInformation.renderingPageNumber}</a>
+                {#for pageNumber in (numberOfShownPages - 1)}
+                    {#let currentPageNumber = (resumesRenderingInformation.renderingPageNumber + pageNumber)}
+                    <a class="navigationMenuHref" href="/pages/resumes?pageIndex={(currentPageNumber - 1)}&pageSize={pageSize}">{currentPageNumber}</a>
+                    {/let}
+                {/for}
+            {/if}
+            {/let}
+            {#let indexOfNextPage = resumesRenderingInformation.renderingPageNumber}
+            {#if indexOfNextPage >= resumesRenderingInformation.numberOfPages}
+                <a class="navigationMenuHref" href="/pages/resumes?pageIndex={resumesRenderingInformation.numberOfPages.minus(1)}&pageSize={pageSize}">Next page</a>
+            {#else}
+                <a class="navigationMenuHref" href="/pages/resumes?pageIndex={indexOfNextPage}&pageSize={pageSize}">Next page</a>
+            {/if}
+            {/let}
+            <a class="navigationMenuHref" href="/pages/resumes?pageIndex={resumesRenderingInformation.numberOfPages - 1}&pageSize={pageSize}">Last page</a>
+            {/let}
+            {/let}
+        </nav>
+    <br>
+</main>
+<footer>
+    {#include HtmlPagesController/footer requestStartTime=resumesRenderingInformation.requestStartTime /}
+</footer>
+</body>
+</html>

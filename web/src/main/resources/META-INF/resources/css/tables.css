@@ -37,6 +37,7 @@ th {
 th:first-child {
     border-left: 0;
 }
+
 td:first-child {
     border-left: 0;
 }
@@ -44,6 +45,7 @@ td:first-child {
 th:last-child {
     border-right: 0;
 }
+
 td:last-child {
     border-right: 0;
 }

@@ -1,14 +1,14 @@
 package authentication.sessionTokens.controllers
 
 import authentication.sessionTokens.services.ISessionTokenService
+import jakarta.annotation.security.PermitAll
+import jakarta.enterprise.context.RequestScoped
+import jakarta.ws.rs.GET
+import jakarta.ws.rs.Path
+import jakarta.ws.rs.Produces
+import jakarta.ws.rs.core.MediaType
 import org.eclipse.microprofile.jwt.JsonWebToken
 import java.util.*
-import javax.annotation.security.PermitAll
-import javax.enterprise.context.RequestScoped
-import javax.ws.rs.GET
-import javax.ws.rs.Path
-import javax.ws.rs.Produces
-import javax.ws.rs.core.MediaType
 
 @RequestScoped
 @Path("sessionTokens")

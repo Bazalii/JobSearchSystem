@@ -1,9 +1,9 @@
 package workExperience.models
 
+import jakarta.persistence.*
 import resumes.models.ResumeDbModel
 import java.time.LocalDate
 import java.util.*
-import javax.persistence.*
 
 @Entity
 @Table(name = "\"workExperienceItems\"")
@@ -16,6 +16,6 @@ class WorkExperienceItemDbModel(
     var endDate: LocalDate = LocalDate.MAX,
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "resume_id")
     var resume: ResumeDbModel = ResumeDbModel(),
 )

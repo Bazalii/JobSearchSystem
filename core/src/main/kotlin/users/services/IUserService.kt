@@ -9,6 +9,6 @@ interface IUserService {
     fun getById(id: UUID): User
     fun getByLogin(login: String): User
     fun updatePassword(userId: UUID, password: String): User
-    fun makeUserAdmin(login: String): User
+    fun updateRole(login: String, role: String): User
     fun removeById(id: UUID): User
 }

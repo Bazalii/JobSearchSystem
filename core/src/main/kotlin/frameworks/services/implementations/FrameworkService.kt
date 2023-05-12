@@ -5,8 +5,8 @@ import frameworks.models.Framework
 import frameworks.models.FrameworkCreationModel
 import frameworks.repositories.IFrameworkRepository
 import frameworks.services.IFrameworkService
+import jakarta.enterprise.context.ApplicationScoped
 import java.util.*
-import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class FrameworkService(

@@ -1,8 +1,8 @@
 package databases.models
 
+import jakarta.persistence.*
 import resumes.models.ResumeDbModel
 import java.util.*
-import javax.persistence.*
 
 @Entity
 @Table(name = "\"databases\"")

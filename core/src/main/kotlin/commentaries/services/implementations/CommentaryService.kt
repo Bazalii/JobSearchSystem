@@ -5,8 +5,10 @@ import commentaries.models.CommentaryCreationModel
 import commentaries.repositories.ICommentaryRepository
 import commentaries.services.ICommentaryService
 import commonClasses.IThrowingValidator
+import jakarta.enterprise.context.ApplicationScoped
+import java.time.LocalDateTime
+import java.time.ZoneOffset
 import java.util.*
-import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class CommentaryService(
@@ -30,8 +32,18 @@ class CommentaryService(
         return _commentaryRepository.getAllByUserId(id)
     }
 
+    override fun getPage(pageIndex: Int, pageSize: Int): List<Commentary> {
+        return _commentaryRepository.getPage(pageIndex, pageSize)
+    }
+
+    override fun countAll(): Long {
+        return _commentaryRepository.countAll()
+    }
+
     override fun update(commentary: Commentary): Commentary {
         _commentaryValidator.validate(commentary)
+
+        commentary.creationTime = LocalDateTime.now(ZoneOffset.UTC)
 
         return _commentaryRepository.update(commentary)
     }

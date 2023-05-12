@@ -1,12 +1,12 @@
 package workExperience.services.implementations
 
 import commonClasses.IThrowingValidator
+import jakarta.enterprise.context.ApplicationScoped
 import workExperience.models.WorkExperienceItem
 import workExperience.models.WorkExperienceItemCreationModel
 import workExperience.repositories.IWorkExperienceRepository
 import workExperience.services.IWorkExperienceService
 import java.util.*
-import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class WorkExperienceService(
@@ -26,8 +26,8 @@ class WorkExperienceService(
         return _workExperienceRepository.getById(id)
     }
 
-    override fun getAllByUserId(id: UUID): List<WorkExperienceItem> {
-        return _workExperienceRepository.getAllByUserId(id)
+    override fun getAllByResumeId(id: UUID): List<WorkExperienceItem> {
+        return _workExperienceRepository.getAllByResumeId(id)
     }
 
     override fun update(workExperienceItem: WorkExperienceItem): WorkExperienceItem {

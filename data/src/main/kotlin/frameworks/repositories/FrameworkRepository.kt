@@ -1,11 +1,11 @@
 package frameworks.repositories
 
-import frameworks.extensions.toFramework
 import frameworks.extensions.toDbModel
+import frameworks.extensions.toFramework
 import frameworks.models.Framework
+import jakarta.enterprise.context.ApplicationScoped
+import jakarta.transaction.Transactional
 import java.util.*
-import javax.enterprise.context.ApplicationScoped
-import javax.transaction.Transactional
 
 @ApplicationScoped
 class FrameworkRepository(

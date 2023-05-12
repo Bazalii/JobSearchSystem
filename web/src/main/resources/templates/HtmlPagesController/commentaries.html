@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Commentaries</title>
+
+    {#include HtmlPagesController/commonHeadInformation /}
+
+    <link href="/css/commentaries.css" rel="stylesheet">
+
+    <script src="/js/commentaries.js"></script>
+
+</head>
+<body>
+<header>
+    {#if commentariesRenderingInformation.groups.contains("User")}
+        {#include HtmlPagesController/userHeader /}
+    {#else if commentariesRenderingInformation.groups.contains("Admin")}
+        {#include HtmlPagesController/adminHeader /}
+    {#else if commentariesRenderingInformation.groups.contains("HR")}
+        {#include HtmlPagesController/hrHeader /}
+    {/if}
+</header>
+<main>
+    <div id="interactiveAlert" class="popup">
+        <button type="button" onclick="location.reload()">Reload</button>
+        <button type="button" onclick="closePopup()">Cancel</button>
+    </div>
+        {#if commentariesRenderingInformation.renderingPageNumber == 1}
+            <div class="commentary">
+                <form name="commentaryInformationForm">
+                    <label for="commentaryTitle"></label>
+                    <input class="inputTextField"
+                           id="commentaryTitle"
+                           placeholder="Commentary title"
+                           required="required">
+                    <br>
+
+                    <label for="commentaryBody"></label>
+                    <input class="inputTextField"
+                           id="commentaryBody"
+                           placeholder="Commentary body"
+                           required="required">
+                    <br>
+
+                    <input class="button"
+                           id="addCommentaryButton"
+                           type="submit"
+                           value="Add commentary">
+                </form>
+            </div>
+        {/if}
+        {#for commentaryRenderingInformation in commentariesRenderingInformation.commentaries}
+            {#include HtmlPagesController/commentary commentaryRenderingInformation=commentaryRenderingInformation currentUserId=commentariesRenderingInformation.currentUserId groups=commentariesRenderingInformation.groups /}
+        {/for}
+        <br>
+        <nav>
+            {#let pageSize = 5}
+            {#let numberOfShownPages = 5}
+            <a class="navigationMenuHref" href="/pages/commentaries?pageIndex=0&pageSize={pageSize}">First page</a>
+            {#let indexOfPreviousPage = commentariesRenderingInformation.renderingPageNumber.minus(2)}
+            {#if indexOfPreviousPage < 0}
+                <a class="navigationMenuHref" href="/pages/commentaries?pageIndex=0&pageSize={pageSize}">Previous page</a>
+            {#else}
+                <a class="navigationMenuHref" href="/pages/commentaries?pageIndex={indexOfPreviousPage}&pageSize={pageSize}">Previous page</a>
+            {/if}
+            {/let}
+            {#let numberOfLeftPages = (commentariesRenderingInformation.numberOfPages - commentariesRenderingInformation.renderingPageNumber)}
+            {#if numberOfLeftPages < numberOfShownPages.minus(1)}
+                {#if commentariesRenderingInformation.numberOfPages < numberOfShownPages}
+                    {#for pageNumber in commentariesRenderingInformation.numberOfPages}
+                        {#if pageNumber == commentariesRenderingInformation.renderingPageNumber}
+                            <a class="navigationMenuHref">{pageNumber}</a>
+                        {#else}
+                            <a class="navigationMenuHref" href="/pages/commentaries?pageIndex={pageNumber - 1}&pageSize={pageSize}">{pageNumber}</a>
+                        {/if}
+                    {/for}
+                {#else}
+                    {#let startPageNumber = (commentariesRenderingInformation.numberOfPages - numberOfShownPages + 1)}
+                    {#for pageNumber in numberOfShownPages}
+                        {#let currentPageNumber = (startPageNumber + pageNumber - 1)}
+                        {#if currentPageNumber == commentariesRenderingInformation.renderingPageNumber}
+                            <a class="navigationMenuHref">{currentPageNumber}</a>
+                        {#else}
+                            <a class="navigationMenuHref" href="/pages/commentaries?pageIndex={currentPageNumber - 1}&pageSize={pageSize}">{currentPageNumber}</a>
+                        {/if}
+                        {/let}
+                    {/for}
+                    {/let}
+                    {/if}
+            {#else}
+                <a class="navigationMenuHref">{commentariesRenderingInformation.renderingPageNumber}</a>
+                {#for pageNumber in (numberOfShownPages - 1)}
+                    {#let currentPageNumber = (commentariesRenderingInformation.renderingPageNumber + pageNumber)}
+                    <a class="navigationMenuHref" href="/pages/commentaries?pageIndex={currentPageNumber - 1}&pageSize={pageSize}">{currentPageNumber}</a>
+                    {/let}
+                {/for}
+            {/if}
+            {/let}
+            {#let indexOfNextPage = commentariesRenderingInformation.renderingPageNumber}
+            {#if indexOfNextPage >= commentariesRenderingInformation.numberOfPages}
+                <a class="navigationMenuHref" href="/pages/commentaries?pageIndex={commentariesRenderingInformation.numberOfPages.minus(1)}&pageSize={pageSize}">Next page</a>
+            {#else}
+                <a class="navigationMenuHref" href="/pages/commentaries?pageIndex={indexOfNextPage}&pageSize={pageSize}">Next page</a>
+            {/if}
+            {/let}
+            <a class="navigationMenuHref" href="/pages/commentaries?pageIndex={commentariesRenderingInformation.numberOfPages - 1}&pageSize={pageSize}">Last page</a>
+            {/let}
+            {/let}
+        </nav>
+    <br>
+</main>
+<footer>
+    {#include HtmlPagesController/footer requestStartTime=commentariesRenderingInformation.requestStartTime /}
+</footer>
+</body>
+</html>

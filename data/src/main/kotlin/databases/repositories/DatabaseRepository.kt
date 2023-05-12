@@ -3,9 +3,9 @@ package databases.repositories
 import databases.extensions.toDatabase
 import databases.extensions.toDbModel
 import databases.models.Database
+import jakarta.enterprise.context.ApplicationScoped
+import jakarta.transaction.Transactional
 import java.util.*
-import javax.enterprise.context.ApplicationScoped
-import javax.transaction.Transactional
 
 @ApplicationScoped
 class DatabaseRepository(

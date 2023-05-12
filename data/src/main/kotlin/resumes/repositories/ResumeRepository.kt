@@ -2,14 +2,14 @@ package resumes.repositories
 
 import databases.extensions.toDbModel
 import frameworks.extensions.toDbModel
+import jakarta.enterprise.context.ApplicationScoped
+import jakarta.transaction.Transactional
 import programmingLanguages.extensions.toDbModel
 import resumes.extensions.toResume
 import resumes.models.Resume
 import resumes.models.ResumeDbModel
 import users.repositories.PanacheUserRepository
 import java.util.*
-import javax.enterprise.context.ApplicationScoped
-import javax.transaction.Transactional
 
 @ApplicationScoped
 class ResumeRepository(
@@ -41,10 +41,20 @@ class ResumeRepository(
         return dbModel.toResume()
     }
 
-    override fun getAllByUserId(id: UUID): List<Resume> {
-        val dbModels = _panacheResumeRepository.getAllByUserId(id)
+    override fun getByUserId(id: UUID): Resume {
+        val dbModel = _panacheResumeRepository.getByUserId(id)
+
+        return dbModel.toResume()
+    }
+
+    override fun getPage(pageIndex: Int, pageSize: Int): List<Resume> {
+        val dbModels = _panacheResumeRepository.getPage(pageIndex, pageSize)
 
         return dbModels.map { it.toResume() }
+    }
+
+    override fun countAll(): Long {
+        return _panacheResumeRepository.countAll()
     }
 
     @Transactional

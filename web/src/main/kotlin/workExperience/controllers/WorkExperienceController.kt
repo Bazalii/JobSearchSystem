@@ -1,6 +1,10 @@
 package workExperience.controllers
 
 import exceptions.NotEnoughRightsException
+import jakarta.annotation.security.RolesAllowed
+import jakarta.enterprise.context.RequestScoped
+import jakarta.inject.Inject
+import jakarta.ws.rs.*
 import org.eclipse.microprofile.jwt.Claim
 import org.eclipse.microprofile.jwt.Claims
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse
@@ -11,10 +15,6 @@ import workExperience.models.WorkExperienceItemCreationRequest
 import workExperience.models.WorkExperienceItemResponse
 import workExperience.services.IWorkExperienceService
 import java.util.*
-import javax.annotation.security.RolesAllowed
-import javax.enterprise.context.RequestScoped
-import javax.inject.Inject
-import javax.ws.rs.*
 
 @RequestScoped
 @Path("workExperiences")
@@ -24,12 +24,16 @@ class WorkExperienceController(
 ) {
 
     @Inject
-    @Claim(standard = Claims.upn)
-    private lateinit var userId: String
+    @Claim(standard = Claims.groups)
+    private lateinit var _groups: Set<String>
+    private lateinit var _userId: UUID
 
     @Inject
-    @Claim(standard = Claims.groups)
-    private lateinit var groups: Set<String>
+    private fun init(@Claim(standard = Claims.upn) userIdString: String?) {
+        if (userIdString != null) {
+            _userId = UUID.fromString(userIdString)
+        }
+    }
 
     @APIResponses(
         APIResponse(responseCode = "200", description = "WorkExperienceItem is created"),
@@ -63,8 +67,8 @@ class WorkExperienceController(
     @GET
     @Path("/user/{userId}")
     @RolesAllowed("Admin")
-    fun getAllByUserId(userId: UUID): List<WorkExperienceItemResponse> {
-        val workExperienceItems = _workExperienceService.getAllByUserId(userId)
+    fun getAllByResumeId(userId: UUID): List<WorkExperienceItemResponse> {
+        val workExperienceItems = _workExperienceService.getAllByResumeId(userId)
 
         return workExperienceItems.map { it.toWorkExperienceItemResponse() }
     }
@@ -76,12 +80,12 @@ class WorkExperienceController(
     @DELETE
     @Path("/{id}")
     @RolesAllowed("User", "Admin")
-    fun removeById(id: UUID): WorkExperienceItemResponse {
+    fun removeById(@PathParam("id") id: UUID): WorkExperienceItemResponse {
         val workExperienceItem = _workExperienceService.getById(id)
 
         val resume = _resumeService.getById(workExperienceItem.resumeId)
 
-        if (!groups.contains("Admin") && resume.userId != UUID.fromString(userId)) {
+        if (!_groups.contains("Admin") && resume.userId != _userId) {
             throw NotEnoughRightsException("You do not have access to this work experience item!")
         }
 

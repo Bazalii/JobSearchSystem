@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>MyResume</title>
+
+    {#include HtmlPagesController/commonHeadInformation /}
+
+    <script src="/js/myResume.js"></script>
+</head>
+<body>
+<header>
+    {#include HtmlPagesController/userHeader /}
+</header>
+<main>
+    <section>
+        <h1>Resume information</h1>
+        <form id="{resumeRenderingInformation.resume.id}"
+              name="resumeInformationForm">
+
+                <label for="name"></label>
+                <input class="inputTextField"
+                       id="name"
+                       placeholder="name"
+                       value="{resumeRenderingInformation.resume.name}"
+                       required="required">
+                <br>
+
+                <label for="currentJob"></label>
+                <input class="inputTextField"
+                       id="currentJob"
+                       placeholder="job"
+                       value="{resumeRenderingInformation.resume.currentJob}"
+                       required="required">
+                <br>
+
+                <label for="quote"></label>
+                <input class="inputTextField"
+                       id="quote"
+                       placeholder="quote"
+                       value="{resumeRenderingInformation.resume.quote}"
+                       required="required">
+                <br>
+
+                <label for="programmingLanguages"></label>
+                <select id="programmingLanguages"
+                        multiple
+                        required="required">
+                    {#for language in resumeRenderingInformation.allLanguages}
+                    <option value="{language.id}"
+                            {#if resumeRenderingInformation.resume.languages.contains(language)}
+                            selected
+                            {/if}>
+                    {language.name}
+                    </option>
+                    {/for}
+                </select>
+                <br>
+
+                <label for="frameworks"></label>
+                <select id="frameworks"
+                        multiple
+                        required="required">
+                    {#for framework in resumeRenderingInformation.allFrameworks}
+                    <option value="{framework.id}"
+                            {#if resumeRenderingInformation.resume.frameworks.contains(framework)}
+                            selected
+                            {/if}>
+                    {framework.name}
+                    </option>
+                    {/for}
+                </select>
+                <br>
+
+                <label for="databases"></label>
+                <select id="databases"
+                        multiple
+                        required="required">
+                    {#for database in resumeRenderingInformation.allDatabases}
+                    <option value="{database.id}"
+                            {#if resumeRenderingInformation.resume.databases.contains(database)}
+                            selected
+                            {/if}>
+                    {database.name}
+                    </option>
+                    {/for}
+                </select>
+                <br>
+
+                <label for="otherTechnologies"></label>
+                <input class="inputTextField"
+                       id="otherTechnologies"
+                       placeholder="other technologies"
+                       value="{resumeRenderingInformation.resume.otherTechnologies}"
+                       required="required">
+                <br>
+
+                <label for="additionalInformation"></label>
+                <input class="inputTextField"
+                       id="additionalInformation"
+                       placeholder="additional information"
+                       value="{resumeRenderingInformation.resume.additionalInformation}"
+                       required="required">
+                <br>
+
+                <input class="button"
+                       id="saveResumeButton"
+                       type="submit"
+                       value="Save resume">
+                <br>
+
+        </form>
+    </section>
+    <section>
+        <h1>Projects</h1>
+        <div id="wrapperForProjectsTable">
+            {#if resumeRenderingInformation.projects.size != 0}
+            <table id="projectsTable" style="grid-template-columns: repeat(4, minmax(100px, 200px));">
+                {#for project in resumeRenderingInformation.projects}
+                <tr>
+                    <td>{project.name}</td>
+                    <td>
+                        <a class="classicHref" href="{project.link}" target="_blank">Source</a>
+                    </td>
+                    <td>{project.year}</td>
+                    <td>
+                        <form name="removeProjectForm">
+                            <input class="deleteButton"
+                                   id="{project.id}"
+                                   name="removeProjectButton"
+                                   type="submit"
+                                   value="Remove">
+                        </form>
+                    </td>
+                </tr>
+                {/for}
+            </table>
+            {/if}
+            <form name="projectInformationForm">
+                <label for="projectName"></label>
+                <input class="inputTextField"
+                       id="projectName"
+                       placeholder="Project name"
+                       required="required">
+
+                <label for="projectLink"></label>
+                <input class="inputTextField"
+                       id="projectLink"
+                       placeholder="Project link"
+                       required="required">
+
+                <label for="projectYear"></label>
+                <input class="inputTextField"
+                       id="projectYear"
+                       type="number"
+                       placeholder="Project year"
+                       required="required">
+
+                <input class="button"
+                       id="addProjectButton"
+                       type="submit"
+                       value="Save project">
+            </form>
+        </div>
+    </section>
+    <section>
+        <h1>Work experience</h1>
+        <div id="wrapperForWorkExperienceTable">
+            {#if resumeRenderingInformation.workExperienceItems.size != 0}
+            <table id="workExperienceTable" style="grid-template-columns: repeat(5, minmax(100px, 200px));">
+                {#for workExperienceItem in resumeRenderingInformation.workExperienceItems}
+                <tr>
+                    <td>{workExperienceItem.place}</td>
+                    <td>{workExperienceItem.position}</td>
+                    <td>{workExperienceItem.startDate}</td>
+                    <td>{workExperienceItem.endDate}</td>
+                    <td>
+                        <form name="removeWorkExperienceItemForm">
+                            <input class="deleteButton"
+                                   id="{workExperienceItem.id}"
+                                   name="removeWorkExperienceItemButton"
+                                   type="submit"
+                                   value="Remove">
+                        </form>
+                    </td>
+                </tr>
+                {/for}
+            </table>
+            {/if}
+
+            <form name="workExperienceItemInformationForm">
+                <label for="workExperienceItemPlace"></label>
+                <input class="inputTextField"
+                       id="workExperienceItemPlace"
+                       placeholder="Work experience item place"
+                       required="required">
+
+                <label for="workExperienceItemPosition"></label>
+                <input class="inputTextField"
+                       id="workExperienceItemPosition"
+                       placeholder="Work experience item position"
+                       required="required">
+
+                <label for="workExperienceItemStartDate"></label>
+                <input class="inputTextField"
+                       id="workExperienceItemStartDate"
+                       type="date"
+                       placeholder="Work experience item start date"
+                       required="required">
+
+                <label for="workExperienceItemEndDate"></label>
+                <input class="inputTextField"
+                       id="workExperienceItemEndDate"
+                       type="date"
+                       placeholder="Work experience item end date"
+                       required="required">
+
+                <input class="button"
+                       id="addWorkExperienceItemButton"
+                       type="submit"
+                       value="Save work experience item">
+            </form>
+        </div>
+    </section>
+        <form>
+            <input class="deleteButton"
+                   id="deleteResumeButton"
+                   type="submit"
+                   value="Completely delete resume">
+        </form>
+</main>
+<footer>
+    {#include HtmlPagesController/footer requestStartTime=resumeRenderingInformation.requestStartTime /}
+</footer>
+</body>
+</html>

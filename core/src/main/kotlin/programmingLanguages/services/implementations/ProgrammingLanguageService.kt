@@ -1,12 +1,12 @@
 package programmingLanguages.services.implementations
 
 import commonClasses.IThrowingValidator
+import jakarta.enterprise.context.ApplicationScoped
 import programmingLanguages.models.ProgrammingLanguage
 import programmingLanguages.models.ProgrammingLanguageCreationModel
 import programmingLanguages.repositories.IProgrammingLanguageRepository
 import programmingLanguages.services.IProgrammingLanguageService
 import java.util.*
-import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class ProgrammingLanguageService(

@@ -1,5 +1,7 @@
 package commentaries.models
 
+import java.time.LocalDateTime
+import java.time.ZoneOffset
 import java.util.*
 
 data class CommentaryCreationModel(
@@ -12,6 +14,7 @@ data class CommentaryCreationModel(
             id = UUID.randomUUID(),
             title = title,
             body = body,
+            creationTime = LocalDateTime.now(ZoneOffset.UTC),
             userId = userId
         )
     }

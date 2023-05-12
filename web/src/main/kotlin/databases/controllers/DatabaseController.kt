@@ -4,15 +4,12 @@ import databases.extensions.toDatabaseResponse
 import databases.models.DatabaseCreationRequest
 import databases.models.DatabaseResponse
 import databases.services.IDatabaseService
+import jakarta.annotation.security.RolesAllowed
+import jakarta.enterprise.context.RequestScoped
+import jakarta.ws.rs.*
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses
 import java.util.*
-import javax.annotation.security.RolesAllowed
-import javax.enterprise.context.RequestScoped
-import javax.ws.rs.DELETE
-import javax.ws.rs.GET
-import javax.ws.rs.POST
-import javax.ws.rs.Path
 
 @RequestScoped
 @Path("databases")
@@ -48,7 +45,7 @@ class DatabaseController(
     @DELETE
     @Path("/{id}")
     @RolesAllowed("Admin")
-    fun removeById(id: UUID): DatabaseResponse {
+    fun removeById(@PathParam("id") id: UUID): DatabaseResponse {
         return _databaseService.removeById(id).toDatabaseResponse()
     }
 }

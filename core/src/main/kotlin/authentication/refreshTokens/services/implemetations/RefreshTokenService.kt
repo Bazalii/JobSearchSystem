@@ -2,18 +2,20 @@ package authentication.refreshTokens.services.implemetations
 
 import authentication.refreshTokens.models.UserCredentials
 import authentication.refreshTokens.services.IRefreshTokenService
+import commonClasses.hashing.IHashCreator
 import exceptions.EntityNotFoundException
 import exceptions.InvalidCredentialsException
 import io.smallrye.jwt.algorithm.SignatureAlgorithm
 import io.smallrye.jwt.build.Jwt
 import io.smallrye.jwt.util.KeyUtils
+import jakarta.enterprise.context.ApplicationScoped
 import users.models.User
 import users.repositories.IUserRepository
-import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class RefreshTokenService(
     private var _userRepository: IUserRepository,
+    private var _hashCreator: IHashCreator,
 ) : IRefreshTokenService {
 
     override fun login(credentials: UserCredentials): String {
@@ -30,7 +32,7 @@ class RefreshTokenService(
             throw InvalidCredentialsException("Invalid login!")
         }
 
-        if (user.password != credentials.password) {
+        if (user.password != _hashCreator.hash(credentials.password)) {
             throw InvalidCredentialsException("Invalid password!")
         }
 

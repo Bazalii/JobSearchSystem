@@ -1,5 +1,8 @@
 package programmingLanguages.controllers
 
+import jakarta.annotation.security.RolesAllowed
+import jakarta.enterprise.context.RequestScoped
+import jakarta.ws.rs.*
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses
 import programmingLanguages.extensions.toProgrammingLanguageResponse
@@ -7,12 +10,6 @@ import programmingLanguages.models.ProgrammingLanguageCreationRequest
 import programmingLanguages.models.ProgrammingLanguageResponse
 import programmingLanguages.services.IProgrammingLanguageService
 import java.util.*
-import javax.annotation.security.RolesAllowed
-import javax.enterprise.context.RequestScoped
-import javax.ws.rs.DELETE
-import javax.ws.rs.GET
-import javax.ws.rs.POST
-import javax.ws.rs.Path
 
 @RequestScoped
 @Path("programmingLanguages")
@@ -48,7 +45,7 @@ class ProgrammingLanguageController(
     @DELETE
     @Path("/{id}")
     @RolesAllowed("Admin")
-    fun removeById(id: UUID): ProgrammingLanguageResponse {
+    fun removeById(@PathParam("id") id: UUID): ProgrammingLanguageResponse {
         return _programmingLanguageService.removeById(id).toProgrammingLanguageResponse()
     }
 }

@@ -1,36 +1,40 @@
 package commentaries.controllers
 
 import commentaries.extensions.toResponseCommentary
+import commentaries.models.CommentaryCreationModel
 import commentaries.models.CommentaryCreationRequest
 import commentaries.models.CommentaryResponse
 import commentaries.services.ICommentaryService
 import exceptions.NotEnoughRightsException
+import jakarta.annotation.security.RolesAllowed
+import jakarta.enterprise.context.RequestScoped
+import jakarta.inject.Inject
+import jakarta.ws.rs.*
 import org.eclipse.microprofile.jwt.Claim
 import org.eclipse.microprofile.jwt.Claims
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses
+import updatesNotifications.notificators.IUpdatesNotificator
 import java.util.*
-import javax.annotation.security.RolesAllowed
-import javax.enterprise.context.RequestScoped
-import javax.inject.Inject
-import javax.ws.rs.DELETE
-import javax.ws.rs.GET
-import javax.ws.rs.POST
-import javax.ws.rs.Path
 
 @RequestScoped
 @Path("commentaries")
 class CommentaryController(
     private var _commentaryService: ICommentaryService,
+    private val _updatesNotificator: IUpdatesNotificator,
 ) {
 
     @Inject
-    @Claim(standard = Claims.upn)
-    private lateinit var userId: String
+    @Claim(standard = Claims.groups)
+    private lateinit var _groups: Set<String>
+    private lateinit var _userId: UUID
 
     @Inject
-    @Claim(standard = Claims.groups)
-    private lateinit var groups: Set<String>
+    private fun init(@Claim(standard = Claims.upn) userIdString: String?) {
+        if (userIdString != null) {
+            _userId = UUID.fromString(userIdString)
+        }
+    }
 
     @APIResponses(
         APIResponse(responseCode = "200", description = "Commentary is created"),
@@ -40,9 +44,17 @@ class CommentaryController(
     @POST
     @RolesAllowed("User", "HR", "Admin")
     fun add(commentaryCreationRequest: CommentaryCreationRequest): CommentaryResponse {
-        val creationModel = commentaryCreationRequest.toCreationModel()
+        val creationModel = CommentaryCreationModel(
+            title = commentaryCreationRequest.title,
+            body = commentaryCreationRequest.body,
+            userId = _userId
+        )
 
-        return _commentaryService.add(creationModel).toResponseCommentary()
+        val commentaryResponse = _commentaryService.add(creationModel).toResponseCommentary()
+
+        _updatesNotificator.notifyAll("Commentary is added!")
+
+        return commentaryResponse
     }
 
     @APIResponses(
@@ -52,7 +64,7 @@ class CommentaryController(
     @GET
     @Path("/{id}")
     @RolesAllowed("Admin")
-    fun getById(id: UUID): CommentaryResponse {
+    fun getById(@PathParam("id") id: UUID): CommentaryResponse {
         val commentary = _commentaryService.getById(id)
 
         return commentary.toResponseCommentary()
@@ -64,7 +76,7 @@ class CommentaryController(
     @GET
     @Path("/user/{userId}")
     @RolesAllowed("Admin")
-    fun getAllByUserId(userId: UUID): List<CommentaryResponse> {
+    fun getAllByUserId(@PathParam("userId") userId: UUID): List<CommentaryResponse> {
         val commentaries = _commentaryService.getAllByUserId(userId)
 
         return commentaries.map { it.toResponseCommentary() }
@@ -77,13 +89,17 @@ class CommentaryController(
     @DELETE
     @Path("/{id}")
     @RolesAllowed("User", "HR", "Admin")
-    fun removeById(id: UUID): CommentaryResponse {
+    fun removeById(@PathParam("id") id: UUID): CommentaryResponse {
         val commentary = _commentaryService.getById(id)
 
-        if (!groups.contains("Admin") && commentary.userId != UUID.fromString(userId)) {
+        if (!_groups.contains("Admin") && commentary.userId != _userId) {
             throw NotEnoughRightsException("You do not have access to this commentary!")
         }
 
-        return _commentaryService.removeById(id).toResponseCommentary()
+        val commentaryResponse = _commentaryService.removeById(id).toResponseCommentary()
+
+        _updatesNotificator.notifyAll("Commentary is deleted!")
+
+        return commentaryResponse
     }
 }

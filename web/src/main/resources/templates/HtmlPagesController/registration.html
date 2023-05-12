@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Registration</title>
+
+    {#include HtmlPagesController/commonHeadInformation /}
+
+    <link href="/css/registration.css" rel="stylesheet">
+
+    <script src="/js/registration.js"></script>
+    <script src="/js/authentication.js"></script>
+</head>
+<body>
+<header>
+</header>
+<main>
+    <h1>Registration</h1>
+
+    <form id="registrationForm">
+        <label for="login"></label>
+        <input class="inputTextField"
+               id="login"
+               placeholder="Login"
+               required="required">
+        <br>
+
+        <label for="email"></label>
+        <input class="inputTextField"
+               id="email"
+               placeholder="Email"
+               required="required"
+               type="email">
+        <br>
+
+        <label for="password"></label>
+        <input class="inputTextField"
+               id="password"
+               placeholder="Password"
+               required="required"
+               type="password">
+        <br>
+
+        <label for="role"></label>
+        <select id="role"
+                required="required">
+            <option>Applicant</option>
+            <option>HR</option>
+        </select>
+        <br>
+
+        <input class="button"
+               id="registrationButton"
+               type="submit"
+               value="Register">
+    </form>
+</main>
+<footer>
+</footer>
+</body>
+</html>

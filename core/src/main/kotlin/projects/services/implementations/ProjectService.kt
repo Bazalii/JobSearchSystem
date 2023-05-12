@@ -1,12 +1,12 @@
 package projects.services.implementations
 
 import commonClasses.IThrowingValidator
+import jakarta.enterprise.context.ApplicationScoped
 import projects.models.Project
 import projects.models.ProjectCreationModel
 import projects.repositories.IProjectRepository
 import projects.services.IProjectService
 import java.util.*
-import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class ProjectService(
@@ -26,8 +26,8 @@ class ProjectService(
         return _projectRepository.getById(id)
     }
 
-    override fun getAllByUserId(id: UUID): List<Project> {
-        return _projectRepository.getAllByUserId(id)
+    override fun getAllByResumeId(id: UUID): List<Project> {
+        return _projectRepository.getAllByResumeId(id)
     }
 
     override fun update(project: Project): Project {

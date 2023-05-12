@@ -1,0 +1,20 @@
+.commentary {
+    background-color: #34daa7;
+    height: fit-content;
+    width: fit-content;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+.commentary h2 {
+    font-size: 30px;
+}
+
+.commentary h3 {
+    text-align: left;
+}
+
+.commentary h4 {
+    text-align: left;
+}

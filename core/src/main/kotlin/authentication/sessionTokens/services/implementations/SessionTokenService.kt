@@ -4,9 +4,9 @@ import authentication.sessionTokens.services.ISessionTokenService
 import io.smallrye.jwt.algorithm.SignatureAlgorithm
 import io.smallrye.jwt.build.Jwt
 import io.smallrye.jwt.util.KeyUtils
+import jakarta.enterprise.context.ApplicationScoped
 import users.repositories.IUserRepository
-import java.util.UUID
-import javax.enterprise.context.ApplicationScoped
+import java.util.*
 
 @ApplicationScoped
 class SessionTokenService(

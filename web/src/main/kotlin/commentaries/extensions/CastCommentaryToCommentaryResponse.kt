@@ -7,5 +7,6 @@ fun Commentary.toResponseCommentary() = CommentaryResponse(
     id,
     title,
     body,
+    creationTime,
     userId
 )

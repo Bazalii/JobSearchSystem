@@ -2,6 +2,7 @@
     create table "commentaries" (
        id uuid not null,
         body varchar(255),
+        creation_time timestamp,
         title varchar(255),
         user_id uuid,
         primary key (id)
@@ -78,7 +79,7 @@
         place varchar(255),
         position varchar(255),
         startDate date,
-        user_id uuid,
+        resume_id uuid,
         primary key (id)
     );
 
@@ -128,6 +129,6 @@
        references "resumes";
 
     alter table if exists "workExperienceItems" 
-       add constraint FKlcko3v8u1whon6ibw5j2yd6e3 
-       foreign key (user_id) 
+       add constraint FK20busw3aq1bmrcg44ianedgwc 
+       foreign key (resume_id) 
        references "resumes";

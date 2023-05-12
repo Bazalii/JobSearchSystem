@@ -1,3 +1,6 @@
+document.addEventListener("DOMContentLoaded", event => setMouseOnHandlers("body header nav a", "#1CC5FA", "#000000"));
+document.addEventListener("DOMContentLoaded", event => setMouseOutHandlers("body header nav a"));
+
 function handleMouseOn(event, background, color) {
     let target = event.target;
 
@@ -10,8 +13,8 @@ function handleMouseOut(event) {
 
     if (target.text === document.title) return;
 
-    target.style.background = '';
-    target.style.color = '';
+    target.style.background = "";
+    target.style.color = "";
 }
 
 function setMouseOnHandlers(selectors, background, color) {
@@ -25,6 +28,3 @@ function setMouseOutHandlers(selectors) {
 
     elements.forEach(element => element.onmouseout = event => handleMouseOut(event, selectors));
 }
-
-
-

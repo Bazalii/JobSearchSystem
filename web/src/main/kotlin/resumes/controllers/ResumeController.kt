@@ -1,6 +1,10 @@
 package resumes.controllers
 
 import exceptions.NotEnoughRightsException
+import jakarta.annotation.security.RolesAllowed
+import jakarta.enterprise.context.RequestScoped
+import jakarta.inject.Inject
+import jakarta.ws.rs.*
 import org.eclipse.microprofile.jwt.Claim
 import org.eclipse.microprofile.jwt.Claims
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse
@@ -8,29 +12,29 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponses
 import resumes.extensions.toResumeResponse
 import resumes.models.ResumeCreationRequest
 import resumes.models.ResumeResponse
+import resumes.models.ResumeUpdateRequest
 import resumes.services.IResumeService
+import updatesNotifications.notificators.IUpdatesNotificator
 import java.util.*
-import javax.annotation.security.RolesAllowed
-import javax.enterprise.context.RequestScoped
-import javax.inject.Inject
-import javax.ws.rs.DELETE
-import javax.ws.rs.GET
-import javax.ws.rs.POST
-import javax.ws.rs.Path
 
 @RequestScoped
 @Path("resumes")
 class ResumeController(
     private var _resumeService: IResumeService,
+    private val _updatesNotificator: IUpdatesNotificator,
 ) {
 
     @Inject
-    @Claim(standard = Claims.upn)
-    private lateinit var userId: String
+    @Claim(standard = Claims.groups)
+    private lateinit var _groups: Set<String>
+    private lateinit var _userId: UUID
 
     @Inject
-    @Claim(standard = Claims.groups)
-    private lateinit var groups: Set<String>
+    private fun init(@Claim(standard = Claims.upn) userIdString: String?) {
+        if (userIdString != null) {
+            _userId = UUID.fromString(userIdString)
+        }
+    }
 
     @APIResponses(
         APIResponse(responseCode = "200", description = "Resume is created"),
@@ -40,9 +44,13 @@ class ResumeController(
     @POST
     @RolesAllowed("User")
     fun add(resumeCreationRequest: ResumeCreationRequest): ResumeResponse {
-        val creationModel = resumeCreationRequest.toCreationModel(UUID.fromString(userId))
+        val creationModel = resumeCreationRequest.toCreationModel(_userId)
 
-        return _resumeService.add(creationModel).toResumeResponse()
+        val resumeResponse = _resumeService.add(creationModel).toResumeResponse()
+
+        _updatesNotificator.notifyAll("Resume is added!")
+
+        return resumeResponse
     }
 
     @APIResponses(
@@ -52,7 +60,7 @@ class ResumeController(
     @GET
     @Path("/{id}")
     @RolesAllowed("Admin")
-    fun getById(id: UUID): ResumeResponse {
+    fun getById(@PathParam("id") id: UUID): ResumeResponse {
         val resume = _resumeService.getById(id)
 
         return resume.toResumeResponse()
@@ -64,10 +72,27 @@ class ResumeController(
     @GET
     @Path("/user/{userId}")
     @RolesAllowed("Admin")
-    fun getAllByUserId(userId: UUID): List<ResumeResponse> {
-        val resumes = _resumeService.getAllByUserId(userId)
+    fun getByUserId(@PathParam("userId") userId: UUID): ResumeResponse {
+        val resume = _resumeService.getByUserId(userId)
 
-        return resumes.map { it.toResumeResponse() }
+        return resume.toResumeResponse()
+    }
+
+    @APIResponses(
+        APIResponse(responseCode = "200", description = "Successful operation"),
+        APIResponse(responseCode = "404", description = "Resume with sent id does not exist")
+    )
+    @PUT
+    @Path("/{id}")
+    @RolesAllowed("User", "Admin")
+    fun update(@PathParam("id") resumeId: UUID, resumeUpdateRequest: ResumeUpdateRequest): ResumeResponse {
+        val resumeUpdateModel = resumeUpdateRequest.toResumeUpdateModel(resumeId, _userId)
+
+        if (!_groups.contains("Admin") && resumeUpdateModel.userId != _userId) {
+            throw NotEnoughRightsException("You do not have access to this resume!")
+        }
+
+        return _resumeService.update(resumeUpdateModel).toResumeResponse()
     }
 
     @APIResponses(
@@ -77,13 +102,17 @@ class ResumeController(
     @DELETE
     @Path("/{id}")
     @RolesAllowed("User", "Admin")
-    fun removeById(id: UUID): ResumeResponse {
+    fun removeById(@PathParam("id") id: UUID): ResumeResponse {
         val resume = _resumeService.getById(id)
 
-        if (!groups.contains("Admin") && resume.userId != UUID.fromString(userId)) {
+        if (!_groups.contains("Admin") && resume.userId != _userId) {
             throw NotEnoughRightsException("You do not have access to this resume!")
         }
 
-        return _resumeService.removeById(id).toResumeResponse()
+        val resumeResponse = _resumeService.removeById(id).toResumeResponse()
+
+        _updatesNotificator.notifyAll("Resume is deleted!")
+
+        return resumeResponse
     }
 }

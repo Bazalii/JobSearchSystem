@@ -2,9 +2,9 @@ package resumes.repositories
 
 import exceptions.EntityNotFoundException
 import io.quarkus.hibernate.orm.panache.kotlin.PanacheRepositoryBase
+import jakarta.enterprise.context.ApplicationScoped
 import resumes.models.ResumeDbModel
 import java.util.*
-import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class PanacheResumeRepository : PanacheRepositoryBase<ResumeDbModel, UUID> {
@@ -19,8 +19,16 @@ class PanacheResumeRepository : PanacheRepositoryBase<ResumeDbModel, UUID> {
         return findById(id) ?: throw EntityNotFoundException("Entity not found!")
     }
 
-    fun getAllByUserId(id: UUID): List<ResumeDbModel> {
-        return list("user_id", id)
+    fun getByUserId(id: UUID): ResumeDbModel {
+        return find("user.id", id).firstResult() ?: throw EntityNotFoundException("Entity not found!")
+    }
+
+    fun getPage(pageIndex: Int, pageSize: Int): List<ResumeDbModel> {
+        return findAll().page(pageIndex, pageSize).list()
+    }
+
+    fun countAll(): Long {
+        return count()
     }
 
     fun update(resumeDbModel: ResumeDbModel): ResumeDbModel {

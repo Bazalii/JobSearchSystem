@@ -3,10 +3,10 @@ package commentaries.repositories
 import commentaries.extensions.toCommentary
 import commentaries.models.Commentary
 import commentaries.models.CommentaryDbModel
+import jakarta.enterprise.context.ApplicationScoped
+import jakarta.transaction.Transactional
 import users.repositories.PanacheUserRepository
 import java.util.*
-import javax.enterprise.context.ApplicationScoped
-import javax.transaction.Transactional
 
 @ApplicationScoped
 class CommentaryRepository(
@@ -21,6 +21,7 @@ class CommentaryRepository(
                 id = commentary.id,
                 title = commentary.title,
                 body = commentary.body,
+                creationTime = commentary.creationTime,
                 user = _panacheUserRepository.getById(commentary.userId)
             )
         ).toCommentary()
@@ -38,6 +39,16 @@ class CommentaryRepository(
         return dbModels.map { it.toCommentary() }
     }
 
+    override fun getPage(pageIndex: Int, pageSize: Int): List<Commentary> {
+        val dbModels = _panacheCommentaryRepository.getPage(pageIndex, pageSize)
+
+        return dbModels.map { it.toCommentary() }
+    }
+
+    override fun countAll(): Long {
+        return _panacheCommentaryRepository.countAll()
+    }
+
     @Transactional
     override fun update(commentary: Commentary): Commentary {
         return _panacheCommentaryRepository.update(
@@ -45,6 +56,7 @@ class CommentaryRepository(
                 id = commentary.id,
                 title = commentary.title,
                 body = commentary.body,
+                creationTime = commentary.creationTime,
                 user = _panacheUserRepository.getById(commentary.userId)
             )
         ).toCommentary()

@@ -1,10 +1,10 @@
 package programmingLanguages.repositories
 
+import jakarta.enterprise.context.ApplicationScoped
 import programmingLanguages.extensions.toDbModel
 import programmingLanguages.extensions.toProgrammingLanguage
 import programmingLanguages.models.ProgrammingLanguage
 import java.util.*
-import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class ProgrammingLanguageRepository(

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Admin</title>
+
+    {#include HtmlPagesController/commonHeadInformation /}
+
+    <script src="/js/admin.js"></script>
+</head>
+<body>
+<header>
+    {#include HtmlPagesController/adminHeader /}
+</header>
+<main>
+    <h1>Hard skills</h1>
+    <form name="hardSkillInformationForm">
+        <label for="hardSkillName"></label>
+        <input class="inputTextField"
+               id="hardSkillName"
+               placeholder="Hard skill name"
+               required="required">
+
+        <label for="hardSkillType"></label>
+        <select id="hardSkillType"
+                required="required">
+            <option value="Programming language">Programming language</option>
+            <option value="Framework">Framework</option>
+            <option value="Database">Database</option>
+        </select>
+
+        <input class="button"
+               id="addHardSkillButton"
+               type="submit"
+               value="Save">
+    </form>
+    <form id="removeProgrammingLanguage">
+        <label for="programmingLanguages"></label>
+        <select id="programmingLanguages"
+                multiple
+                required="required">
+            {#for language in adminPageRenderingInformation.allLanguages}
+            <option value="{language.id}">
+                {language.name}
+            </option>
+            {/for}
+        </select>
+        <br>
+
+        <input class="deleteButton"
+               id="removeProgrammingLanguagesButton"
+               type="submit"
+               value="Remove">
+    </form>
+    <form>
+        <label for="frameworks"></label>
+        <select id="frameworks"
+                multiple
+                required="required">
+            {#for framework in adminPageRenderingInformation.allFrameworks}
+            <option value="{framework.id}">
+                {framework.name}
+            </option>
+            {/for}
+        </select>
+        <br>
+
+        <input class="deleteButton"
+               id="removeFrameworksButton"
+               type="submit"
+               value="Remove">
+    </form>
+    <form>
+        <label for="databases"></label>
+        <select id="databases"
+                multiple
+                required="required">
+            {#for database in adminPageRenderingInformation.allDatabases}
+            <option value="{database.id}">
+                {database.name}
+            </option>
+            {/for}
+        </select>
+        <br>
+
+        <input class="deleteButton"
+               id="removeDatabasesButton"
+               type="submit"
+               value="Remove">
+    </form>
+    <h1>Change user role</h1>
+    <form name="changeRoleForm">
+        <label for="login"></label>
+        <input class="inputTextField"
+               id="login"
+               placeholder="User login"
+               required="required">
+
+        <label for="role"></label>
+        <select id="role"
+                required="required">
+            <option value="User">User</option>
+            <option value="HR">HR</option>
+            <option value="Admin">Admin</option>
+        </select>
+
+        <input class="button"
+               id="changeRoleButton"
+               type="submit"
+               value="Update">
+    </form>
+</main>
+<footer>
+    {#include HtmlPagesController/footer requestStartTime=adminPageRenderingInformation.requestStartTime /}
+</footer>
+</body>
+</html>

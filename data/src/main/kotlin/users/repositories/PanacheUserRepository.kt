@@ -2,9 +2,9 @@ package users.repositories
 
 import exceptions.EntityNotFoundException
 import io.quarkus.hibernate.orm.panache.kotlin.PanacheRepositoryBase
+import jakarta.enterprise.context.ApplicationScoped
 import users.models.UserDbModel
 import java.util.*
-import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class PanacheUserRepository : PanacheRepositoryBase<UserDbModel, UUID> {
@@ -20,11 +20,11 @@ class PanacheUserRepository : PanacheRepositoryBase<UserDbModel, UUID> {
     }
 
     fun getByLogin(login: String): UserDbModel {
-        return list("login", login).firstOrNull() ?: throw EntityNotFoundException("User not found!")
+        return find("login", login).firstResult() ?: throw EntityNotFoundException("User not found!")
     }
 
     fun getByEmail(email: String): UserDbModel {
-        return list("email", email).firstOrNull() ?: throw EntityNotFoundException("User not found!")
+        return find("email", email).firstResult() ?: throw EntityNotFoundException("User not found!")
     }
 
     fun removeById(id: UUID): UserDbModel {

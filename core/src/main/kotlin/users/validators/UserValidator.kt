@@ -4,14 +4,15 @@ import commonClasses.IThrowingValidator
 import exceptions.EntityAlreadyExistsException
 import exceptions.EntityNotFoundException
 import exceptions.InvalidEntityException
+import jakarta.enterprise.context.ApplicationScoped
 import users.models.UserCreationModel
 import users.repositories.IUserRepository
-import javax.enterprise.context.ApplicationScoped
 
 @ApplicationScoped
 class UserValidator(
     private val _userRepository: IUserRepository,
     private val _userPasswordValidator: UserPasswordValidator,
+    private val _userRoleValidator: UserRoleValidator,
 ) : IThrowingValidator<UserCreationModel> {
 
     override fun validate(checkedObject: UserCreationModel) {
@@ -36,5 +37,7 @@ class UserValidator(
         }
 
         _userPasswordValidator.validate(checkedObject.password)
+
+        _userRoleValidator.validate(checkedObject.role)
     }
 }

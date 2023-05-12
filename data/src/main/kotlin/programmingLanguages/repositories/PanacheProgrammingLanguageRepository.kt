@@ -2,10 +2,10 @@ package programmingLanguages.repositories
 
 import exceptions.EntityNotFoundException
 import io.quarkus.hibernate.orm.panache.kotlin.PanacheRepositoryBase
+import jakarta.enterprise.context.ApplicationScoped
+import jakarta.transaction.Transactional
 import programmingLanguages.models.ProgrammingLanguageDbModel
 import java.util.*
-import javax.enterprise.context.ApplicationScoped
-import javax.transaction.Transactional
 
 @ApplicationScoped
 class PanacheProgrammingLanguageRepository : PanacheRepositoryBase<ProgrammingLanguageDbModel, UUID> {
